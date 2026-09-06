@@ -106,7 +106,7 @@ const DATA_PATH = 'data/heraldry/heraldry.json';
     container.innerHTML = '<header class="section-hero">' +
         '<div class="section-hero-watermark" aria-hidden="true">𐤀 𐤁 𐤂 𐤃 𐤄 𐤅</div>' +
         '<div class="section-hero-kicker">ГОЛЕМ · ГЕРБОВНИК</div>' +
-        '<h1><img src="../../assets/icons/32/scribe/scrolls.png" class="lab-icon" alt="">Гербовник</h1>' +
+        '<h1><img src="assets/icons/32/scribe/scrolls.png" class="lab-icon" alt="">Гербовник</h1>' +
         '<p class="section-hero-lead">Исследование государственных конструкций через палео-анализ гербов, флагов и символов власти.</p>' +
       '</header>' +
       '<div class="heraldry-page">' +
@@ -145,7 +145,7 @@ const DATA_PATH = 'data/heraldry/heraldry.json';
     // Используем модальное окно для детального просмотра
     var html = buildDetailHTML(country);
     LabModal.show(
-      '<img src="../../assets/icons/32/scribe/scrolls.png" class="lab-icon" alt=""> ' + escapeHtml(country.name),
+      '<img src="assets/icons/32/scribe/scrolls.png" class="lab-icon" alt=""> ' + escapeHtml(country.name),
       html,
       '<button class="lab-btn lab-btn-secondary lab-btn-sm" onclick="LabModal.close()">Закрыть</button>' +
       '<button class="lab-btn lab-btn-primary lab-btn-sm" onclick="Heraldry.exportDetail()">Экспорт TXT</button>'

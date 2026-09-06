@@ -2,7 +2,7 @@
   {
     "id": "aleph", "hebrew": "א", "name": "Алеф", "sound": "’ (гортанная смычка)", "meaning": "бык, сила, начало",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Голова быка с рогами — треугольник с двумя чертами вверху" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Голова быка с рогами — треугольник с двумя чертами вверху" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤀", "description": "Упрощённый угловатый рисунок головы быка" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤀", "description": "Линейный алфавитный знак на основе той же пиктограммы" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡀", "description": "Курсивная канцелярская форма, использовалась в администрации Ахеменидов" }
@@ -11,7 +11,7 @@
   {
     "id": "bet", "hebrew": "ב", "name": "Бет", "sound": "b", "meaning": "дом, вместилище",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Схематичный план дома с одним входом" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Схематичный план дома с одним входом" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤁", "description": "Угловой контур дома, вход слева" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤁", "description": "Тот же контур, более линейный" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡁", "description": "Закруглённая канцелярская форма, предок квадратного бет" }
@@ -20,7 +20,7 @@
   {
     "id": "gimel", "hebrew": "ג", "name": "Гимель", "sound": "g", "meaning": "верблюд, движение",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Изгиб шеи верблюда" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Изгиб шеи верблюда" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤂", "description": "Угловой крюк — упрощённая шея" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤂", "description": "Тот же угловой крюк" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡂", "description": "Крюк вытянут в изогнутую дугу канцелярским письмом" }
@@ -29,7 +29,7 @@
   {
     "id": "dalet", "hebrew": "ד", "name": "Далет", "sound": "d", "meaning": "дверь, вход",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Треугольная створка двери" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Треугольная створка двери" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤃", "description": "Угловой треугольник с хвостом" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤃", "description": "Треугольник, линии выпрямлены" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡃", "description": "Треугольник со смягчённым, закруглённым верхом" }
@@ -38,7 +38,7 @@
   {
     "id": "he", "hebrew": "ה", "name": "Хе", "sound": "h", "meaning": "дыхание, откровение",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Фигура человека с поднятыми руками" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Фигура человека с поднятыми руками" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤄", "description": "Упрощённая фигура — три горизонтальные черты на вертикали" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤄", "description": "Та же структура, более геометрично" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡄", "description": "Горизонтальные черты слились в единый росчерк" }
@@ -47,7 +47,7 @@
   {
     "id": "vav", "hebrew": "ו", "name": "Вав", "sound": "w", "meaning": "крюк, соединение",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Изогнутый крюк или посох" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Изогнутый крюк или посох" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤅", "description": "Прямая палка с небольшим изгибом сверху" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤅", "description": "Тот же вертикальный штрих с крюком" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡅", "description": "Вертикаль с небольшим изгибом — стал матерью чтения (mater lectionis) для /u/" }
@@ -56,7 +56,7 @@
   {
     "id": "zayin", "hebrew": "ז", "name": "Заин", "sound": "z", "meaning": "оружие, инструмент",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Топор или серп с рукоятью" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Топор или серп с рукоятью" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤆", "description": "Вертикальная черта с поперечинами сверху и снизу" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤆", "description": "Тот же знак, выпрямленный" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡆", "description": "Вертикаль с одной угловой перекладиной" }
@@ -65,7 +65,7 @@
   {
     "id": "het", "hebrew": "ח", "name": "Хет", "sound": "ḥ", "meaning": "ограда, отделение",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Плетёная изгородь или стена" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Плетёная изгородь или стена" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤇", "description": "Двойная вертикаль с перекладиной" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤇", "description": "Тот же контур ограды" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡇", "description": "Форма ограды стала угловой, приближаясь к квадратному хет" }
@@ -74,7 +74,7 @@
   {
     "id": "tet", "hebrew": "ט", "name": "Тет", "sound": "ṭ", "meaning": "змея, оборачивание",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Свернувшаяся кольцом змея" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Свернувшаяся кольцом змея" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤈", "description": "Круг с крестом внутри" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤈", "description": "Тот же круг с пересечением" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡈", "description": "Круг с внутренней чертой — пересечение утратило симметрию" }
@@ -83,7 +83,7 @@
   {
     "id": "yod", "hebrew": "י", "name": "Йод", "sound": "y", "meaning": "рука, действие",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Кисть руки с пальцами" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Кисть руки с пальцами" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤉", "description": "Короткий зигзаг — упрощённая рука" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤉", "description": "Тот же зигзаг" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡉", "description": "Сжался до короткой косой черты, предок квадратного йод" }
@@ -92,7 +92,7 @@
   {
     "id": "kaf", "hebrew": "כ", "name": "Каф", "sound": "k", "meaning": "ладонь, удержание",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Открытая ладонь" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Открытая ладонь" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤊", "description": "Угловая скоба, напоминающая изгиб ладони" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤊", "description": "Та же скоба, более прямая" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡊", "description": "Скоба удлинена канцелярским росчерком вниз" }
@@ -101,7 +101,7 @@
   {
     "id": "lamed", "hebrew": "ל", "name": "Ламед", "sound": "l", "meaning": "посох, направление",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Пастуший посох с изгибом" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Пастуший посох с изгибом" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤋", "description": "Длинная диагональ с крюком наверху" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤋", "description": "Тот же крюк на удлинённом штрихе" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡋", "description": "Крюк вытянут вверх высоким росчерком" }
@@ -110,7 +110,7 @@
   {
     "id": "mem", "hebrew": "מ", "name": "Мем", "sound": "m", "meaning": "вода, течение",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Волнистая линия воды" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Волнистая линия воды" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤌", "description": "Зигзаг из трёх-четырёх волн" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤌", "description": "Тот же зигзаг, острее" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡌", "description": "Волны слились в единый плавный росчерк" }
@@ -119,7 +119,7 @@
   {
     "id": "nun", "hebrew": "נ", "name": "Нун", "sound": "n", "meaning": "рыба, жизнь",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Силуэт рыбы или змеи" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Силуэт рыбы или змеи" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤍", "description": "Изогнутая вертикаль с хвостом" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤍", "description": "Тот же изгиб, выпрямленный" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡍", "description": "Изгиб сжался до короткого крюка" }
@@ -128,7 +128,7 @@
   {
     "id": "samekh", "hebrew": "ס", "name": "Самех", "sound": "s", "meaning": "поддержка, основа",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Столб или подпорка с перекладинами" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Столб или подпорка с перекладинами" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤎", "description": "Вертикаль с тремя горизонтальными штрихами" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤎", "description": "Тот же столб с перекладинами" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡎", "description": "Перекладины слились в петлю вокруг вертикали" }
@@ -137,7 +137,7 @@
   {
     "id": "ayin", "hebrew": "ע", "name": "Аин", "sound": "‘ (глоточная)", "meaning": "глаз, источник",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Рисунок глаза с зрачком" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Рисунок глаза с зрачком" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤏", "description": "Круг, зрачок исчез" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤏", "description": "Тот же круг" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡏", "description": "Круг раскрылся в незамкнутую петлю" }
@@ -146,7 +146,7 @@
   {
     "id": "pe", "hebrew": "פ", "name": "Пе", "sound": "p", "meaning": "рот, речь",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Открытый рот в профиль" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Открытый рот в профиль" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤐", "description": "Угловая скоба, напоминающая контур рта" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤐", "description": "Та же скоба" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡐", "description": "Скоба закруглена в форму крюка" }
@@ -155,7 +155,7 @@
   {
     "id": "tsade", "hebrew": "צ", "name": "Цаде", "sound": "ṣ", "meaning": "праведность, цель",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Рыболовный крюк или силок" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Рыболовный крюк или силок" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤑", "description": "Двойной зигзаг" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤑", "description": "Тот же двойной зигзаг" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡑", "description": "Зигзаг сжат в компактный росчерк" }
@@ -164,7 +164,7 @@
   {
     "id": "qof", "hebrew": "ק", "name": "Коф", "sound": "q", "meaning": "святость, окружение",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Игольное ушко или моток нити" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Игольное ушко или моток нити" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤒", "description": "Круг с длинным вертикальным хвостом" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤒", "description": "Тот же круг с хвостом" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡒", "description": "Хвост удлинён ниже строки" }
@@ -173,7 +173,7 @@
   {
     "id": "resh", "hebrew": "ר", "name": "Реш", "sound": "r", "meaning": "голова, начало",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Профиль головы человека" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Профиль головы человека" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤓", "description": "Угловой крюк — упрощённый профиль" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤓", "description": "Тот же крюк, выпрямленный" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡓", "description": "Крюк округлён, стал похож на современный реш" }
@@ -182,7 +182,7 @@
   {
     "id": "shin", "hebrew": "ש", "name": "Шин", "sound": "š", "meaning": "зуб, разрушение",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Ряд зубов, зигзагом" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Ряд зубов, зигзагом" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤔", "description": "W-образный зигзаг" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤔", "description": "Тот же зигзаг" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡔", "description": "Зигзаг сглажен в волнистую линию" }
@@ -191,7 +191,7 @@
   {
     "id": "tav", "hebrew": "ת", "name": "Тав", "sound": "t", "meaning": "знак, завет",
     "stages": {
-      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "../../assets/icons/32/paleo/placeholder.svg", "description": "Скрещённые линии — знак-метка" },
+      "proto_canaanite": { "period": "~1700 до н.э.", "glyph": null, "placeholder": "assets/icons/32/paleo/placeholder.svg", "description": "Скрещённые линии — знак-метка" },
       "paleo_hebrew": { "period": "~1050–500 до н.э.", "glyph": "𐤕", "description": "Крест или X-образный знак" },
       "phoenician": { "period": "~1050–150 до н.э.", "glyph": "𐤕", "description": "Тот же крест" },
       "imperial_aramaic": { "period": "~800–200 до н.э.", "glyph": "𐡕", "description": "Крест округлён в форму, близкую к квадратному тав" }

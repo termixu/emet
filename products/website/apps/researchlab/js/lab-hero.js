@@ -27,7 +27,7 @@
         (config.kicker ? '<p class="lab-hero__kicker">' + esc(config.kicker) + '</p>' : '') +
         '<h1 class="lab-hero__title"' + titleId + '>' +
           '<span class="lab-hero__title-main">' +
-          (config.icon ? '<img class="lab-hero__icon" src="../../assets/icons/32/' + config.icon + '" alt="" aria-hidden="true">' : '') +
+          (config.icon ? '<img class="lab-hero__icon" src="assets/icons/32/' + config.icon + '" alt="" aria-hidden="true">' : '') +
           esc(config.title) +
           '</span>' +
         '</h1>' +

@@ -390,7 +390,7 @@ const ScriptureReader = (function() {
       var statusLabel = book.dataFile ? 'Есть данные' : 'В работе';
       var badge = '<div class="book-status ' + statusClass + '">' + statusLabel + '</div>';
       return '<a href="#" class="tool-card scripture-book-card" data-book-id="' + escapeHtml(book.id) + '">' +
-'<span class="tool-icon"><img src="../../assets/icons/32/ui/book.png" width="32" height="32" alt=""></span>' +
+'<span class="tool-icon"><img src="assets/icons/32/ui/book.png" width="32" height="32" alt=""></span>' +
         '<div class="tool-name">' + escapeHtml(book.ru) + '</div>' +
         '<div class="tool-desc">' + escapeHtml(book.paleo || '') + '</div>' +
         badge +

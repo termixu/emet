@@ -31,7 +31,7 @@ const ExposureCase = (function() {
     scales: 'ui/scales.png',
     question: 'ui/question.png'
   };
-  var ICON_BASE = '../../assets/icons/32/';
+  var ICON_BASE = 'assets/icons/32/';
 
   function esc(text) {
     var d = document.createElement('div');

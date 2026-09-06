@@ -10,12 +10,12 @@
   'use strict';
 
   var ICONS = {
-    layer: '../../assets/icons/32/archaeology/testtube.svg',
-    ai: '../../assets/icons/32/crafts/hammer-and-chisel.png',
-    dialect: '../../assets/icons/32/scribe/scroll.png',
-    tensor: '../../assets/icons/32/archaeology/testtube.svg',
-    word: '../../assets/icons/32/archaeology/testtube.svg',
-    state: '../../assets/icons/32/paleo/track.png'
+    layer: 'assets/icons/32/archaeology/testtube.svg',
+    ai: 'assets/icons/32/crafts/hammer-and-chisel.png',
+    dialect: 'assets/icons/32/scribe/scroll.png',
+    tensor: 'assets/icons/32/archaeology/testtube.svg',
+    word: 'assets/icons/32/archaeology/testtube.svg',
+    state: 'assets/icons/32/paleo/track.png'
   };
   var LAYERS = [
     { id: 'hellenization', name: 'Эллинизация', markers: ['абстракц', 'идея', 'философ', 'категор', 'теор'], diagnosis: 'Предметное действие переводится в отвлечённую идею или категорию.' },

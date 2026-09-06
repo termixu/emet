@@ -423,7 +423,7 @@ const Cartography = (function() {
     container.innerHTML = '<header class="section-hero">' +
         '<div class="section-hero-watermark" aria-hidden="true">𐤀 𐤁 𐤂 𐤃 𐤄 𐤅</div>' +
         '<div class="section-hero-kicker">ГОЛЕМ · КАРТОГРАФИЯ</div>' +
-        '<h1><img src="../../assets/icons/32/ui/web.png" class="lab-icon" alt="">Картография</h1>' +
+        '<h1><img src="assets/icons/32/ui/web.png" class="lab-icon" alt="">Картография</h1>' +
         '<p class="section-hero-lead">Смысловая карта: страны, города и регионы как пространственные конструкции.</p>' +
       '</header>' +
       '<button type="button" class="cartography-world-launch" data-open-map="1"><span aria-hidden="true">𐤌</span><span><strong>Глобальная карта состояний</strong><small>Открыть полный слой диагностики</small></span><span aria-hidden="true">→</span></button>' +

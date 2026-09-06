@@ -117,7 +117,7 @@ const Workbench = (function() {
       return '' +
         '<article class="wb-pipeline-card">' +
           '<header class="wb-pipeline-head">' +
-            '<img class="wb-pipeline-icon" src="../../assets/icons/32/' + esc(pipeline.icon) + '" alt="" aria-hidden="true">' +
+            '<img class="wb-pipeline-icon" src="assets/icons/32/' + esc(pipeline.icon) + '" alt="" aria-hidden="true">' +
             '<h3 class="wb-pipeline-title">' + esc(pipeline.title) + '</h3>' +
           '</header>' +
           '<p class="wb-pipeline-desc">' + esc(pipeline.description) + '</p>' +
@@ -804,7 +804,7 @@ const Workbench = (function() {
     var pipelineTitle = pipeline ? pipeline.title : meta.pipelineId;
     return '' +
       '<section class="wb-viewer wb-viewer-stub" aria-label="Взор в разработке">' +
-        '<img class="wb-pipeline-icon" src="../../assets/icons/32/' + esc(pipeline ? pipeline.icon : 'paleo/track.png') + '" alt="" aria-hidden="true">' +
+        '<img class="wb-pipeline-icon" src="assets/icons/32/' + esc(pipeline ? pipeline.icon : 'paleo/track.png') + '" alt="" aria-hidden="true">' +
         '<h3>Вьювер «' + esc(pipelineTitle) + '» в разработке</h3>' +
         '<p>' + esc(result.note || 'Результат зафиксирован метаданными проекта.') + '</p>' +
         '<ul class="wb-estimate-list">' +

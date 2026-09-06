@@ -58,7 +58,7 @@
             const isBm = GolemState.isBookmarked(p);
             const file = GolemState.state.FILES.find(function(x) { return x.path === p; });
             const iconHtml = (file && file.icon && file.icon !== 'scrolls.png')
-                ? '<img src="../../assets/icons/32/' + file.icon + '" class="content-icon" alt="" style="width:28px;height:28px;vertical-align:middle;margin-right:10px;">'
+                ? '<img src="assets/icons/32/' + file.icon + '" class="content-icon" alt="" style="width:28px;height:28px;vertical-align:middle;margin-right:10px;">'
                 : '';
             
             if (GolemUI.isMobile()) {

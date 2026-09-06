@@ -15,6 +15,13 @@
 6. [Анимации](#6-анимации)
 6.1 [Слой «современный манускрипт»](#61-слой-современный-манускрипт-этап-b)
 6.2 [Linear-Paleo слой](#62-linear-paleo-слой-редизайн-интерфейсов)
+  - [Roadmap Scale](#roadmap-scale)
+  - [Filter Chips](#filter-chips)
+  - [Status Dots](#status-dots)
+  - [Meta Line](#meta-line)
+  - [Stagger-анимация](#stagger-анимация)
+  - [Inline Actions](#inline-actions)
+  - [Command Palette](#command-palette-⌘k)
 7. [Иконки](#7-иконки)
 8. [Адаптивность](#8-адаптивность)
 
@@ -374,6 +381,46 @@ Focus: граница `--accent-gold` + `box-shadow: 0 0 0 2px rgba(184,134,11,0
 .tl-meta-line        — flex, gap 6px, 12px muted
 .meta-sep            — разделитель «·» (border color)
 ```
+
+### Stagger-анимация
+
+Появление сегментов roadmap с задержкой (Linear-style).
+
+```css
+.tl-roadmap-segment  — animation: tl-segment-in 0.35s ease both
+                       animation-delay: calc(var(--tl-index, 0) * 50ms)
+@media (prefers-reduced-motion: reduce) — animation: none
+```
+
+### Inline Actions
+
+Действия на hover строк событий (открыть / копировать ссылку).
+
+```css
+.tl-event-row-inner       — flex, gap 10px, padding-right 72px
+.tl-detail-event-main     — flex: 1, контент события
+.tl-event-actions         — absolute right, display: none → flex on hover
+.tl-event-action-btn      — 28×28px, rounded, border → gold on hover
+@keyframes tl-action-appear — opacity + translateX(4px) → 0
+```
+
+### Command Palette (⌘K)
+
+Поиск по таймлайнам и событиям (Linear command palette).
+
+```css
+.tl-cp-overlay       — fixed fullscreen, bg rgba(0,0,0,0.5), blur
+.tl-cp-modal         — max-width 520px, scale + translateY transition
+.tl-cp-input-row     — flex, padding, border-bottom
+.tl-cp-input         — 14px, transparent bg, no border
+.tl-cp-results       — max-height 320px, overflow-y
+.tl-cp-item          — flex, padding, hover bg, selected bg
+.tl-cp-item-icon     — 28×28px, paleo glyph, gold
+.tl-cp-item-title    — 13px 600, truncate
+.tl-cp-item-subtitle — 11px muted, truncate
+```
+
+JS API: `buildSearchIndex()`, `openCommandPalette()`, `closeCommandPalette()`, `renderCpResults()`, `updateCpSelection()`, `selectCpItem()`. Хоткей: `⌘K` / `Ctrl+K`.
 
 ---
 

@@ -261,7 +261,7 @@ const GolemStates = (function() {
         '<span aria-hidden="true">→</span>' +
       '</button>' +
       '<div class="states-head">' +
-        '<h1><img src="../../assets/icons/32/ui/web.png" class="lab-icon" alt=""> Карта состояний</h1>' +
+        '<h1><img src="assets/icons/32/ui/web.png" class="lab-icon" alt=""> Карта состояний</h1>' +
         '<p class="subtitle">Семь пространств палео-механики — от запертости (Тоху) до завершённости (Эден). Каждое состояние — это не метафора, а физика: степень сжатости или открытости твоего пространства.</p>' +
       '</div>' +
       '<div class="states-map">' +
@@ -532,7 +532,7 @@ const GolemStates = (function() {
       '</div>' +
       '<div class="diagnostic-page">' +
         '<div class="diagnostic-header">' +
-          '<h2><img src="../../assets/icons/32/archaeology/testtube.svg" class="lab-icon" alt=""> Диагностика состояния</h2>' +
+          '<h2><img src="assets/icons/32/archaeology/testtube.svg" class="lab-icon" alt=""> Диагностика состояния</h2>' +
           '<p>Ответь на 7 вопросов, чтобы определить своё текущее пространство.</p>' +
         '</div>' +
         '<div class="diagnostic-progress">' +
@@ -547,12 +547,12 @@ const GolemStates = (function() {
         '</div>' +
         '<div class="diagnostic-actions">' +
           (current > 0
-            ? '<button class="btn-diagnostic-prev" onclick="GolemStates.prevQuestion()"><img src="../../assets/icons/32/nav/home.png" class="lab-icon" alt=""> Назад</button>'
+            ? '<button class="btn-diagnostic-prev" onclick="GolemStates.prevQuestion()"><img src="assets/icons/32/nav/home.png" class="lab-icon" alt=""> Назад</button>'
             : '') +
           (hasAnswer
             ? (current < total - 1
-                ? '<button class="btn-diagnostic-next" onclick="GolemStates.nextQuestion()"><img src="../../assets/icons/32/nav/door.png" class="lab-icon" alt=""> Далее</button>'
-                : '<button class="btn-diagnostic-next" onclick="GolemStates.completeDiagnostic()"><img src="../../assets/icons/32/archaeology/lamp.png" class="lab-icon" alt=""> Узнать результат</button>')
+                ? '<button class="btn-diagnostic-next" onclick="GolemStates.nextQuestion()"><img src="assets/icons/32/nav/door.png" class="lab-icon" alt=""> Далее</button>'
+                : '<button class="btn-diagnostic-next" onclick="GolemStates.completeDiagnostic()"><img src="assets/icons/32/archaeology/lamp.png" class="lab-icon" alt=""> Узнать результат</button>')
             : '<button class="btn-diagnostic-next" disabled>Выберите ответ</button>'
           ) +
         '</div>' +
@@ -629,9 +629,9 @@ const GolemStates = (function() {
               '</div>'
             : '') +
           '<div class="result-actions">' +
-            '<button class="btn-result-state" onclick="GolemStates.openState(\'' + escapeHtml(bestStateId) + '\')"><img src="../../assets/icons/32/ui/book.png" class="lab-icon" alt=""> Подробнее о состоянии</button>' +
-            '<button class="btn-result-restart" onclick="GolemStates.restartDiagnostic()"><img src="../../assets/icons/32/ui/hourglass.png" class="lab-icon" alt=""> Пройти заново</button>' +
-            '<button class="btn-result-share" onclick="GolemStates.shareResult(\'' + escapeHtml(state.name) + '\', \'' + escapeHtml(transition ? targetName : '') + '\')"><img src="../../assets/icons/32/ui/export.png" class="lab-icon" alt=""> Поделиться</button>' +
+            '<button class="btn-result-state" onclick="GolemStates.openState(\'' + escapeHtml(bestStateId) + '\')"><img src="assets/icons/32/ui/book.png" class="lab-icon" alt=""> Подробнее о состоянии</button>' +
+            '<button class="btn-result-restart" onclick="GolemStates.restartDiagnostic()"><img src="assets/icons/32/ui/hourglass.png" class="lab-icon" alt=""> Пройти заново</button>' +
+            '<button class="btn-result-share" onclick="GolemStates.shareResult(\'' + escapeHtml(state.name) + '\', \'' + escapeHtml(transition ? targetName : '') + '\')"><img src="assets/icons/32/ui/export.png" class="lab-icon" alt=""> Поделиться</button>' +
           '</div>' +
         '</div>' +
       '</div>' +

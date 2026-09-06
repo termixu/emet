@@ -199,7 +199,7 @@ const Investigation = (function() {
       { name: 'Редактор традиции', role: 'закрепление формулы', icon: 'crafts/hammer-and-chisel.png', text: 'Повторение в корпусе превращает выбор в привычную формулу.' }
     ];
     var cards = people.map(function(person, index) {
-return '<button class="investigation-creator" type="button" data-creator-index="' + index + '" aria-expanded="false"><span class="investigation-portrait"><img src="../../assets/icons/32/' + person.icon + '" width="32" height="32" alt="" onerror="this.style.display=\'none\'"></span><span><strong>' + esc(person.name) + '</strong><small>' + esc(person.role) + '</small></span><span class="investigation-creator-chevron" aria-hidden="true">+</span><span class="investigation-creator-detail">' + esc(person.text) + '</span></button>';
+return '<button class="investigation-creator" type="button" data-creator-index="' + index + '" aria-expanded="false"><span class="investigation-portrait"><img src="assets/icons/32/' + person.icon + '" width="32" height="32" alt="" onerror="this.style.display=\'none\'"></span><span><strong>' + esc(person.name) + '</strong><small>' + esc(person.role) + '</small></span><span class="investigation-creator-chevron" aria-hidden="true">+</span><span class="investigation-creator-detail">' + esc(person.text) + '</span></button>';
     }).join('');
     return '<section class="investigation-section dossier-creators" style="--section-delay:220ms">' +
       '<div class="investigation-section-head"><span class="investigation-index">03</span><div><h2>Кто создал</h2><p>Не один автор, а несколько слоёв, закрепивших новую форму.</p></div></div>' +

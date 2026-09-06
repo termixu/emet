@@ -22,9 +22,9 @@
 | 4 | Один H1 на экран | LabHero — единственная шапка | все модули | ✅ таймлайн; остальные — кодемод |
 | 5 | Meta line (автор · время) | мета-строка 12px | клуб, исследования | ✅ `.tl-meta-line` в детальном экране |
 | 6 | Segmented chips (For me/Popular/Recent) | чипы-фильтры каталогов | глоссарий, исследования, видео | ✅ `.tl-filter-chip` в таймлайне |
-| 7 | Status dot + label (Project on track) | статусы эммет/вопрос, чекеры | клуб, давар-чекер | ✅ `.tl-status-dot` компонент |
-| 8 | Roadmap bars + milestones | визуальная шкала эпох | палео-хронология | ✅ `.tl-roadmap` шкала в каталоге |
-| 9 | Command palette ⌘K | расширение lab-search | глобально | ⏳ частично есть |
+| 7 | Status dot + label (Project on track) | статусы эммет/вопрос, чекеры | клуб, давар-чекер | ✅ `.tl-status-dot` в событиях + `getEventStatus()` |
+| 8 | Roadmap bars + milestones | визуальная шкала эпох | палео-хронология | ✅ `.tl-roadmap` + stagger-анимация |
+| 9 | Command palette ⌘K | поиск по таймлайнам | глобально | ✅ `.tl-cp-overlay` + `⌘K` хоткей |
 
 ## Что НЕ копируем
 

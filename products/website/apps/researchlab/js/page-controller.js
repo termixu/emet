@@ -123,7 +123,7 @@ const PageController = (function() {
       var specialCards = [
         '<a href="#" class="dict-card" data-key="__root_dictionary" style="animation-delay: 0ms">' +
           '<div class="dict-card-top">' +
-            '<img src="../../assets/icons/32/ui/book.png" class="dict-icon" alt="">' +
+            '<img src="assets/icons/32/ui/book.png" class="dict-icon" alt="">' +
             '<div class="dict-name">Корневой словарь</div>' +
             '<div class="dict-count">150 корней</div>' +
           '</div>' +
@@ -131,7 +131,7 @@ const PageController = (function() {
           '</a>',
         '<a href="#" class="dict-card" data-key="__paleo_glossary" style="animation-delay: 50ms">' +
           '<div class="dict-card-top">' +
-            '<img src="../../assets/icons/32/paleo/track.png" class="dict-icon" alt="">' +
+            '<img src="assets/icons/32/paleo/track.png" class="dict-icon" alt="">' +
             '<div class="dict-name">Палео-глоссарий</div>' +
             '<div class="dict-count">100 слов</div>' +
           '</div>' +
@@ -143,7 +143,7 @@ const PageController = (function() {
         var count = (dict.terms || []).length;
         return '<a href="#" class="dict-card" data-key="' + escapeHtml(key) + '" style="animation-delay: ' + ((index + 2) * 50) + 'ms">' +
           '<div class="dict-card-top">' +
-            '<img src="../../assets/icons/32/ui/book.png" class="dict-icon" alt="">' +
+            '<img src="assets/icons/32/ui/book.png" class="dict-icon" alt="">' +
             '<div class="dict-name">' + escapeHtml(dict.title || key) + '</div>' +
             '<div class="dict-count">' + count + ' терминов</div>' +
           '</div>' +
@@ -151,7 +151,7 @@ const PageController = (function() {
           '</a>';
       }).join('');
       container.innerHTML = '<div class="research-page-head">' +
-        '<h1><img src="../../assets/icons/32/ui/book.png" class="lab-icon" alt="">Словари</h1>' +
+        '<h1><img src="assets/icons/32/ui/book.png" class="lab-icon" alt="">Словари</h1>' +
         '<p class="subtitle">Словарные карты подмен с ивритским соответствием и палео-формой.</p>' +
         '</div>' +
         '<div class="dict-grid" id="dict-grid">' + dictCards + '</div>';
@@ -202,7 +202,7 @@ const PageController = (function() {
     var dictionaryDescription = escapeHtml((dictionary.description || '').replace(/---/g, '').trim());
     var dictionaryHeading = escapeHtml(dictionary.title || 'Словари');
     container.innerHTML = '<div class="research-page-head">' +
-      '<h1><img src="../../assets/icons/32/ui/book.png" class="lab-icon" alt="">' + dictionaryHeading + '</h1>' +
+      '<h1><img src="assets/icons/32/ui/book.png" class="lab-icon" alt="">' + dictionaryHeading + '</h1>' +
       '<p class="subtitle text-muted">' + dictionaryDescription + '</p>' + backBtn +
       '</div>' +
       '<div class="research-controls">' +
@@ -228,7 +228,7 @@ const PageController = (function() {
   function renderRootDictionaryModule(container, data) {
     var backBtn = '<button class="lab-btn lab-btn-secondary lab-btn-sm" onclick="LabRouter.navigate(\'dictionaries\')">← Назад к словарям</button>';
     container.innerHTML = '<div class="research-page-head">' +
-      '<h1><img src="../../assets/icons/32/ui/book.png" class="lab-icon" alt="">Корневой словарь</h1>' +
+      '<h1><img src="assets/icons/32/ui/book.png" class="lab-icon" alt="">Корневой словарь</h1>' +
       '<p class="subtitle">Поиск по корням иврита. Введите корень, слово или значение.</p>' + backBtn +
       '</div>' +
       '<div class="search-wrap"><input type="text" id="rd-search" class="lab-input" placeholder="אמן, AMN, верить..." oninput="if(window.RootsSearch)RootsSearch.filter(this.value)" autofocus></div>' +
@@ -313,27 +313,27 @@ const PageController = (function() {
     var steps = fields.steps || [];
     var cards = [
       '<article class="paleo-module paleo-module-image">' +
-        '<div class="paleo-module-heading"><img src="../../assets/icons/32/paleo/track.png" alt=""><h2>Образ</h2></div>' +
+        '<div class="paleo-module-heading"><img src="assets/icons/32/paleo/track.png" alt=""><h2>Образ</h2></div>' +
         '<p class="paleo-module-lead">' + renderInlineMarkdown(image) + '</p>' +
       '</article>',
       '<article class="paleo-module paleo-module-function">' +
-        '<div class="paleo-module-heading"><img src="../../assets/icons/32/archaeology/testtube.svg" alt=""><h2>Функция</h2></div>' +
+        '<div class="paleo-module-heading"><img src="assets/icons/32/archaeology/testtube.svg" alt=""><h2>Функция</h2></div>' +
         '<div class="paleo-module-copy">' + renderInlineMarkdown(functionText) + '</div>' +
       '</article>',
       '<article class="paleo-module paleo-module-example">' +
-        '<div class="paleo-module-heading"><img src="../../assets/icons/32/ui/book.png" alt=""><h2>Пример в слове</h2></div>' +
+        '<div class="paleo-module-heading"><img src="assets/icons/32/ui/book.png" alt=""><h2>Пример в слове</h2></div>' +
         '<div class="paleo-word-display" lang="hbo">' + escapeHtml(paleoWord) + '</div>' +
         '<div class="paleo-assembly"><span>Сборка</span><strong lang="hbo">' + escapeHtml(paleoAssembly) + '</strong></div>' +
         '<p class="paleo-module-copy">' + renderInlineMarkdown(exampleText) + '</p>' +
       '</article>',
       '<article class="paleo-module paleo-module-steps">' +
-        '<div class="paleo-module-heading"><img src="../../assets/icons/32/crafts/hammer-and-chisel.png" alt=""><h2>Как работает</h2></div>' +
+        '<div class="paleo-module-heading"><img src="assets/icons/32/crafts/hammer-and-chisel.png" alt=""><h2>Как работает</h2></div>' +
         '<ol class="paleo-steps">' + steps.map(function(step, index) {
           return '<li class="paleo-step"><span>' + (index + 1) + '</span><div>' + renderInlineMarkdown(step) + '</div></li>';
         }).join('') + '</ol>' +
       '</article>',
       '<article class="paleo-module paleo-module-comparison">' +
-        '<div class="paleo-module-heading"><img src="../../assets/icons/32/ui/scales.png" alt=""><h2>Сравнение с греческой подменой</h2></div>' +
+        '<div class="paleo-module-heading"><img src="assets/icons/32/ui/scales.png" alt=""><h2>Сравнение с греческой подменой</h2></div>' +
         '<div class="paleo-comparison-copy">' + renderInlineMarkdown(comparisonText) + '</div>' +
       '</article>'
     ].join('');
@@ -366,7 +366,7 @@ const PageController = (function() {
       return;
     }
     if (!state.key) {
-      var iconPath = page === 'paleo-mechanics' ? '../../assets/icons/32/paleo/track.png' : '../../assets/icons/32/crafts/hammer-and-chisel.png';
+      var iconPath = page === 'paleo-mechanics' ? 'assets/icons/32/paleo/track.png' : 'assets/icons/32/crafts/hammer-and-chisel.png';
       var docCards = keys.map(function(key, index) {
         var doc = data[key];
         return '<a href="#" class="doc-card" data-key="' + escapeHtml(key) + '" style="animation-delay: ' + (index * 50) + 'ms">' +
@@ -425,7 +425,7 @@ const PageController = (function() {
         summary = summary ? summary.charAt(0).toLocaleUpperCase('ru-RU') + summary.slice(1) : 'Краткое описание механизма подмены.';
         var icon = mechanismIcons[mechanismIndex % mechanismIcons.length];
         mechanismIndex++;
-        return '<article class="research-section methodology-card"><div class="methodology-card-head"><h2><img src="../../assets/icons/32/' + icon + '" class="methodology-card-icon" alt="" aria-hidden="true">' + escapeHtml(section.title || '').replace(/^\s*\d+[.)\-:]?\s*/, '') + '</h2></div><div class="research-section-content"><p>' + escapeHtml(summary) + '</p></div></article>';
+        return '<article class="research-section methodology-card"><div class="methodology-card-head"><h2><img src="assets/icons/32/' + icon + '" class="methodology-card-icon" alt="" aria-hidden="true">' + escapeHtml(section.title || '').replace(/^\s*\d+[.)\-:]?\s*/, '') + '</h2></div><div class="research-section-content"><p>' + escapeHtml(summary) + '</p></div></article>';
       }
       var content = typeof marked !== 'undefined' && marked.parse ? marked.parse(section.content || '') : escapeHtml(section.content || '');
       return '<article class="research-section"><h2>' + escapeHtml(section.title || '') + '</h2><div class="research-section-content">' + content + '</div></article>';
@@ -1076,13 +1076,13 @@ const PageController = (function() {
       var result = findPipelineResult(results, pipeline.id);
       var agents = (pipeline.agents || []).map(function(agentName, agentIndex) {
         var agent = (agentMapData || []).filter(function(item) { return item.name === agentName; })[0] || { name: agentName, desc: 'Участник цепочки передачи контекста.', icon: 'paleo/track' };
-        return (agentIndex ? '<span class="pipeline-flow-arrow" aria-hidden="true">→</span>' : '') + '<li class="pipeline-timeline-step" tabindex="0" title="' + escapeHtml(agent.desc) + '" data-agent-name="' + escapeHtml(agent.name) + '" data-status="pending"><img src="../../assets/icons/32/' + escapeHtml(agent.icon) + '.png" alt=""><span class="pipeline-status-dot" aria-hidden="true"></span><div><strong>' + escapeHtml(agent.name) + '</strong><small>' + escapeHtml(agent.desc) + '</small></div></li>';
+        return (agentIndex ? '<span class="pipeline-flow-arrow" aria-hidden="true">→</span>' : '') + '<li class="pipeline-timeline-step" tabindex="0" title="' + escapeHtml(agent.desc) + '" data-agent-name="' + escapeHtml(agent.name) + '" data-status="pending"><img src="assets/icons/32/' + escapeHtml(agent.icon) + '.png" alt=""><span class="pipeline-status-dot" aria-hidden="true"></span><div><strong>' + escapeHtml(agent.name) + '</strong><small>' + escapeHtml(agent.desc) + '</small></div></li>';
       }).join('');
       var isLoop = pipeline.type === 'loop' || pipeline.type === 'spiral';
       var loopBadge = isLoop ? '<span class="pipeline-loop-badge" title="' + (pipeline.type === 'spiral' ? 'Спираль: каждый виток расширяет горизонт (Хук Свива)' : 'Цикл: обратная связь до сходимости') + '">' + (pipeline.type === 'spiral' ? '↺ спираль' : '↺ цикл') + '</span>' : '';
       var loopClose = isLoop ? '<li class="pipeline-loop-close" title="Возврат в начало витка">↺ в начало</li>' : '';
       var resultButton = '<button type="button" class="lab-btn lab-btn-secondary pipeline-view-btn" data-pipeline-details>Открыть результат</button>';
-      return '<article class="agent-pipeline-card" data-pipeline-id="' + escapeHtml(pipeline.id) + '"><div class="pipeline-card-head"><div class="pipeline-card-title"><img src="../../assets/icons/32/paleo/track.png" alt=""><h3>' + escapeHtml(pipeline.name) + '</h3>' + loopBadge + '<span class="pipeline-status-badge" data-pipeline-run-status data-status="' + (result ? 'done' : 'pending') + '">' + (result ? 'Готовый результат' : 'Ожидание запуска') + '</span></div><div class="agent-pipeline-actions"><button type="button" class="pipeline-icon-btn" data-pipeline-edit aria-label="Редактировать пайплайн">✎</button><button type="button" class="pipeline-icon-btn pipeline-delete" data-pipeline-delete aria-label="Удалить пайплайн">✕</button></div></div><p class="agent-pipeline-route">' + escapeHtml(pipeline.description || 'Цепочка передачи контекста') + '</p><ol class="pipeline-timeline" aria-label="Этапы пайплайна">' + agents + loopClose + '</ol><div class="pipeline-card-buttons"><button type="button" class="lab-btn lab-btn-primary pipeline-run-btn" data-pipeline-run>Запустить локально</button>' + resultButton + '<button type="button" class="lab-btn lab-btn-secondary pipeline-detail-btn" data-pipeline-details>Подробнее</button></div></article>';
+      return '<article class="agent-pipeline-card" data-pipeline-id="' + escapeHtml(pipeline.id) + '"><div class="pipeline-card-head"><div class="pipeline-card-title"><img src="assets/icons/32/paleo/track.png" alt=""><h3>' + escapeHtml(pipeline.name) + '</h3>' + loopBadge + '<span class="pipeline-status-badge" data-pipeline-run-status data-status="' + (result ? 'done' : 'pending') + '">' + (result ? 'Готовый результат' : 'Ожидание запуска') + '</span></div><div class="agent-pipeline-actions"><button type="button" class="pipeline-icon-btn" data-pipeline-edit aria-label="Редактировать пайплайн">✎</button><button type="button" class="pipeline-icon-btn pipeline-delete" data-pipeline-delete aria-label="Удалить пайплайн">✕</button></div></div><p class="agent-pipeline-route">' + escapeHtml(pipeline.description || 'Цепочка передачи контекста') + '</p><ol class="pipeline-timeline" aria-label="Этапы пайплайна">' + agents + loopClose + '</ol><div class="pipeline-card-buttons"><button type="button" class="lab-btn lab-btn-primary pipeline-run-btn" data-pipeline-run>Запустить локально</button>' + resultButton + '<button type="button" class="lab-btn lab-btn-secondary pipeline-detail-btn" data-pipeline-details>Подробнее</button></div></article>';
     }).join('');
     pipelines.querySelector('.agent-pipelines-status').outerHTML = '<div class="agent-pipelines-grid">' + (cards || '<div class="lab-alert lab-alert-info">Пайплайны пока не созданы.</div>') + '</div>';
     pipelines.querySelector('[data-pipeline-create]').addEventListener('click', function() { openPipelineModal(container, pipelines, null); });
@@ -1330,7 +1330,7 @@ const PageController = (function() {
         break;
 
       case 'root-dictionary':
-        container.innerHTML = '<h1><img src="../../assets/icons/32/ui/book.png" class="lab-icon" alt="">Корневой словарь</h1>' +
+        container.innerHTML = '<h1><img src="assets/icons/32/ui/book.png" class="lab-icon" alt="">Корневой словарь</h1>' +
           '<p class="subtitle">Поиск по корням иврита. Введите корень, слово или значение. Граф использует только палео-письмо.</p>' +
           '<div class="search-wrap"><input type="text" id="rd-search" class="lab-input" placeholder="אמן, AMN, верить..." oninput="if(window.RootsSearch)RootsSearch.filter(this.value)" autofocus></div>' +
           '<div class="rd-stats"><div class="rd-stat"><div class="num" id="rd-total">150</div><div class="label">Корней</div></div><div class="rd-stat"><div class="num" id="rd-found">0</div><div class="label">Найдено</div></div></div>' +
@@ -1367,12 +1367,12 @@ const PageController = (function() {
         break;
 
       case 'word-analyzer':
-        container.innerHTML = '<h1><img src="../../assets/icons/32/archaeology/testtube.svg" class="lab-icon" alt="">Разбор слов</h1>' +
+        container.innerHTML = '<h1><img src="assets/icons/32/archaeology/testtube.svg" class="lab-icon" alt="">Разбор слов</h1>' +
           '<p class="subtitle">Вставьте слова через запятую или каждое с новой строки. Мы найдём корень, палео-образы, транслитерацию и цепочку подмен.</p>' +
           '<textarea id="wa-input" class="lab-textarea" rows="8" placeholder="אמת, תורה, שלום&#10;משיח&#10;צדק, חסד"></textarea>' +
           '<div class="flex gap-8 mb-16">' +
-          '<button class="lab-btn lab-btn-primary" onclick="WordAnalyzer.analyze()"><img src="../../assets/icons/32/archaeology/testtube.svg" width="32" height="32" alt="Разобрать" style="vertical-align: middle; margin-right: 6px;"> Разобрать</button>' +
-          '<button class="lab-btn lab-btn-secondary" onclick="document.getElementById(\'wa-input\').value=\'\';document.getElementById(\'wa-grid\').innerHTML=\'\';document.getElementById(\'wa-export\').style.display=\'none\';document.getElementById(\'wa-status\').className=\'lab-alert lab-alert-info\';document.getElementById(\'wa-status\').textContent=\'Введите слова для разбора.\'"><img src="../../assets/icons/32/nav/alert.png" width="32" height="32" alt="Очистить" style="vertical-align: middle; margin-right: 6px;"> Очистить</button>' +
+          '<button class="lab-btn lab-btn-primary" onclick="WordAnalyzer.analyze()"><img src="assets/icons/32/archaeology/testtube.svg" width="32" height="32" alt="Разобрать" style="vertical-align: middle; margin-right: 6px;"> Разобрать</button>' +
+          '<button class="lab-btn lab-btn-secondary" onclick="document.getElementById(\'wa-input\').value=\'\';document.getElementById(\'wa-grid\').innerHTML=\'\';document.getElementById(\'wa-export\').style.display=\'none\';document.getElementById(\'wa-status\').className=\'lab-alert lab-alert-info\';document.getElementById(\'wa-status\').textContent=\'Введите слова для разбора.\'"><img src="assets/icons/32/nav/alert.png" width="32" height="32" alt="Очистить" style="vertical-align: middle; margin-right: 6px;"> Очистить</button>' +
           '</div>' +
           '<div id="wa-status" class="lab-alert lab-alert-info">Введите слова для разбора.</div>' +
           '<div id="wa-export" class="export-bar" style="display:none">' +
@@ -1395,7 +1395,7 @@ const PageController = (function() {
         break;
 
       case 'etymology-checker':
-        container.innerHTML = '<h1><img src="../../assets/icons/32/archaeology/testtube.svg" class="lab-icon" alt="">Чекер этимологии</h1>' +
+        container.innerHTML = '<h1><img src="assets/icons/32/archaeology/testtube.svg" class="lab-icon" alt="">Чекер этимологии</h1>' +
           '<p class="subtitle">Проверь слово на соответствие палео-корням, образам и карте утрат</p>' +
           '<div class="search-wrap"><input type="text" id="el-input" class="lab-input" placeholder="Введите слово на иврите..." onkeydown="if(event.key===\'Enter\')EtymologyLab.analyze()"><button class="lab-btn lab-btn-primary" onclick="EtymologyLab.analyze()">Разобрать</button></div>' +
           '<div id="el-results"></div>';
@@ -1404,7 +1404,7 @@ const PageController = (function() {
 
       case 'scripture-reader':
         container.innerHTML = '<div class="research-page-head scripture-reader-head">' +
-          '<h1><img src="../../assets/icons/32/ui/book.png" class="lab-icon" alt="">Книгочтение</h1>' +
+          '<h1><img src="assets/icons/32/ui/book.png" class="lab-icon" alt="">Книгочтение</h1>' +
           '<p class="subtitle">Книги Танаха, засвидетельствованные в кумранских свитках. Чтение на палео-иврите с последовательным просмотром стихов.</p>' +
           '</div>' +
           '<div id="scripture-verse-nav" class="scripture-verse-nav" style="display:none;" aria-label="Выбор главы и стиха"></div>' +
@@ -1434,8 +1434,8 @@ const PageController = (function() {
           '</div>' +
           '</section>' +
           '<section id="scripture-tools" class="scripture-tools" style="display:none;" aria-label="Инструменты исследователя">' +
-          '<button type="button" class="lab-btn lab-btn-secondary scripture-tool" id="scripture-tool-analysis" aria-label="Открыть анализ выбранного слова"><img src="../../assets/icons/32/ui/diff.png" alt="" aria-hidden="true"><span>Разобрать</span></button>' +
-          '<button type="button" class="lab-btn lab-btn-secondary scripture-tool" id="scripture-tool-save" aria-label="Сохранить свидетельство выбранного слова"><img src="../../assets/icons/32/ui/download.png" alt="" aria-hidden="true"><span>Сохранить</span></button>' +
+          '<button type="button" class="lab-btn lab-btn-secondary scripture-tool" id="scripture-tool-analysis" aria-label="Открыть анализ выбранного слова"><img src="assets/icons/32/ui/diff.png" alt="" aria-hidden="true"><span>Разобрать</span></button>' +
+          '<button type="button" class="lab-btn lab-btn-secondary scripture-tool" id="scripture-tool-save" aria-label="Сохранить свидетельство выбранного слова"><img src="assets/icons/32/ui/download.png" alt="" aria-hidden="true"><span>Сохранить</span></button>' +
           '</section>' +
           '</main>' +
           '</div>';
@@ -1447,13 +1447,13 @@ const PageController = (function() {
         container.innerHTML = '<header class="section-hero">' +
           '<div class="section-hero-watermark" aria-hidden="true">𐤀 𐤁 𐤂 𐤃 𐤄 𐤅</div>' +
           '<div class="section-hero-kicker">ГОЛЕМ · ЧЕКЕР ПОДМЕН</div>' +
-          '<h1><img src="../../assets/icons/32/ui/question.png" class="lab-icon" alt="">Чекер подмен</h1>' +
+          '<h1><img src="assets/icons/32/ui/question.png" class="lab-icon" alt="">Чекер подмен</h1>' +
           '<p class="section-hero-lead">Введите слово, корень или перевод. Сопоставьте происхождение, цепочку подмен и текстовые свидетельства.</p>' +
         '</header>' +
           '<form id="investigation-form" class="investigation-search" onsubmit="event.preventDefault(); Investigation.investigate();">' +
           '<label for="investigation-input">Объект расследования</label>' +
           '<div class="investigation-search-row"><input type="search" id="investigation-input" class="lab-input" placeholder="חסד, милость, HSD..." autocomplete="off" required>' +
-          '<button type="submit" class="lab-btn lab-btn-primary" id="investigation-submit"><img src="../../assets/icons/32/ui/question.png" width="24" height="24" alt="">Расследовать</button></div>' +
+          '<button type="submit" class="lab-btn lab-btn-primary" id="investigation-submit"><img src="assets/icons/32/ui/question.png" width="24" height="24" alt="">Расследовать</button></div>' +
           '<div id="investigation-status" class="investigation-status" role="status" aria-live="polite">Данные загружаются из словаря корней и словарей подмен.</div>' +
           '</form>' +
           '<div id="investigation-result" class="investigation-result" aria-live="polite"></div>';
@@ -1498,7 +1498,7 @@ const PageController = (function() {
         break;
 
       case 'board-generator':
-        container.innerHTML = '<h1><img src="../../assets/icons/32/scribe/scroll.png" class="lab-icon" alt="">Генератор исследовательских досок</h1>' +
+        container.innerHTML = '<h1><img src="assets/icons/32/scribe/scroll.png" class="lab-icon" alt="">Генератор исследовательских досок</h1>' +
           '<p class="subtitle">Создавайте визуальные доски для анализа улик, выводов и вложений. Экспортируйте в PNG, PDF или TXT.</p>' +
           '<form id="board-form">' +
           '<div style="margin-bottom:20px"><label style="display:block;font-weight:600;margin-bottom:6px">Заголовок доски <span style="color:var(--accent-red)">*</span></label>' +
@@ -1527,7 +1527,7 @@ const PageController = (function() {
         break;
 
       case 'research-generator':
-        container.innerHTML = '<h1><img src="../../assets/icons/32/crafts/hammer-and-chisel.png" class="lab-icon" alt="">Генератор исследований</h1>' +
+        container.innerHTML = '<h1><img src="assets/icons/32/crafts/hammer-and-chisel.png" class="lab-icon" alt="">Генератор исследований</h1>' +
           '<p class="subtitle">Выберите тип исследования, укажите тему и получите основу в формате Markdown.</p>' +
           '<form id="research-generator-form" class="research-generator-form" onsubmit="event.preventDefault(); PageController.generateResearch();">' +
           '<div class="research-generator-fields">' +
@@ -1556,19 +1556,19 @@ const PageController = (function() {
         break;
 
       case 'religionism-checker':
-        container.innerHTML = '<h1><img src="../../assets/icons/32/ui/question.png" width="32" height="32" alt="Чекер религионимов" style="vertical-align: middle; margin-right: 6px;"> Чекер религионимов</h1>' +
+        container.innerHTML = '<h1><img src="assets/icons/32/ui/question.png" width="32" height="32" alt="Чекер религионимов" style="vertical-align: middle; margin-right: 6px;"> Чекер религионимов</h1>' +
           '<p class="subtitle">Проверка текста на подмены. Вставьте текст на русском — мы подсветим религионизмы.</p>' +
           '<textarea id="rc-input" class="lab-textarea" rows="6" placeholder="Вставьте текст, например: Господь Бог сказал Моисею..."></textarea>' +
           '<div class="flex gap-8 items-center mb-16">' +
-          '<button class="lab-btn lab-btn-primary" onclick="RelChecker.check()"><img src="../../assets/icons/32/ui/question.png" width="32" height="32" alt="Проверить" style="vertical-align: middle; margin-right: 6px;"> Проверить текст</button>' +
-          '<button class="lab-btn lab-btn-secondary" onclick="RelChecker.clear()"><img src="../../assets/icons/32/nav/alert.png" width="32" height="32" alt="Очистить" style="vertical-align: middle; margin-right: 6px;"> Очистить</button></div>' +
-          '<div id="rc-result" class="lab-card" style="display:none;"><div class="lab-card-header"><img src="../../assets/icons/32/scribe/scroll.png" width="32" height="32" alt="Результат" style="vertical-align: middle; margin-right: 6px;"> Результат проверки</div><div class="lab-card-body" id="rc-body"></div></div>' +
-          '<div class="lab-card"><div class="lab-card-header"><img src="../../assets/icons/32/ui/book.png" width="32" height="32" alt="Словарь" style="vertical-align: middle; margin-right: 6px;"> Словарь подмен</div><div class="lab-card-body" id="rc-dict"></div></div>';
+          '<button class="lab-btn lab-btn-primary" onclick="RelChecker.check()"><img src="assets/icons/32/ui/question.png" width="32" height="32" alt="Проверить" style="vertical-align: middle; margin-right: 6px;"> Проверить текст</button>' +
+          '<button class="lab-btn lab-btn-secondary" onclick="RelChecker.clear()"><img src="assets/icons/32/nav/alert.png" width="32" height="32" alt="Очистить" style="vertical-align: middle; margin-right: 6px;"> Очистить</button></div>' +
+          '<div id="rc-result" class="lab-card" style="display:none;"><div class="lab-card-header"><img src="assets/icons/32/scribe/scroll.png" width="32" height="32" alt="Результат" style="vertical-align: middle; margin-right: 6px;"> Результат проверки</div><div class="lab-card-body" id="rc-body"></div></div>' +
+          '<div class="lab-card"><div class="lab-card-header"><img src="assets/icons/32/ui/book.png" width="32" height="32" alt="Словарь" style="vertical-align: middle; margin-right: 6px;"> Словарь подмен</div><div class="lab-card-body" id="rc-dict"></div></div>';
         container.dataset.loaded = '1';
         break;
 
       case 'religionisms':
-        container.innerHTML = '<h1><img src="../../assets/icons/32/ui/question.png" width="32" height="32" alt="Религионизмы" style="vertical-align: middle; margin-right: 6px;"> Религионизмы</h1>' +
+        container.innerHTML = '<h1><img src="assets/icons/32/ui/question.png" width="32" height="32" alt="Религионизмы" style="vertical-align: middle; margin-right: 6px;"> Религионизмы</h1>' +
           '<p class="subtitle">Каждая сфера, учреждённая человеком вне откровения Яхве — структурированный шекер со своим алтарём, жрецами и жертвами. 9 компонентов на каждую сферу.</p>' +
           '<div class="search-wrap"><input type="text" id="rel-search" class="lab-input" placeholder="Медицина, алтарь, жрец..." oninput="if(window.Religionisms)Religionisms.filter(this.value)"></div>' +
           '<div class="rd-stats"><div class="rd-stat"><div class="num" id="rel-found">0</div><div class="label">Сфер найдено</div></div></div>' +
@@ -1582,49 +1582,49 @@ const PageController = (function() {
       case 'translation-comparator':
         container.innerHTML = '<div class="tc-search-row"><label for="tc-search">Ссылка на стих</label><div class="search-wrap">' +
           '<input type="text" id="tc-search" class="lab-input" placeholder="Берешит 1:1, Исайя 53:5" />' +
-          '<button class="lab-btn lab-btn-primary" onclick="TransComp.search()"><img src="../../assets/icons/32/ui/book.png" width="32" height="32" alt="">Показать</button></div></div>' +
+          '<button class="lab-btn lab-btn-primary" onclick="TransComp.search()"><img src="assets/icons/32/ui/book.png" width="32" height="32" alt="">Показать</button></div></div>' +
           '<div id="tc-placeholder" class="lab-alert lab-alert-info">Введите ссылку на стих. Пример: <strong>Берешит 1:1</strong>.</div>' +
           '<main id="tc-results" class="tc-map-page" style="display:none;">' +
-          '<section class="tc-section"><h2><img src="../../assets/icons/32/scribe/scroll.png" alt="">Ивритские источники</h2><div class="tc-source-grid">' +
-          '<article class="lab-card tc-source-card"><h3><img src="../../assets/icons/32/scribe/scroll.png" alt=""><span>ТМ<small>масоретский текст · квадратное письмо</small></span></h3><div id="tc-tm" class="tc-text tc-hebrew" dir="rtl" lang="he"></div></article>' +
-          '<article class="lab-card tc-source-card"><h3><img src="../../assets/icons/32/scribe/scroll.png" alt=""><span>Кумранский свиток<small>квадратное письмо · без огласовок</small></span></h3><div id="tc-qumran" class="tc-text tc-hebrew" dir="rtl" lang="he"></div></article>' +
-          '<article class="lab-card tc-source-card"><h3><img src="../../assets/icons/32/paleo/track.png" alt=""><span>Сам. Пятикнижие<small>палео-шрифт</small></span></h3><div id="tc-samaritan" class="tc-text tc-paleo" lang="hbo"></div></article></div></section>' +
-          '<section class="tc-section"><h2><img src="../../assets/icons/32/scribe/scroll.png" alt="">Древние переводы</h2><div class="tc-source-grid"><article class="lab-card tc-source-card"><h3><img src="../../assets/icons/32/scribe/scroll.png" alt=""><span>LXX <small>греч.</small></span></h3><div id="tc-lxx" class="tc-text"></div></article><article class="lab-card tc-source-card"><h3><img src="../../assets/icons/32/scribe/scroll.png" alt=""><span>Пешитта <small>сир.</small></span></h3><div id="tc-peshitta" class="tc-text" dir="rtl" lang="syr"></div></article><article class="lab-card tc-source-card"><h3><img src="../../assets/icons/32/scribe/scroll.png" alt=""><span>Вульгата <small>лат.</small></span></h3><div class="tc-text">Латинский слой пока не загружен.</div></article></div></section>' +
-          '<section class="tc-section"><h2><img src="../../assets/icons/32/scribe/scroll.png" alt="">Современные переводы</h2><div class="tc-source-grid"><article class="lab-card tc-source-card"><h3><img src="../../assets/icons/32/scribe/scroll.png" alt=""><span>Синодальный <small>рус.</small></span></h3><div id="tc-synodal" class="tc-text"></div></article><article class="lab-card tc-source-card"><h3><img src="../../assets/icons/32/scribe/scroll.png" alt=""><span>Современный русский</span></h3><div id="tc-modern" class="tc-text"></div></article></div></section>' +
-          '<section id="tc-analysis-section" class="tc-source-analysis tc-analysis-section" hidden aria-labelledby="tc-source-analysis-title"><h2 id="tc-source-analysis-title"><img src="../../assets/icons/32/ui/scales.png" alt="">Аналитика расхождений</h2><div class="tc-analysis-subsection"><h3>Расхождения и разбор</h3><div id="tc-divergence-block" class="tc-analysis-block"><h4>Описание расхождения</h4><div id="tc-divergence" class="tc-analysis-text"></div></div><div id="tc-paleo-block" class="tc-analysis-block"><h4>Палео-разбор ключевых слов</h4><div id="tc-paleo-analysis" class="tc-analysis-text"></div></div></div><div class="tc-analysis-subsection tc-analysis-stats"><h3>Статистика</h3><div id="tc-source-ratio" class="tc-source-ratio"></div><p id="tc-source-key-difference" class="tc-source-key-difference"></p></div></section></main>';
+          '<section class="tc-section"><h2><img src="assets/icons/32/scribe/scroll.png" alt="">Ивритские источники</h2><div class="tc-source-grid">' +
+          '<article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>ТМ<small>масоретский текст · квадратное письмо</small></span></h3><div id="tc-tm" class="tc-text tc-hebrew" dir="rtl" lang="he"></div></article>' +
+          '<article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>Кумранский свиток<small>квадратное письмо · без огласовок</small></span></h3><div id="tc-qumran" class="tc-text tc-hebrew" dir="rtl" lang="he"></div></article>' +
+          '<article class="lab-card tc-source-card"><h3><img src="assets/icons/32/paleo/track.png" alt=""><span>Сам. Пятикнижие<small>палео-шрифт</small></span></h3><div id="tc-samaritan" class="tc-text tc-paleo" lang="hbo"></div></article></div></section>' +
+          '<section class="tc-section"><h2><img src="assets/icons/32/scribe/scroll.png" alt="">Древние переводы</h2><div class="tc-source-grid"><article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>LXX <small>греч.</small></span></h3><div id="tc-lxx" class="tc-text"></div></article><article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>Пешитта <small>сир.</small></span></h3><div id="tc-peshitta" class="tc-text" dir="rtl" lang="syr"></div></article><article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>Вульгата <small>лат.</small></span></h3><div class="tc-text">Латинский слой пока не загружен.</div></article></div></section>' +
+          '<section class="tc-section"><h2><img src="assets/icons/32/scribe/scroll.png" alt="">Современные переводы</h2><div class="tc-source-grid"><article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>Синодальный <small>рус.</small></span></h3><div id="tc-synodal" class="tc-text"></div></article><article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>Современный русский</span></h3><div id="tc-modern" class="tc-text"></div></article></div></section>' +
+          '<section id="tc-analysis-section" class="tc-source-analysis tc-analysis-section" hidden aria-labelledby="tc-source-analysis-title"><h2 id="tc-source-analysis-title"><img src="assets/icons/32/ui/scales.png" alt="">Аналитика расхождений</h2><div class="tc-analysis-subsection"><h3>Расхождения и разбор</h3><div id="tc-divergence-block" class="tc-analysis-block"><h4>Описание расхождения</h4><div id="tc-divergence" class="tc-analysis-text"></div></div><div id="tc-paleo-block" class="tc-analysis-block"><h4>Палео-разбор ключевых слов</h4><div id="tc-paleo-analysis" class="tc-analysis-text"></div></div></div><div class="tc-analysis-subsection tc-analysis-stats"><h3>Статистика</h3><div id="tc-source-ratio" class="tc-source-ratio"></div><p id="tc-source-key-difference" class="tc-source-key-difference"></p></div></section></main>';
         container.dataset.loaded = '1';
         break;
 
       case 'board-library':
-        container.innerHTML = '<h1><img src="../../assets/icons/32/scribe/scrolls.png" width="32" height="32" alt="Архив досок" style="vertical-align: middle; margin-right: 6px;"> Архив досок</h1>' +
+        container.innerHTML = '<h1><img src="assets/icons/32/scribe/scrolls.png" width="32" height="32" alt="Архив досок" style="vertical-align: middle; margin-right: 6px;"> Архив досок</h1>' +
           '<p class="subtitle">Архив сохранённых исследовательских досок. Просмотр, экспорт и управление.</p>' +
-          '<div class="flex gap-8 mb-16"><button class="lab-btn lab-btn-secondary" onclick="BoardLib.clearAll()"><img src="../../assets/icons/32/nav/alert.png" width="32" height="32" alt="Очистить" style="vertical-align: middle; margin-right: 6px;"> Очистить всё</button></div>' +
+          '<div class="flex gap-8 mb-16"><button class="lab-btn lab-btn-secondary" onclick="BoardLib.clearAll()"><img src="assets/icons/32/nav/alert.png" width="32" height="32" alt="Очистить" style="vertical-align: middle; margin-right: 6px;"> Очистить всё</button></div>' +
           '<div id="bl-list"></div>' +
           '<div id="bl-empty" class="lab-alert lab-alert-info">Пока нет сохранённых досок.</div>';
         container.dataset.loaded = '1';
         break;
 
       case 'vision':
-        container.innerHTML = '<h1><img src="../../assets/icons/32/archaeology/lamp.png" width="32" height="32" alt="Визуальный анализатор" style="vertical-align: middle; margin-right: 6px;"> Визуальный анализатор</h1>' +
+        container.innerHTML = '<h1><img src="assets/icons/32/archaeology/lamp.png" width="32" height="32" alt="Визуальный анализатор" style="vertical-align: middle; margin-right: 6px;"> Визуальный анализатор</h1>' +
           '<p class="subtitle">Загрузите изображение для анализа. Модель опишет содержимое: текст, символы, объекты.</p>' +
           '<div class="flex gap-8 mb-16">' +
           '<button class="lab-btn lab-btn-primary" data-mode="huggingface" onclick="VisionUI.setMode(\'huggingface\')">🤗 Hugging Face API</button>' +
           '<button class="lab-btn lab-btn-secondary" data-mode="local" onclick="VisionUI.setMode(\'local\')">💻 Локальный сервер</button></div>' +
-          '<div class="lab-card"><div class="lab-card-header"><img src="../../assets/icons/32/nav/door.png" width="32" height="32" alt="Настройки" style="vertical-align: middle; margin-right: 6px;"> Настройки</div><div class="lab-card-body">' +
+          '<div class="lab-card"><div class="lab-card-header"><img src="assets/icons/32/nav/door.png" width="32" height="32" alt="Настройки" style="vertical-align: middle; margin-right: 6px;"> Настройки</div><div class="lab-card-body">' +
           '<label class="mb-8" style="display:block;font-weight:600;">API ключ Hugging Face</label>' +
           '<div class="text-small text-muted mb-8"><a href="https://huggingface.co/settings/tokens" target="_blank" style="color:#b8860b;">Получить бесплатный ключ</a></div>' +
           '<div class="flex gap-8"><input type="password" id="vi-apikey" class="lab-input" placeholder="hf_xxxxxxxxxxxx" style="max-width:400px;" />' +
-          '<button class="lab-btn lab-btn-secondary" onclick="VisionUI.saveKey()"><img src="../../assets/icons/32/ui/settings.png" width="32" height="32" alt="Сохранить" style="vertical-align: middle; margin-right: 6px;"> Сохранить</button></div></div></div>' +
+          '<button class="lab-btn lab-btn-secondary" onclick="VisionUI.saveKey()"><img src="assets/icons/32/ui/settings.png" width="32" height="32" alt="Сохранить" style="vertical-align: middle; margin-right: 6px;"> Сохранить</button></div></div></div>' +
           '<div class="lab-card" style="text-align:center;cursor:pointer;" onclick="document.getElementById(\'vi-file\').click()">' +
           '<div id="vi-preview" style="display:none;margin-bottom:12px;">' +
           '<img id="vi-img" src="" alt="preview" style="max-width:100%;max-height:300px;border-radius:4px;border:1px solid #d4c4a8;" />' +
-          '<button class="lab-btn lab-btn-secondary mt-8" onclick="event.stopPropagation();VisionUI.remove()"><img src="../../assets/icons/32/nav/alert.png" width="32" height="32" alt="Удалить" style="vertical-align: middle; margin-right: 6px;"> Удалить</button></div>' +
-          '<div id="vi-placeholder"><span><img src="../../assets/icons/32/ui/placeholder.svg" width="32" height="32" alt="Изображение" style="vertical-align: middle; margin-right: 6px;"></span><div style="font-size:18px;color:#2c1810;margin-top:8px;">Нажмите, чтобы загрузить</div>' +
+          '<button class="lab-btn lab-btn-secondary mt-8" onclick="event.stopPropagation();VisionUI.remove()"><img src="assets/icons/32/nav/alert.png" width="32" height="32" alt="Удалить" style="vertical-align: middle; margin-right: 6px;"> Удалить</button></div>' +
+          '<div id="vi-placeholder"><span><img src="assets/icons/32/ui/placeholder.svg" width="32" height="32" alt="Изображение" style="vertical-align: middle; margin-right: 6px;"></span><div style="font-size:18px;color:#2c1810;margin-top:8px;">Нажмите, чтобы загрузить</div>' +
           '<div class="text-muted text-small mt-8">PNG, JPG, WEBP — до 10 МБ</div></div>' +
           '<input type="file" id="vi-file" accept="image/png,image/jpeg,image/jpg,image/webp" style="display:none;" onchange="VisionUI.load(event)" /></div>' +
-          '<button class="lab-btn lab-btn-primary" id="vi-analyze-btn" onclick="VisionUI.analyze()" disabled style="width:100%;justify-content:center;padding:14px;font-size:18px;margin-bottom:16px;"><img src="../../assets/icons/32/ui/question.png" width="32" height="32" alt="Анализировать" style="vertical-align: middle; margin-right: 6px;"> Анализировать</button>' +
+          '<button class="lab-btn lab-btn-primary" id="vi-analyze-btn" onclick="VisionUI.analyze()" disabled style="width:100%;justify-content:center;padding:14px;font-size:18px;margin-bottom:16px;"><img src="assets/icons/32/ui/question.png" width="32" height="32" alt="Анализировать" style="vertical-align: middle; margin-right: 6px;"> Анализировать</button>' +
           '<div id="vi-spinner" class="lab-spinner"><div class="loader"></div><div class="spinner-text">Анализ…</div></div>' +
-          '<div id="vi-result" class="lab-card" style="display:none;"><div class="lab-card-header"><img src="../../assets/icons/32/scribe/scroll.png" width="32" height="32" alt="Результат" style="vertical-align: middle; margin-right: 6px;"> Результат</div><div class="lab-card-body" id="vi-result-body" style="white-space:pre-wrap;"></div>' +
+          '<div id="vi-result" class="lab-card" style="display:none;"><div class="lab-card-header"><img src="assets/icons/32/scribe/scroll.png" width="32" height="32" alt="Результат" style="vertical-align: middle; margin-right: 6px;"> Результат</div><div class="lab-card-body" id="vi-result-body" style="white-space:pre-wrap;"></div>' +
           '<div class="text-muted text-small mt-8 flex justify-between"><span id="vi-model-badge">SmolVLM-256M</span><span id="vi-timestamp"></span></div></div>' +
           '<div id="vi-error" class="lab-alert lab-alert-error" style="display:none;"></div>';
         container.dataset.loaded = '1';
@@ -1634,7 +1634,7 @@ const PageController = (function() {
         var agents = getAgentMapData();
         agentMapData = agents;
         var cards = agents.map(function(a) {
-          return '<button type="button" class="tool-card agent-card agent-list-card' + (a.featured ? ' agent-card-orchestrator' : '') + '" data-agent-id="' + a.id + '" onclick="LabRouter.navigate(\'ai-agents\',[\'' + a.id + '\'])" aria-label="Открыть страницу агента: ' + a.name + '"><span class="tool-icon"><img src="../../assets/icons/32/' + a.icon + '.png" width="32" height="32" alt="' + a.name + '"></span>' +
+          return '<button type="button" class="tool-card agent-card agent-list-card' + (a.featured ? ' agent-card-orchestrator' : '') + '" data-agent-id="' + a.id + '" onclick="LabRouter.navigate(\'ai-agents\',[\'' + a.id + '\'])" aria-label="Открыть страницу агента: ' + a.name + '"><span class="tool-icon"><img src="assets/icons/32/' + a.icon + '.png" width="32" height="32" alt="' + a.name + '"></span>' +
             '<div class="tool-name">' + a.name + '</div>' +
             '<div class="tool-desc">' + a.desc + '</div>' +
             '<span class="tool-badge model agent-list-model">' + a.model + '</span>' +
@@ -1648,7 +1648,7 @@ const PageController = (function() {
         var agentControls = document.createElement('section');
         agentControls.className = 'agent-controls-panel';
         agentControls.setAttribute('aria-label', 'Управление агентами');
-        agentControls.innerHTML = '<button type="button" class="lab-btn lab-btn-primary agent-control-button" data-agent-map-open><img src="../../assets/icons/32/ui/web.png" alt="" aria-hidden="true"><span>Карта агентов</span></button>';
+        agentControls.innerHTML = '<button type="button" class="lab-btn lab-btn-primary agent-control-button" data-agent-map-open><img src="assets/icons/32/ui/web.png" alt="" aria-hidden="true"><span>Карта агентов</span></button>';
         container.insertBefore(agentControls, container.querySelector('.agent-list-view'));
         agentControls.querySelector('[data-agent-map-open]').addEventListener('click', function() {
           if (window.AgentMap) window.AgentMap.open();
@@ -1665,7 +1665,7 @@ const PageController = (function() {
         break;
 
       case 'ed-chat':
-        container.innerHTML = '<h1><img src="../../assets/icons/32/crafts/hammer-and-chisel.png" width="32" height="32" alt="Нейрочат" style="vertical-align: middle; margin-right: 6px;"> Нейрочат</h1>' +
+        container.innerHTML = '<h1><img src="assets/icons/32/crafts/hammer-and-chisel.png" width="32" height="32" alt="Нейрочат" style="vertical-align: middle; margin-right: 6px;"> Нейрочат</h1>' +
           '<p class="subtitle">Чат с исследовательской нейросетью для анализа, разбора слов и поиска подмен.</p>' +
           '<div class="ec-layout"><main class="ec-main">' +
           '<div class="ec-toolbar"><label for="ec-model">Модель</label><select id="ec-model" class="lab-select"><option value="claude">Claude Sonnet 4</option><option value="gpt4o">GPT-4o</option><option value="deepseek">DeepSeek</option><option value="gemini">Gemini</option></select><span id="ec-model-label" class="ec-model-label"></span><span id="ec-tokens" class="ec-tokens" hidden></span></div>' +
@@ -1677,10 +1677,10 @@ const PageController = (function() {
         break;
 
       case 'paleo-keyboard':
-        container.innerHTML = '<h1><img src="../../assets/icons/32/paleo/track.png" width="32" height="32" alt="Палео-клавиатура" style="vertical-align: middle; margin-right: 6px;"> Палео-ивритская клавиатура</h1>' +
+        container.innerHTML = '<h1><img src="assets/icons/32/paleo/track.png" width="32" height="32" alt="Палео-клавиатура" style="vertical-align: middle; margin-right: 6px;"> Палео-ивритская клавиатура</h1>' +
           '<p class="subtitle">Нажимайте на буквы, чтобы вставить их. Каждая буква — с образом и значением.</p>' +
           '<textarea id="pk-output" class="lab-card pk-output" aria-label="Поле палео-текста" placeholder="Введите палео-символы…"></textarea>' +
-          '<div class="flex gap-8 mb-16 pk-actions"><button type="button" class="lab-btn lab-btn-secondary" onclick="PaleoKey.copy()"><img src="../../assets/icons/32/scribe/scroll.png" width="32" height="32" alt="Копировать" style="vertical-align: middle; margin-right: 6px;"> Копировать</button><button type="button" class="lab-btn lab-btn-secondary" onclick="PaleoKey.clear()"><img src="../../assets/icons/32/nav/alert.png" width="32" height="32" alt="Очистить" style="vertical-align: middle; margin-right: 6px;"> Очистить</button></div>' +
+          '<div class="flex gap-8 mb-16 pk-actions"><button type="button" class="lab-btn lab-btn-secondary" onclick="PaleoKey.copy()"><img src="assets/icons/32/scribe/scroll.png" width="32" height="32" alt="Копировать" style="vertical-align: middle; margin-right: 6px;"> Копировать</button><button type="button" class="lab-btn lab-btn-secondary" onclick="PaleoKey.clear()"><img src="assets/icons/32/nav/alert.png" width="32" height="32" alt="Очистить" style="vertical-align: middle; margin-right: 6px;"> Очистить</button></div>' +
           '<div id="pk-keys" class="pk-keyboard" aria-label="Палео-клавиатура"></div>' +
           '<div id="pk-info" class="lab-card mt-16" style="display:none;"><div class="lab-card-header" id="pk-info-title"></div><div class="lab-card-body" id="pk-info-body"></div></div>';
         container.dataset.loaded = '1';

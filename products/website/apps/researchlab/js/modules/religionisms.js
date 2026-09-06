@@ -97,7 +97,7 @@ const Religionisms = (function() {
     if (empty) empty.style.display = 'none';
 
     grid.innerHTML = list.map(function(s, idx) {
-      var iconPath = '../../assets/icons/32/' + (s.icon || 'ui/question.png');
+      var iconPath = 'assets/icons/32/' + (s.icon || 'ui/question.png');
       var description = getShortDescription(s);
 
       return '<button type="button" class="rel-card" style="animation-delay:' + (idx * 40) + 'ms" onclick="Religionisms.open(\'' + s.id + '\')">' +
@@ -145,7 +145,7 @@ const Religionisms = (function() {
       return;
     }
 
-    var iconPath = '../../assets/icons/32/' + (sphere.icon || 'ui/question.png');
+    var iconPath = 'assets/icons/32/' + (sphere.icon || 'ui/question.png');
     var componentsHtml = COMPONENTS.map(function(c) {
       return '<div class="rel-comp-block">' +
         '<div class="rel-comp-title">' + c[1] + '</div>' +

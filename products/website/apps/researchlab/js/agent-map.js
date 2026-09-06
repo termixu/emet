@@ -95,7 +95,7 @@
       node.dataset.agentId = agent.id;
       node.style.transform = 'translate(' + position.x + 'px, ' + position.y + 'px)';
       node.innerHTML = '<div class="agent-map-node-head">' +
-        '<img class="agent-map-node-icon" src="../../assets/icons/32/' + escapeHtml(agent.icon) + '.png" alt="">' +
+        '<img class="agent-map-node-icon" src="assets/icons/32/' + escapeHtml(agent.icon) + '.png" alt="">' +
         '<div class="agent-map-node-name">' + escapeHtml(agent.name) + '</div>' +
         '</div>' +
         '<div class="agent-map-node-role">Роль: ' + escapeHtml(settings.role) + '</div>' +

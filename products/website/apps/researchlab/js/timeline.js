@@ -69,7 +69,7 @@ const Timeline = (function() {
       timelines.map(function(tl, idx) {
         var count = tl.events ? tl.events.length : 0;
         var activeClass = idx === 0 ? ' active' : '';
-        return '<div class="tl-roadmap-segment' + activeClass + '" data-tl-id="' + escapeHtml(tl.id) + '" role="listitem" tabindex="0" aria-label="' + escapeHtml(tl.title) + '">' +
+        return '<div class="tl-roadmap-segment' + activeClass + '" data-tl-id="' + escapeHtml(tl.id) + '" role="listitem" tabindex="0" aria-label="' + escapeHtml(tl.title) + '" style="--tl-index:' + idx + '">' +
           '<div class="tl-roadmap-bar"><div class="tl-roadmap-bar-fill" style="width:' + Math.min(100, count * 20) + '%"></div></div>' +
           '<span class="tl-roadmap-label">' + escapeHtml(tl.title) + '</span>' +
           '<span class="tl-roadmap-count">' + count + '</span>' +
@@ -229,11 +229,7 @@ const Timeline = (function() {
     if (!timeline || !timelineContainer) return;
 
     var eventsHtml = (timeline.events || []).map(function(event, index) {
-      return '<article class="tl-detail-event" style="--tl-event-index:' + index + '" role="listitem">' +
-        '<div class="tl-detail-event-date">' + escapeHtml(event.date) + '</div>' +
-        '<h3 class="tl-detail-event-title">' + escapeHtml(event.title) + '</h3>' +
-        '<p class="tl-detail-event-desc">' + escapeHtml(event.description || '') + '</p>' +
-      '</article>';
+      return renderEventRow(event, index, timeline.id);
     }).join('');
 
     // Шапку детального экрана рисует LabHero. Внутри — back-ссылка,
@@ -273,6 +269,64 @@ const Timeline = (function() {
       // Возврат через hash — роутер сам вызовет renderCatalog (applyRoute).
       location.hash = '#timeline';
     });
+
+    // Inline actions на событиях: открыть / копировать ссылку
+    var actionButtons = timelineContainer.querySelectorAll('.tl-event-action-btn');
+    actionButtons.forEach(function(btn) {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var action = btn.getAttribute('data-action');
+        var eventIdx = parseInt(btn.getAttribute('data-event-idx'), 10);
+        var event = timeline.events[eventIdx];
+        if (!event) return;
+
+        if (action === 'open') {
+          // Визуальный отклик — можно расширить до модалки с деталями
+          var eventEl = btn.closest('.tl-detail-event');
+          if (eventEl) {
+            eventEl.style.background = 'var(--bg-tertiary)';
+            setTimeout(function() { eventEl.style.background = ''; }, 200);
+          }
+        } else if (action === 'copy') {
+          var shareUrl = location.origin + location.pathname + '#timeline/' + timeline.id + '/event/' + eventIdx;
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(shareUrl).then(function() {
+              showToast('Ссылка скопирована');
+            }).catch(function() {
+              fallbackCopy(shareUrl);
+            });
+          } else {
+            fallbackCopy(shareUrl);
+          }
+        }
+      });
+    });
+  }
+
+  function fallbackCopy(text) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try { document.execCommand('copy'); showToast('Ссылка скопирована'); }
+    catch(e) { showToast('Не удалось скопировать'); }
+    document.body.removeChild(ta);
+  }
+
+  function showToast(message) {
+    var existing = document.querySelector('.tl-toast');
+    if (existing) existing.remove();
+    var toast = document.createElement('div');
+    toast.className = 'tl-toast';
+    toast.textContent = message;
+    toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);' +
+      'background:var(--bg-dark);color:var(--text-light);padding:8px 16px;border-radius:6px;' +
+      'font-family:var(--font-ui);font-size:13px;font-weight:600;z-index:10001;' +
+      'box-shadow:0 4px 16px rgba(0,0,0,0.3);animation:fadeIn 0.2s ease both;';
+    document.body.appendChild(toast);
+    setTimeout(function() { toast.remove(); }, 2000);
   }
 
   function pluralize(n, one, two, five) {
@@ -284,8 +338,35 @@ const Timeline = (function() {
     return five;
   }
 
-  /* applyRoute — перерисовка при повторном заходе на модуль (hashchange):
-     #timeline → каталог, #timeline/<id> → детальный экран (unknown id → каталог). */
+  // Определение статуса события по ключевым словам (для status dots)
+  function getEventStatus(event) {
+    var text = (event.title + ' ' + (event.description || '')).toLowerCase();
+    if (/обнаружен|открыт|найден|создание|рождение|начало/.test(text)) return 'done';
+    if (/публикац|выпуск|издан|выпуск|представлен/.test(text)) return 'active';
+    if (/перевод|трансформац|эволюц|развитие|распространен/.test(text)) return 'active';
+    return 'pending';
+  }
+
+  // Рендеринг одного события с status dot и inline actions
+  function renderEventRow(event, index, tlId) {
+    var status = getEventStatus(event);
+    var statusLabels = { done: 'Завершено', active: 'В процессе', pending: 'Предстоит' };
+    return '<article class="tl-detail-event" style="--tl-event-index:' + index + '" role="listitem">' +
+      '<div class="tl-event-row-inner">' +
+        '<span class="tl-status-dot tl-status-dot--' + status + '" aria-label="' + statusLabels[status] + '"></span>' +
+        '<div class="tl-detail-event-main">' +
+          '<div class="tl-detail-event-date">' + escapeHtml(event.date) + '</div>' +
+          '<h3 class="tl-detail-event-title">' + escapeHtml(event.title) + '</h3>' +
+          '<p class="tl-detail-event-desc">' + escapeHtml(event.description || '') + '</p>' +
+        '</div>' +
+        '<div class="tl-event-actions">' +
+          '<button class="tl-event-action-btn" type="button" data-action="open" data-event-idx="' + index + '" title="Открыть событие">→</button>' +
+          '<button class="tl-event-action-btn" type="button" data-action="copy" data-event-idx="' + index + '" title="Копировать ссылку">⎘</button>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
   function applyRoute(parsed) {
     if (!timelineContainer || !timelineItems.length) return;
     var detailId = parsed && parsed.segments && parsed.segments[1];
@@ -297,11 +378,175 @@ const Timeline = (function() {
     }
   }
 
+  // ===== COMMAND PALETTE (⌘K) =====
+  var cpState = { open: false, selectedIdx: 0, results: [] };
+
+  function buildSearchIndex() {
+    var index = [];
+    timelineItems.forEach(function(tl) {
+      index.push({
+        type: 'timeline',
+        id: tl.id,
+        title: tl.title,
+        subtitle: tl.description || '',
+        icon: tl.paleoIcon,
+        count: tl.events ? tl.events.length : 0
+      });
+      (tl.events || []).forEach(function(event, idx) {
+        index.push({
+          type: 'event',
+          id: tl.id + '--event-' + idx,
+          parentId: tl.id,
+          parentTitle: tl.title,
+          title: event.title,
+          subtitle: event.date + ' · ' + tl.title,
+          icon: tl.paleoIcon,
+          eventIdx: idx
+        });
+      });
+    });
+    return index;
+  }
+
+  function renderCpResults(container, results, query) {
+    if (!results.length) {
+      container.innerHTML = '<div class="tl-cp-empty">Ничего не найдено</div>';
+      return;
+    }
+    container.innerHTML = results.map(function(item, idx) {
+      var selectedClass = idx === cpState.selectedIdx ? ' selected' : '';
+      return '<div class="tl-cp-item' + selectedClass + '" data-cp-idx="' + idx + '" role="option" aria-selected="' + (idx === cpState.selectedIdx) + '">' +
+        '<span class="tl-cp-item-icon" lang="hbo" aria-hidden="true">' + escapeHtml(item.icon || 'א') + '</span>' +
+        '<div class="tl-cp-item-content">' +
+          '<div class="tl-cp-item-title">' + escapeHtml(item.title) + '</div>' +
+          '<div class="tl-cp-item-subtitle">' + escapeHtml(item.subtitle) + '</div>' +
+        '</div>' +
+        (item.type === 'timeline' ? '<span class="tl-cp-item-meta">' + item.count + ' соб.</span>' : '<span class="tl-cp-item-meta">событие</span>') +
+      '</div>';
+    }).join('');
+
+    var items = container.querySelectorAll('.tl-cp-item');
+    items.forEach(function(el) {
+      el.addEventListener('click', function() {
+        var idx = parseInt(el.getAttribute('data-cp-idx'), 10);
+        selectCpItem(cpState.results[idx]);
+      });
+    });
+  }
+
+  function updateCpSelection(container) {
+    var items = container.querySelectorAll('.tl-cp-item');
+    items.forEach(function(el, idx) {
+      el.classList.toggle('selected', idx === cpState.selectedIdx);
+      el.setAttribute('aria-selected', idx === cpState.selectedIdx);
+    });
+    if (items[cpState.selectedIdx]) {
+      items[cpState.selectedIdx].scrollIntoView({ block: 'nearest' });
+    }
+  }
+
+  function selectCpItem(item) {
+    if (!item) return;
+    closeCommandPalette();
+    if (item.type === 'timeline') {
+      location.hash = '#timeline/' + item.id;
+    } else if (item.type === 'event') {
+      location.hash = '#timeline/' + item.parentId;
+    }
+  }
+
+  function closeCommandPalette() {
+    var overlay = document.getElementById('tl-cp-overlay');
+    if (!overlay) return;
+    overlay.classList.remove('open');
+    setTimeout(function() { overlay.remove(); }, 150);
+    cpState.open = false;
+  }
+
+  function openCommandPalette() {
+    if (cpState.open) return;
+    var index = buildSearchIndex();
+    cpState = { open: true, selectedIdx: 0, results: index, query: '' };
+
+    var overlay = document.createElement('div');
+    overlay.className = 'tl-cp-overlay';
+    overlay.id = 'tl-cp-overlay';
+    overlay.innerHTML =
+      '<div class="tl-cp-modal" role="dialog" aria-modal="true" aria-label="Поиск по таймлайнам">' +
+        '<div class="tl-cp-input-row">' +
+          '<span class="tl-cp-icon">⌘</span>' +
+          '<input class="tl-cp-input" type="text" placeholder="Поиск таймлайнов и событий…" aria-label="Поиск" autofocus>' +
+          '<kbd class="tl-cp-kbd">ESC</kbd>' +
+        '</div>' +
+        '<div class="tl-cp-results" role="listbox" aria-label="Результаты поиска"></div>' +
+      '</div>';
+
+    document.body.appendChild(overlay);
+    requestAnimationFrame(function() { overlay.classList.add('open'); });
+
+    var input = overlay.querySelector('.tl-cp-input');
+    var resultsContainer = overlay.querySelector('.tl-cp-results');
+    input.focus();
+
+    renderCpResults(resultsContainer, index, '');
+
+    input.addEventListener('input', function() {
+      var query = input.value.trim().toLowerCase();
+      cpState.query = query;
+      cpState.selectedIdx = 0;
+      if (query) {
+        var filtered = index.filter(function(item) {
+          return item.title.toLowerCase().indexOf(query) !== -1 ||
+                 item.subtitle.toLowerCase().indexOf(query) !== -1;
+        });
+        cpState.results = filtered;
+      } else {
+        cpState.results = index;
+      }
+      renderCpResults(resultsContainer, cpState.results, query);
+    });
+
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        cpState.selectedIdx = Math.min(cpState.selectedIdx + 1, cpState.results.length - 1);
+        updateCpSelection(resultsContainer);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        cpState.selectedIdx = Math.max(cpState.selectedIdx - 1, 0);
+        updateCpSelection(resultsContainer);
+      } else if (e.key === 'Enter') {
+        e.preventDefault();
+        selectCpItem(cpState.results[cpState.selectedIdx]);
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        closeCommandPalette();
+      }
+    });
+
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeCommandPalette();
+    });
+  }
+
+  // Глобальный хоткей ⌘K / Ctrl+K
+  document.addEventListener('keydown', function(e) {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      if (cpState.open) {
+        closeCommandPalette();
+      } else {
+        openCommandPalette();
+      }
+    }
+  });
+
   return {
     init: init,
     render: renderCatalog,
     applyRoute: applyRoute,
-    renderDetail: renderDetail
+    renderDetail: renderDetail,
+    openCommandPalette: openCommandPalette
   };
 })();
 
