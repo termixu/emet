@@ -129,12 +129,6 @@
       subtitle: 'Связывайте наблюдения, источники и гипотезы в едином поле Хук / Свива.',
       icon: 'crafts/hammer-and-chisel.png'
     },
-    'translation-comparator': {
-      kicker: 'ГОЛЕМ · КОМПАРАТОР',
-      title: 'Компаратор',
-      subtitle: 'Сопоставление переводов для обнаружения сдвигов, потерь и смысловых подмен.',
-      icon: 'ui/scales.png'
-    },
     'board-library': {
       kicker: 'ГОЛЕМ · БИБЛИОТЕКА',
       title: 'Библиотека',

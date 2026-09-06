@@ -1607,22 +1607,6 @@ const PageController = (function() {
         if (window.Religionisms) Religionisms.init();
         break;
 
-      case 'translation-comparator':
-        container.innerHTML = '<div class="tc-search-row"><label for="tc-search">Ссылка на стих</label><div class="search-wrap">' +
-          '<input type="text" id="tc-search" class="lab-input" placeholder="Берешит 1:1, Исайя 53:5" />' +
-          '<button class="lab-btn lab-btn-primary" onclick="TransComp.search()"><img src="assets/icons/32/ui/book.png" width="32" height="32" alt="">Показать</button></div></div>' +
-          '<div id="tc-placeholder" class="lab-alert lab-alert-info">Введите ссылку на стих. Пример: <strong>Берешит 1:1</strong>.</div>' +
-          '<main id="tc-results" class="tc-map-page" style="display:none;">' +
-          '<section class="tc-section"><h2><img src="assets/icons/32/scribe/scroll.png" alt="">Ивритские источники</h2><div class="tc-source-grid">' +
-          '<article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>ТМ<small>масоретский текст · квадратное письмо</small></span></h3><div id="tc-tm" class="tc-text tc-hebrew" dir="rtl" lang="he"></div></article>' +
-          '<article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>Кумранский свиток<small>квадратное письмо · без огласовок</small></span></h3><div id="tc-qumran" class="tc-text tc-hebrew" dir="rtl" lang="he"></div></article>' +
-          '<article class="lab-card tc-source-card"><h3><img src="assets/icons/32/paleo/track.png" alt=""><span>Сам. Пятикнижие<small>палео-шрифт</small></span></h3><div id="tc-samaritan" class="tc-text tc-paleo" lang="hbo"></div></article></div></section>' +
-          '<section class="tc-section"><h2><img src="assets/icons/32/scribe/scroll.png" alt="">Древние переводы</h2><div class="tc-source-grid"><article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>LXX <small>греч.</small></span></h3><div id="tc-lxx" class="tc-text"></div></article><article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>Пешитта <small>сир.</small></span></h3><div id="tc-peshitta" class="tc-text" dir="rtl" lang="syr"></div></article><article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>Вульгата <small>лат.</small></span></h3><div class="tc-text">Латинский слой пока не загружен.</div></article></div></section>' +
-          '<section class="tc-section"><h2><img src="assets/icons/32/scribe/scroll.png" alt="">Современные переводы</h2><div class="tc-source-grid"><article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>Синодальный <small>рус.</small></span></h3><div id="tc-synodal" class="tc-text"></div></article><article class="lab-card tc-source-card"><h3><img src="assets/icons/32/scribe/scroll.png" alt=""><span>Современный русский</span></h3><div id="tc-modern" class="tc-text"></div></article></div></section>' +
-          '<section id="tc-analysis-section" class="tc-source-analysis tc-analysis-section" hidden aria-labelledby="tc-source-analysis-title"><h2 id="tc-source-analysis-title"><img src="assets/icons/32/ui/scales.png" alt="">Аналитика расхождений</h2><div class="tc-analysis-subsection"><h3>Расхождения и разбор</h3><div id="tc-divergence-block" class="tc-analysis-block"><h4>Описание расхождения</h4><div id="tc-divergence" class="tc-analysis-text"></div></div><div id="tc-paleo-block" class="tc-analysis-block"><h4>Палео-разбор ключевых слов</h4><div id="tc-paleo-analysis" class="tc-analysis-text"></div></div></div><div class="tc-analysis-subsection tc-analysis-stats"><h3>Статистика</h3><div id="tc-source-ratio" class="tc-source-ratio"></div><p id="tc-source-key-difference" class="tc-source-key-difference"></p></div></section></main>';
-        container.dataset.loaded = '1';
-        break;
-
       case 'board-library':
         container.innerHTML = '<h1><img src="assets/icons/32/scribe/scrolls.png" width="32" height="32" alt="Архив досок" style="vertical-align: middle; margin-right: 6px;"> Архив досок</h1>' +
           '<p class="subtitle">Архив сохранённых исследовательских досок. Просмотр, экспорт и управление.</p>' +
@@ -1733,6 +1717,9 @@ const PageController = (function() {
           }
           if (moduleId === 'video-lab' && window.VideoLab) {
             window.VideoLab.init(container);
+          }
+          if (moduleId === 'checkers' && window.TransComp) {
+            window.TransComp.init();
           }
         }).catch(function(err) {
           showError(container, 'Ошибка загрузки модуля: ' + err.message);
@@ -2116,7 +2103,6 @@ const PageController = (function() {
     if (window.EtyLab) EtyLab.init();
     if (window.RelChecker) RelChecker.init();
     if (window.Religionisms) Religionisms.init();
-    if (window.TransComp) TransComp.init();
     if (window.BoardLib) BoardLib.init();
     if (window.VisionUI) VisionUI.init();
     if (window.EdChat) EdChat.init();

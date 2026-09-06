@@ -18,7 +18,6 @@ const AdminSettings = (function() {
     { key: 'scripture-reader', label: 'Книгочтение' },
     { key: 'researches', label: 'Разоблачения' },
     { key: 'religionism-checker', label: 'Чекер религионимов' },
-    { key: 'translation-comparator', label: 'Сравнение переводов' },
     { key: 'dictionaries', label: 'Словари' },
     { key: 'methodology', label: 'Методички' },
     { key: 'board-generator', label: 'Генератор досок' },

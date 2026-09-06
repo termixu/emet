@@ -36,7 +36,7 @@
 <link rel="stylesheet" href="css/dashboard.css">
 <link rel="stylesheet" href="css/cartography.css">
 <link rel="stylesheet" href="css/states.css">
-<link rel="stylesheet" href="css/translation-comparator.css">
+<link rel="stylesheet" href="css/checkers-comparator.css">
 <link rel="stylesheet" href="css/prompt-generator.css">
 <link rel="stylesheet" href="css/davar-checker.css">
 <link rel="stylesheet" href="css/tree-checker.css">
@@ -172,7 +172,6 @@
         <a href="#paleo-keyboard" class="sidebar-item" data-module="paleo-keyboard"><i data-lucide="keyboard" class="lab-icon" aria-hidden="true"></i>Палео-клавиатура</a>
         <a href="#generators" class="sidebar-item" data-module="generators"><i data-lucide="sparkles" class="lab-icon" aria-hidden="true"></i>Генераторы</a>
         <a href="#checkers" class="sidebar-item" data-module="checkers"><i data-lucide="check-circle" class="lab-icon" aria-hidden="true"></i>Чекеры</a>
-        <a href="#translation-comparator" class="sidebar-item" data-module="translation-comparator"><i data-lucide="diff" class="lab-icon" aria-hidden="true"></i>Компаратор</a>
         <a href="#analyzers" class="sidebar-item" data-module="analyzers"><i data-lucide="test-tube" class="lab-icon" aria-hidden="true"></i>Анализаторы</a>
       </div>
     </div>
@@ -258,7 +257,7 @@
 <script defer src="js/linguistic-tensor.js"></script>
 <script defer src="js/states.js"></script>
 <script defer src="js/scripture-reader.js"></script>
-<script defer src="js/translation-comparator.js"></script>
+<script defer src="js/checkers-comparator.js"></script>
 <script defer src="js/investigation.js"></script>
 <script defer src="js/religionism-checker.js"></script>
 <script defer src="js/modules/religionisms.js"></script>
@@ -533,15 +532,6 @@ const LegacyLabSearch = {
       });
     }
 
-    // ===== СРАВНЕНИЕ ПЕРЕВОДОВ =====
-    if (window.TransComp && window._tcData) {
-      Object.keys(window._tcData).forEach(function(key) {
-        if (key.toLowerCase().indexOf(query) !== -1) {
-          push('translations', '<img src="../../assets/icons/32/scribe/scroll.png" width="32" height="32" alt="Компаратор" style="vertical-align: middle; margin-right: 6px;">', key, 'translation-comparator', 'Компаратор');
-        }
-      });
-    }
-
     // ===== СБОРКА =====
     var total = 0;
     var hasAny = false;
@@ -599,7 +589,7 @@ const LegacyLabSearch = {
 
 // ===== LAB HOTKEYS =====
 const LabHotkeys = {
-  modules: ['dashboard', 'root-dictionary', 'word-analyzer', 'religionism-checker', 'translation-comparator', 'board-library', 'vision', 'ed-chat', 'paleo-keyboard', 'admin-settings'],
+  modules: ['dashboard', 'root-dictionary', 'word-analyzer', 'religionism-checker', 'board-library', 'vision', 'ed-chat', 'paleo-keyboard', 'admin-settings'],
   
   init: function() {
     document.addEventListener('keydown', function(e) {
