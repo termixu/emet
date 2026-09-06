@@ -455,7 +455,6 @@ const PageController = (function() {
   }
 
   function renderManifestPage(container, data) {
-    document.title = 'Манифест — Golem';
     var story = data.story || {};
     // Общая шапка LabHero — единственная шапка манифеста.
     // Крошки добавляет router.js, подзаголовок берём из данных манифеста.
@@ -1258,6 +1257,9 @@ const PageController = (function() {
       }
       if (moduleId === 'researches' && window.LoadResearches) {
         window.LoadResearches.render(container, parsed);
+      }
+      if (moduleId === 'timeline' && window.Timeline) {
+        window.Timeline.applyRoute(parsed);
       }
       if (moduleId === 'dictionaries' && jsonCache.dictionaries) {
         renderDictionaries(container, jsonCache.dictionaries);

@@ -23,14 +23,9 @@ const Timeline = (function() {
 
     timelineContainer = container;
 
-    // Hero-шапка
+    // Шапку модуля рисует LabHero (единственная шапка, как во всех модулях лаба).
+    // Собственный hero удалён: он дублировал H1 «Каталог таймлайнов».
     container.innerHTML =
-      '<header class="tl-hero">' +
-        '<div class="tl-watermark" aria-hidden="true">𐤀 𐤁 𐤂 𐤃 𐤄 𐤅</div>' +
-        '<div class="tl-kicker">ПАЛЕО-ТАЙМЛАЙН</div>' +
-        '<h1>Каталог таймлайнов</h1>' +
-        '<p class="tl-lead">Хронологические карты событий: от палео-ивритского письма до цифровых инструментов восстановления.</p>' +
-      '</header>' +
       '<div class="tl-spinner show"><div class="loader"></div><div class="spinner-text">Загрузка таймлайнов…</div></div>';
 
     // Загружаем данные
@@ -41,7 +36,13 @@ const Timeline = (function() {
       })
       .then(function(timelines) {
         timelineItems = Array.isArray(timelines) ? timelines : [];
-        renderCatalog(container, timelineItems);
+        // Deep-link: #timeline/<id> открывает детальный экран сразу.
+        var detailId = parsed && parsed.segments && parsed.segments[1];
+        if (detailId && timelineItems.some(function(t) { return t.id === detailId; })) {
+          renderDetail(detailId);
+        } else {
+          renderCatalog(container, timelineItems);
+        }
       })
       .catch(function(err) {
         var spinner = container.querySelector('.tl-spinner');
@@ -51,10 +52,38 @@ const Timeline = (function() {
   }
 
   function renderCatalog(container, timelines) {
+    // Возврат к базовой шапке модуля (например, по кнопке «назад» из детального экрана).
+    // Override сбрасываем: applyModuleHero после applyRoute не должен подставлять
+    // заголовок закрытого детального экрана.
+    container._labHeroOverride = null;
     if (!timelines || !timelines.length) {
       container.innerHTML = '<div class="lab-alert lab-alert-info">Таймлайны пока не добавлены.</div>';
+      if (window.LabHero && window.LabHero.setView) {
+        window.LabHero.setView('timeline', null, (window.LabHero.views && window.LabHero.views.timeline) || {});
+      }
       return;
     }
+
+    // ROADMAP SCALE: горизонтальная шкала всех таймлайнов (Linear Roadmap pattern)
+    var roadmapHtml = '<div class="tl-roadmap" role="list" aria-label="Шкала таймлайнов">' +
+      timelines.map(function(tl, idx) {
+        var count = tl.events ? tl.events.length : 0;
+        var activeClass = idx === 0 ? ' active' : '';
+        return '<div class="tl-roadmap-segment' + activeClass + '" data-tl-id="' + escapeHtml(tl.id) + '" role="listitem" tabindex="0" aria-label="' + escapeHtml(tl.title) + '">' +
+          '<div class="tl-roadmap-bar"><div class="tl-roadmap-bar-fill" style="width:' + Math.min(100, count * 20) + '%"></div></div>' +
+          '<span class="tl-roadmap-label">' + escapeHtml(tl.title) + '</span>' +
+          '<span class="tl-roadmap-count">' + count + '</span>' +
+        '</div>';
+      }).join('') +
+    '</div>';
+
+    // FILTER CHIPS: сегментный фильтр (все + количество)
+    var totalEvents = timelines.reduce(function(sum, tl) { return sum + (tl.events ? tl.events.length : 0); }, 0);
+    var filtersHtml = '<div class="tl-filters" role="tablist" aria-label="Фильтры таймлайнов">' +
+      '<button class="tl-filter-chip active" data-filter="all" role="tab" aria-selected="true">Все<span class="chip-count">' + timelines.length + '</span></button>' +
+      '<button class="tl-filter-chip" data-filter="ancient" role="tab" aria-selected="false">Древность<span class="chip-count">' + countByEra(timelines, 'ancient') + '</span></button>' +
+      '<button class="tl-filter-chip" data-filter="modern" role="tab" aria-selected="false">Современность<span class="chip-count">' + countByEra(timelines, 'modern') + '</span></button>' +
+    '</div>';
 
     var catalogHtml = timelines.map(function(tl) {
       var count = tl.events ? tl.events.length : 0;
@@ -98,21 +127,72 @@ const Timeline = (function() {
         '</article>';
     }).join('');
 
-    container.innerHTML =
-      '<header class="tl-hero">' +
-        '<div class="tl-watermark" aria-hidden="true">𐤀 𐤁 𐤂 𐤃 𐤄 𐤅</div>' +
-        '<div class="tl-kicker">ПАЛЕО-ТАЙМЛАЙН</div>' +
-        '<h1>Каталог таймлайнов</h1>' +
-        '<p class="tl-lead">Хронологические карты событий: от палео-ивритского письма до цифровых инструментов восстановления.</p>' +
-      '</header>' +
-      '<div class="tl-catalog">' + catalogHtml + '</div>';
+    // Шапку рисует LabHero — ПОСЛЕ innerHTML: присвоение container.innerHTML
+    // стирает секцию .lab-hero, и вызов setView до него терялся (hero
+    // пересоздавался scan-ом из базового конфига каталога).
+    container.innerHTML = roadmapHtml + filtersHtml + '<div class="tl-catalog">' + catalogHtml + '</div>';
+    if (window.LabHero && window.LabHero.setView) {
+      window.LabHero.setView('timeline', null, (window.LabHero.views && window.LabHero.views.timeline) || {});
+    }
+
+    // Обработчики roadmap segments
+    var segments = container.querySelectorAll('.tl-roadmap-segment');
+    segments.forEach(function(seg) {
+      seg.addEventListener('click', function() {
+        var tlId = seg.getAttribute('data-tl-id');
+        if (tlId) location.hash = '#timeline/' + tlId;
+      });
+      seg.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          var tlId = seg.getAttribute('data-tl-id');
+          if (tlId) location.hash = '#timeline/' + tlId;
+        }
+      });
+    });
+
+    // Обработчики filter chips
+    var chips = container.querySelectorAll('.tl-filter-chip');
+    chips.forEach(function(chip) {
+      chip.addEventListener('click', function() {
+        chips.forEach(function(c) { c.classList.remove('active'); c.setAttribute('aria-selected', 'false'); });
+        chip.classList.add('active');
+        chip.setAttribute('aria-selected', 'true');
+        var filter = chip.getAttribute('data-filter');
+        applyFilter(container, timelines, filter);
+      });
+    });
+  }
+
+  function countByEra(timelines, era) {
+    // Простая эвристика: ancient = содержит даты до н.э. или древние названия
+    var ancientIds = ['timeline-writing', 'shin-history', 'alphabet-history', 'root-path'];
+    var modernIds = ['timeline-digital', 'seven-states', 'word-history'];
+    var ids = era === 'ancient' ? ancientIds : modernIds;
+    return timelines.filter(function(tl) { return ids.indexOf(tl.id) !== -1; }).length;
+  }
+
+  function applyFilter(container, timelines, filter) {
+    var catalog = container.querySelector('.tl-catalog');
+    if (!catalog) return;
+    var items = catalog.querySelectorAll('.tl-container');
+    items.forEach(function(item) {
+      var tlId = item.getAttribute('data-timeline-id');
+      if (!tlId) return;
+      var ancientIds = ['timeline-writing', 'shin-history', 'alphabet-history', 'root-path'];
+      var show = filter === 'all' ||
+        (filter === 'ancient' && ancientIds.indexOf(tlId) !== -1) ||
+        (filter === 'modern' && ancientIds.indexOf(tlId) === -1);
+      item.style.display = show ? '' : 'none';
+    });
     bindCatalogEvents(container);
   }
 
   function bindCatalogEvents(container) {
     container.querySelectorAll('.tl-container').forEach(function(card) {
+      // Навигация через hash: детальный экран становится deep-link-able.
       var open = function() {
-        renderDetail(card.getAttribute('data-timeline-id'));
+        location.hash = '#timeline/' + card.getAttribute('data-timeline-id');
       };
       card.addEventListener('click', function(event) {
         if (event.target.closest('button')) return;
@@ -148,16 +228,6 @@ const Timeline = (function() {
     })[0];
     if (!timeline || !timelineContainer) return;
 
-    // Шапка модуля подменяется на динамический заголовок таймлайна
-    if (window.LabHero && window.LabHero.setView) {
-      window.LabHero.setView('timeline', 'detail', {
-        kicker: 'ГОЛЕМ · ПАЛЕО-ТАЙМЛАЙН',
-        title: timeline.title,
-        subtitle: timeline.description || '',
-        icon: 'paleo/track.png'
-      });
-    }
-
     var eventsHtml = (timeline.events || []).map(function(event, index) {
       return '<article class="tl-detail-event" style="--tl-event-index:' + index + '" role="listitem">' +
         '<div class="tl-detail-event-date">' + escapeHtml(event.date) + '</div>' +
@@ -166,21 +236,42 @@ const Timeline = (function() {
       '</article>';
     }).join('');
 
+    // Шапку детального экрана рисует LabHero. Внутри — back-ссылка,
+    // мета-строка и события. Кнопка «назад» ведёт к каталогу (renderCatalog
+    // восстанавливает базовую шапку LabHero).
     timelineContainer.innerHTML =
-      '<section class="tl-detail" aria-labelledby="tl-detail-title">' +
-        '<header class="tl-detail-hero">' +
-          '<div class="tl-detail-icon" lang="hbo" aria-hidden="true">' + escapeHtml(timeline.paleoIcon) + '</div>' +
-          '<div class="tl-kicker">ПАЛЕО-ТАЙМЛАЙН · ДЕТАЛЬНЫЙ СЛОЙ</div>' +
-          '<div class="tl-detail-title">' + escapeHtml(timeline.title) + '</div>' +
-          '<p class="tl-lead">' + escapeHtml(timeline.description || '') + '</p>' +
-        '</header>' +
-        '<div class="tl-detail-meta">' + (timeline.events || []).length + ' ' + pluralize((timeline.events || []).length, 'событие', 'события', 'событий') + '</div>' +
+      '<section class="tl-detail" aria-label="Таймлайн: ' + escapeHtml(timeline.title) + '">' +
+        '<button class="tl-detail-back" type="button">← Каталог таймлайнов</button>' +
+        '<div class="tl-detail-meta tl-meta-line">' +
+          '<span class="tl-detail-glyph" lang="hbo" aria-hidden="true">' + escapeHtml(timeline.paleoIcon) + '</span>' +
+          '<span class="meta-sep">·</span>' +
+          '<span>' + (timeline.events || []).length + ' ' + pluralize((timeline.events || []).length, 'событие', 'события', 'событий') + '</span>' +
+        '</div>' +
         '<div class="tl-detail-events" role="list" aria-label="События таймлайна">' + eventsHtml + '</div>' +
       '</section>';
 
+    // Шапка модуля подменяется на динамический заголовок таймлайна — ПОСЛЕ
+    // innerHTML (иначе присвоение стирает секцию .lab-hero, и setView терялся).
+    // Override дублируем в container._labHeroOverride: applyModuleHero вызывает
+    // setView ПОСЛЕ Timeline.applyRoute и без него вернёт базовую шапку каталога
+    // (тот же контракт, что в load-researches.js и workbench.js).
+    timelineContainer._labHeroOverride = {
+      kicker: 'ГОЛЕМ · ПАЛЕО-ТАЙМЛАЙН',
+      title: timeline.title,
+      subtitle: timeline.description || '',
+      icon: 'paleo/track.png'
+    };
+    if (window.LabHero && window.LabHero.setView) {
+      window.LabHero.setView('timeline', 'detail', timelineContainer._labHeroOverride);
+      if (window.LabRouter && LabRouter.parseHash) {
+        LabRouter.renderBreadcrumbs('timeline', LabRouter.parseHash());
+      }
+    }
+
     var backButton = timelineContainer.querySelector('.tl-detail-back');
     if (backButton) backButton.addEventListener('click', function() {
-      renderCatalog(timelineContainer, timelineItems);
+      // Возврат через hash — роутер сам вызовет renderCatalog (applyRoute).
+      location.hash = '#timeline';
     });
   }
 
@@ -193,9 +284,23 @@ const Timeline = (function() {
     return five;
   }
 
+  /* applyRoute — перерисовка при повторном заходе на модуль (hashchange):
+     #timeline → каталог, #timeline/<id> → детальный экран (unknown id → каталог). */
+  function applyRoute(parsed) {
+    if (!timelineContainer || !timelineItems.length) return;
+    var detailId = parsed && parsed.segments && parsed.segments[1];
+    var exists = detailId && timelineItems.some(function(t) { return t.id === detailId; });
+    if (exists) {
+      renderDetail(detailId);
+    } else {
+      renderCatalog(timelineContainer, timelineItems);
+    }
+  }
+
   return {
     init: init,
     render: renderCatalog,
+    applyRoute: applyRoute,
     renderDetail: renderDetail
   };
 })();

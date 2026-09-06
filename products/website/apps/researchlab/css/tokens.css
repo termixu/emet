@@ -32,6 +32,13 @@
   --accent-red: #c0392b;
   --accent-red-hover: #a93226;
   --accent-green: #2a6a2a;
+
+  /* ===== STATUS COLORS (Linear-style dots) ===== */
+  --status-green: #34c759;
+  --status-amber: #ff9f0a;
+  --status-gray: #8e8e93;
+  --status-red: #ff3b30;
+
   --header-bg: #2c1810;
   --header-text: #fff8ea;
   --header-muted: #d8c8b0;

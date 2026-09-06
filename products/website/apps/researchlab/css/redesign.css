@@ -2,7 +2,7 @@
    css/redesign.css — LINEAR-ПАЛЕО СЛОЙ (результат редизайна)
    Подключается ПОСЛЕДНИМ <link> в apps/researchlab/index.html,
    чтобы побеждать каскад модульных CSS. Спека:
-   docs/10-DESIGN/REDESIGN-LINEAR-PALEO.md
+   docs/10-DESIGN/DESIGN-INSPIRATION.md
    Принципы: плотность (база 4px), тонкие рамки вместо теней,
    один акцент (золото), интерфейс = гротеск, контент = serif,
    клавиатурный фокус видим, бейджи с точкой-индикатором.
@@ -399,4 +399,139 @@ body.is-embed .lab-content { margin: 0; }
 [data-theme="white"] .lab-hero__kicker,
 [data-theme="white"] .lab-hero__title {
   color: var(--accent-gold);
+}
+
+/* =============================================
+   ПОСТАУДИТСКИЙ СЛОЙ (2026-09-06) — Linear-like компактность.
+   1) Логотип: inline style="height:40px" блокировал 28px из redesign -> !important.
+   2) Hero модулей: единый компактный размер (побеждает manuscript.css — тот же
+      слой подключён раньше, специфичность [data-lab-hero] .lab-hero__title равна).
+   3) Базовый текст модулей: 15px/1.6 вместо 18px/1.8 — легче и читабельнее;
+      читалки (Манифест, Книгочтение) сохраняют свои крупные правила.
+   4) Мобильная шапка: одна строка вместо сломанного двойного ряда
+      (поиск выпадал вторым рядом и перекрывал контент).
+   5) Мобильные кнопочные группы переносятся, а не обрезаются.
+   ============================================= */
+
+/* --- Логотип / бейдж BETA --- */
+.lab-header .logo img {
+  height: 28px !important;
+  width: auto !important;
+}
+.golem-beta {
+  height: 18px;
+  padding: 0 7px;
+  font-size: 10px;
+  line-height: 18px;
+  letter-spacing: 0.5px;
+}
+
+/* --- Hero модулей: консистентный компактный вид --- */
+.lab-hero,
+[data-lab-hero] {
+  padding: 16px 20px;
+}
+[data-lab-hero] .lab-hero__title,
+.module .lab-hero__title {
+  font-size: clamp(18px, 2vw, 24px);
+  line-height: 1.2;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+[data-lab-hero] .lab-hero__title-main {
+  justify-content: flex-start;
+}
+[data-lab-hero] .lab-hero__kicker,
+.module .lab-hero__kicker {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  margin-bottom: 4px;
+}
+[data-lab-hero] .lab-hero__subtitle,
+.module .lab-hero__subtitle {
+  font-size: 14px;
+  line-height: 1.55;
+  max-width: 52ch;
+}
+
+/* --- Базовый текст модулей: 15px/1.6 --- */
+.lab-content {
+  font-size: 15px;
+  line-height: 1.6;
+}
+.module:not([id="manifest"]):not([id="scripture-reader"]) {
+  font-size: 15px;
+  line-height: 1.6;
+}
+/* Читалки: чуть крупнее инструментов, но компактнее прежних 18px */
+.lab-content #manifest,
+.lab-content #scripture-reader {
+  font-size: 16px;
+  line-height: 1.7;
+}
+.module h1 {
+  font-size: clamp(20px, 2.4vw, 26px);
+  line-height: 1.2;
+}
+.module .subtitle {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 60ch;
+}
+
+/* --- Мобильная шапка: одна строка --- */
+@media (max-width: 768px) {
+  .lab-header {
+    height: 48px;
+    min-height: 48px;
+    flex-wrap: nowrap;
+    padding: 0 8px;
+    gap: 8px;
+  }
+  .lab-header .logo { flex: 0 0 auto; }
+  .golem-beta { display: none; }
+  .lab-header-mobile-links { display: none !important; }
+  .lab-header nav { display: flex; align-items: center; gap: 4px; }
+  .lab-header nav a.icon-link { display: none; }
+  .lab-header nav .theme-toggle {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+  }
+  .header-search {
+    order: 0;
+    flex: 1 1 auto;
+    min-width: 60px;
+    max-width: none;
+    margin: 0;
+  }
+  .header-search input {
+    min-height: 36px;
+    height: 36px;
+    font-family: var(--font-ui);
+    font-size: 13px;
+    padding: 6px 10px 6px 30px;
+  }
+  .header-search .search-icon { left: 9px; font-size: 14px; }
+  .lab-hamburger {
+    order: 5;
+    width: 40px;
+    height: 40px;
+    padding: 8px;
+    margin-left: 0;
+  }
+  .lab-sidebar { top: 48px; height: calc(100vh - 48px); }
+  .lab-sidebar-overlay { inset: 48px 0 0 0; }
+
+  /* Кнопочные группы: перенос вместо обрезания */
+  .rd-pagination,
+  .pagination {
+    flex-wrap: wrap;
+  }
+  .lab-tabs { overflow-x: auto; }
+
+  /* Крошки и шапки модулей на телефоне */
+  .module h1 { font-size: 20px; }
+  .module .subtitle { font-size: 13px; }
 }

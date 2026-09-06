@@ -62,7 +62,7 @@
     var inp = document.createElement('input');
     inp.type = 'search';
     inp.id = 'labNavFilter';
-    inp.placeholder = 'Фильтр по разделам…';
+    inp.placeholder = 'Поиск по разделам…';
     inp.setAttribute('aria-label', 'Фильтр навигации');
     inp.addEventListener('input', function () { applyFilter(this.value); });
     box.appendChild(inp);

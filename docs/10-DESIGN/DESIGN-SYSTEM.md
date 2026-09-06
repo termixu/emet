@@ -13,6 +13,8 @@
 4. [UI-элементы](#4-ui-элементы)
 5. [Тени и глубина](#5-тени-и-глубина)
 6. [Анимации](#6-анимации)
+6.1 [Слой «современный манускрипт»](#61-слой-современный-манускрипт-этап-b)
+6.2 [Linear-Paleo слой](#62-linear-paleo-слой-редизайн-интерфейсов)
 7. [Иконки](#7-иконки)
 8. [Адаптивность](#8-адаптивность)
 
@@ -321,6 +323,59 @@ Focus: граница `--accent-gold` + `box-shadow: 0 0 0 2px rgba(184,134,11,0
 
 ---
 
+## 6.2 Linear-Paleo слой (редизайн интерфейсов)
+
+Слой компонентов, вдохновлённых Linear (linear.app). Применяется к модулям через `css/redesign.css` (глобальные контролы, сайдбар, шапка) и `css/linear-timeline.css` (компоненты таймлайна). Приоритет: плотность, рамки вместо теней, hairline-разделители.
+
+### Roadmap Scale
+
+Горизонтальная шкала эпох (Linear Roadmap pattern). Используется в каталоге таймлайнов.
+
+```css
+.tl-roadmap          — контейнер, flex, overflow-x: auto
+.tl-roadmap-segment  — один таймлайн (кликабельный, с клавиатурным фокусом)
+.tl-roadmap-bar      — 4px bar, заполнение пропорционально количеству событий
+.tl-roadmap-dot      — точка-маркер события (6px, gold border)
+.tl-roadmap-label    — название (11px, 600, uppercase tracking)
+.tl-roadmap-count    — счётчик событий (10px, muted)
+.tl-roadmap-segment.active — активный сегмент (gold label + bar)
+```
+
+### Filter Chips
+
+Сегментный фильтр каталогов (Linear segmented control).
+
+```css
+.tl-filters          — flex-контейнер, gap 4px, wrap (mobile: nowrap + scroll)
+.tl-filter-chip      — чип 28px height, 12px 600, transparent → hover bg
+.tl-filter-chip.active — gold text + bg + border
+.chip-count          — пилюля-счётчик (10px, rounded 8px, bg tertiary)
+```
+
+### Status Dots
+
+Цветовые индикаторы статуса (Linear project status).
+
+```css
+.tl-status           — inline-flex, gap 4px
+.tl-status-dot       — 6px circle
+.tl-status-dot--done     — зелёный #34c759
+.tl-status-dot--active   — янтарный #ff9f0a
+.tl-status-dot--pending  — серый #8e8e93
+```
+
+Токены статус-цветов в `tokens.css`: `--status-green`, `--status-amber`, `--status-gray`, `--status-red`.
+
+### Meta Line
+
+Единый паттерн мета-информации (автор · время · счётчик).
+
+```css
+.tl-meta-line        — flex, gap 6px, 12px muted
+.meta-sep            — разделитель «·» (border color)
+```
+
+---
 
 ## 7. Иконки
 
@@ -443,3 +498,24 @@ UI-хром (шапка, сайдбар, модалки, кнопки, поис�
 - **Набор тем** в переключателе `LabTheme.themes`: `white → beige → brown → dark`; в `user-preferences.js` фолбэк для устаревшей сохранённой темы — белая.
 - **Шапка — 48px** (`.lab-header`), логотип 28px; сайдбар синхронизирован (`top/height: calc(100vh - 48px)`, ширина 224px).
 - **Экраны плотнее**: `.lab-content` — отступы `space-4`, hero-блоки разделов компактные (padding 14×18, заголовок `clamp(19–26px)`), карточки dashboard/инструментов — padding 14×16 и текст 13–15px. Читалки (манифест, писания, исследования) сохраняют крупный вид за счёт собственных правил модулей.
+
+## Постаудитский компактный слой (2026-09-06)
+
+UI/UX-аудит (десктоп 1280×800 + мобайл 320–640) выявил: hero-заголовки фактически оставались 38px из-за побеждающей специфичности `[data-lab-hero] .lab-hero__title` (manuscript.css) над `.lab-hero__title` (redesign.css); мобильная шапка распадалась на два ряда и поиск перекрывал контент; кнопочные пагинации обрезались. Исправления — последний блок `css/redesign.css` («ПОСТАУДИТСКИЙ СЛОЙ»):
+
+- **Hero модулей:** единый компактный размер `clamp(18px, 2vw, 24px)` (селекторы `[data-lab-hero] .lab-hero__title` и `.module .lab-hero__title`, специфичность ≥ manuscript.css, файл подключён последним), kicker 11px, subtitle 14px, padding hero 16×20.
+- **Базовый текст модулей:** 15px/1.6 вместо унаследованных 18px/1.8; читалки (#manifest, #scripture-reader) явно 16px/1.7.
+- **Логотип:** `height: 28px !important` (inline `style="height:40px"` блокировал каскад), бейдж BETA 10px/18px.
+- **Мобильная шапка (≤768px):** одна строка 48px: логотип 28px + гибкий поиск 36px + тема 40px + гамбургер 40px; дублирующие mobile-ссылки и иконки сайт/github скрыты (доступны в футере); drawer сайдбара начинается с `top: 48px`. Тач-таргеты 44px для контентных контролов сохранены; шапочные 40px — осознанное упрощение для компактности.
+- **Мобильные кнопочные группы:** `.rd-pagination`/`.pagination` — `flex-wrap: wrap`.
+- **JS-закрепление:** глобальные сервисы (`LabTheme/LabSidebar/LabModal/LabExport/LabToast/LabHotkeys`) экспортируются на `window` (иначе top-level `const` недоступны модулям: тема не включалась автоматически, тосты/модалки не работали, хоткеи не вешались). `document.title` обновляется на каждый маршрут (ранее липал «Манифест» после захода на #manifest). Версия SW-кэша поднята до v19.
+
+### Пилот Linear-плотности: палео-таймлайн (2026-09-06)
+
+Референс-карта заимствований — `docs/10-DESIGN/DESIGN-INSPIRATION.md`. Изменения модуля #timeline:
+
+- **Один H1 на маршрут:** собственный hero модуля (`.tl-hero`) удалён — шапку рисует LabHero; при возврате из детального экрана шапка восстанавливается (`LabHero.setView('timeline', null, VIEWS.timeline)`).
+- **Каталог строками (Linear List rows):** одна колонка `--shell-read`, hairline-разделители событий, без `box-shadow`; hover — смена фона на `--bg-tertiary` + заголовок в золото, без elevation.
+- **Чип-счётчик** событий — пилюля с рамкой (Linear count chip), UI-текст модуля переведён на `--font-ui` (11–13px); serif остаётся только в контенте.
+- **Детальный экран:** back-ссылка «← Каталог таймлайнов» (починен мёртвый биндинг `.tl-detail-back` — кнопка раньше вообще не рендерилась), мета-строка 12px с палео-глифом, события — компактные строки без теней; ширина консолидирована на `--shell-read`.
+- Правило для остальных модулей: при переводе на строковые списки — UI-текст `--font-ui`, hover фоном, тени только оверлеям.

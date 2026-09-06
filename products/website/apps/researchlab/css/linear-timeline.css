@@ -1,0 +1,208 @@
+/* =============================================
+   css/linear-timeline.css — LINEAR ROADMAP LAYER
+   Подключается ПОСЛЕ redesign.css и timeline.css.
+   Компоненты: roadmap bars, filter chips, status dots.
+   ============================================= */
+
+/* ===== ROADMAP SCALE: горизонтальная шкала эпох ===== */
+.tl-roadmap {
+  display: flex;
+  align-items: stretch;
+  gap: 0;
+  margin-bottom: var(--space-5);
+  padding: var(--space-4) var(--space-5);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+
+.tl-roadmap-segment {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 80px;
+  padding: 0 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  transition: opacity var(--motion-base);
+}
+
+.tl-roadmap-segment:hover { opacity: 0.85; }
+
+.tl-roadmap-bar {
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border);
+  position: relative;
+  overflow: visible;
+}
+
+.tl-roadmap-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: var(--accent-gold);
+  transition: width var(--motion-base);
+}
+
+.tl-roadmap-dot {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 2px solid var(--accent-gold);
+}
+
+.tl-roadmap-label {
+  font-family: var(--font-ui);
+  font-size: var(--ui-11);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
+.tl-roadmap-count {
+  font-family: var(--font-ui);
+  font-size: var(--ui-10);
+  color: var(--text-muted);
+}
+
+.tl-roadmap-segment.active .tl-roadmap-label { color: var(--accent-gold); }
+/* ===== FILTER CHIPS: сегментный фильтр ===== */
+.tl-filters {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.tl-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 28px;
+  padding: 4px 12px;
+  font-family: var(--font-ui);
+  font-size: var(--ui-12);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: color var(--motion-base), background var(--motion-base), border-color var(--motion-base);
+  white-space: nowrap;
+}
+
+.tl-filter-chip:hover {
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+}
+
+.tl-filter-chip.active {
+  color: var(--accent-gold);
+  background: var(--bg-secondary);
+  border-color: var(--border);
+}
+
+.tl-filter-chip .chip-count {
+  font-size: var(--ui-10);
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--bg-tertiary);
+  padding: 1px 5px;
+  border-radius: 8px;
+  min-width: 18px;
+  text-align: center;
+}
+
+.tl-filter-chip.active .chip-count {
+  color: var(--accent-gold);
+  background: rgba(212, 175, 55, 0.1);
+}
+
+/* ===== STATUS DOTS: цветовые индикаторы ===== */
+.tl-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: var(--font-ui);
+  font-size: var(--ui-11);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.tl-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.tl-status-dot--done { background: var(--status-green, #34c759); }
+.tl-status-dot--active { background: var(--status-amber, #ff9f0a); }
+.tl-status-dot--pending { background: var(--status-gray, #8e8e93); }
+
+/* ===== META LINE: единый паттерн дата · счётчик ===== */
+.tl-meta-line {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-ui);
+  font-size: var(--ui-12);
+  color: var(--text-muted);
+}
+
+.tl-meta-line .meta-sep { color: var(--border); font-weight: 400; }
+
+/* ===== DARK THEME ===== */
+[data-theme="dark"] .tl-roadmap {
+  background: var(--bg-card, #2a2218);
+  border-color: var(--border-dark, #3a2a1a);
+}
+
+[data-theme="dark"] .tl-roadmap-bar { background: var(--border-dark, #3a2a1a); }
+
+[data-theme="dark"] .tl-roadmap-dot {
+  background: var(--bg-card, #2a2218);
+  border-color: var(--accent-gold);
+}
+
+[data-theme="dark"] .tl-filter-chip:hover { background: var(--bg-tertiary, #3a3228); }
+
+[data-theme="dark"] .tl-filter-chip.active {
+  background: var(--bg-tertiary, #3a3228);
+  border-color: var(--border-dark, #3a2a1a);
+}
+
+[data-theme="dark"] .tl-filter-chip .chip-count { background: var(--bg-secondary, #1a1410); }
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+  .tl-roadmap {
+    padding: var(--space-3) var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+  .tl-roadmap-segment { min-width: 60px; }
+  .tl-filters {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .tl-filters::-webkit-scrollbar { display: none; }
+}

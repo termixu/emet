@@ -335,6 +335,11 @@ const LabRouter = (function() {
 
     currentModule = moduleId;
 
+    // document.title в соответствии с маршрутом.
+    // Раньше title задавался только манифестом и лип к другим страницам.
+    var pageTitle = routeTitle(moduleId);
+    if (pageTitle) document.title = pageTitle + ' — Golem';
+
     // PageController получает единственный вызов через зарегистрированный колбэк.
     if (onModuleChange) {
       onModuleChange(moduleId, parsed);
