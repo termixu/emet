@@ -338,9 +338,9 @@ const PageController = (function() {
       '</article>'
     ].join('');
 
-    container.innerHTML = '<div class="paleo-mechanics-actions">' + backBtn + '</div>' +
+    container.innerHTML = '<div id="paleo-mechanics" class="paleo-mechanics-page"><div class="paleo-mechanics-actions">' + backBtn + '</div>' +
       '<div class="research-controls"><label>Документ<select id="research-paleo-mechanics-select" class="lab-input">' + options + '</select></label></div>' +
-      '<div class="paleo-mechanics-modules">' + cards + '</div>';
+      '<div class="paleo-mechanics-modules">' + cards + '</div></div>';
 
     var select = document.getElementById('research-paleo-mechanics-select');
     if (select) select.addEventListener('change', function() {
@@ -366,20 +366,48 @@ const PageController = (function() {
       return;
     }
     if (!state.key) {
-      var iconPath = page === 'paleo-mechanics' ? 'assets/icons/32/paleo/track.png' : 'assets/icons/32/crafts/hammer-and-chisel.png';
+      var paleoIcons = {
+        'aleph': 'paleo/aleph.png',
+        'bet': 'ui/home.png',
+        'gimel': 'desert/camel.svg',
+        'dalet': 'nav/door.png',
+        'he': 'ui/anchor.png',
+        'vav': 'ui/link.png',
+        'zayin': 'weapons/sword.png',
+        'het': 'ui/grid.png',
+        'tet': 'ui/inbox.png',
+        'yod': 'ui/group.png',
+        'kaf': 'ui/group.png',
+        'lamed': 'ui/arrows.png',
+        'mem': 'ui/hourglass.png',
+        'nun': 'paleo/track.png',
+        'samekh': 'ui/info.png',
+        'ayin': 'ui/question.png',
+        'pe': 'ui/group.png',
+        'tsade': 'ui/link.png',
+        'qof': 'ui/group.png',
+        'resh': 'paleo/track.png',
+        'shin': 'ui/markbook.png',
+        'tav': 'ui/check.png'
+      };
+      var defaultIcon = 'paleo/track.png';
       var docCards = keys.map(function(key, index) {
         var doc = data[key];
-        return '<a href="#" class="doc-card" data-key="' + escapeHtml(key) + '" style="animation-delay: ' + (index * 50) + 'ms">' +
-          '<img src="' + iconPath + '" class="doc-icon" alt="">' +
-          '<div class="doc-name">' + escapeHtml(doc.title || key) + '</div>' +
-          '<div class="doc-desc">' + escapeHtml((doc.description || '').split('---')[0].trim().substring(0, 120) + (doc.description && doc.description.length > 120 ? '...' : '')) + '</div>' +
+        var icon = paleoIcons[key] || defaultIcon;
+        return '<a href="#" class="doc-card" data-key="' + escapeHtml(key) + '" style="animation-delay: ' + (index * 30) + 'ms">' +
+          '<span class="doc-card-icon"><img src="assets/icons/32/' + icon + '" alt=""></span>' +
+          '<span class="doc-card-body">' +
+            '<span class="doc-card-title">' + escapeHtml(doc.title || key) + '</span>' +
+            '<span class="doc-card-desc">' + escapeHtml((doc.description || '').split('---')[0].trim().substring(0, 80) + (doc.description && doc.description.length > 80 ? '...' : '')) + '</span>' +
+          '</span>' +
+          '<span class="doc-card-arrow" aria-hidden="true">→</span>' +
           '</a>';
       }).join('');
       var heading = page === 'paleo-mechanics' ? 'Палео-механика' : 'Методички';
       container.innerHTML = page === 'paleo-mechanics'
-        ? '<div class="doc-grid" id="doc-grid">' + docCards + '</div>'
+        ? '<div id="paleo-mechanics" class="paleo-mechanics-page"><div class="doc-grid" id="doc-grid">' + docCards + '</div></div>'
         : '<div class="research-page-head">' +
-          '<h1><img src="' + iconPath + '" class="lab-icon" alt="">' + heading + '</h1>' +
+          '<h1><img src="assets/icons/32/crafts/hammer-and-chisel.png" class="lab-icon" alt="">' + heading + '</h1>' +
           '<p class="subtitle">Материалы ResearchLab, собранные из исходных Markdown-документов.</p>' +
           '</div>' +
           '<div class="doc-grid" id="doc-grid">' + docCards + '</div>';
@@ -1608,21 +1636,21 @@ const PageController = (function() {
         container.innerHTML = '<h1><img src="assets/icons/32/archaeology/lamp.png" width="32" height="32" alt="Визуальный анализатор" style="vertical-align: middle; margin-right: 6px;"> Визуальный анализатор</h1>' +
           '<p class="subtitle">Загрузите изображение для анализа. Модель опишет содержимое: текст, символы, объекты.</p>' +
           '<div class="flex gap-8 mb-16">' +
-          '<button class="lab-btn lab-btn-primary" data-mode="huggingface" onclick="VisionUI.setMode(\'huggingface\')">🤗 Hugging Face API</button>' +
-          '<button class="lab-btn lab-btn-secondary" data-mode="local" onclick="VisionUI.setMode(\'local\')">💻 Локальный сервер</button></div>' +
+          '<button class="lab-btn lab-btn-primary" data-mode="huggingface" onclick="VisionUI.setMode(\'huggingface\')"><i data-lucide="cloud" aria-hidden="true"></i> Hugging Face API</button>' +
+          '<button class="lab-btn lab-btn-secondary" data-mode="local" onclick="VisionUI.setMode(\'local\')"><i data-lucide="server" aria-hidden="true"></i> Локальный сервер</button></div>' +
           '<div class="lab-card"><div class="lab-card-header"><img src="assets/icons/32/nav/door.png" width="32" height="32" alt="Настройки" style="vertical-align: middle; margin-right: 6px;"> Настройки</div><div class="lab-card-body">' +
           '<label class="mb-8" style="display:block;font-weight:600;">API ключ Hugging Face</label>' +
           '<div class="text-small text-muted mb-8"><a href="https://huggingface.co/settings/tokens" target="_blank" style="color:#b8860b;">Получить бесплатный ключ</a></div>' +
           '<div class="flex gap-8"><input type="password" id="vi-apikey" class="lab-input" placeholder="hf_xxxxxxxxxxxx" style="max-width:400px;" />' +
-          '<button class="lab-btn lab-btn-secondary" onclick="VisionUI.saveKey()"><img src="assets/icons/32/ui/settings.png" width="32" height="32" alt="Сохранить" style="vertical-align: middle; margin-right: 6px;"> Сохранить</button></div></div></div>' +
+          '<button class="lab-btn lab-btn-secondary" onclick="VisionUI.saveKey()"><i data-lucide="save" aria-hidden="true"></i> Сохранить</button></div></div></div>' +
           '<div class="lab-card" style="text-align:center;cursor:pointer;" onclick="document.getElementById(\'vi-file\').click()">' +
           '<div id="vi-preview" style="display:none;margin-bottom:12px;">' +
           '<img id="vi-img" src="" alt="preview" style="max-width:100%;max-height:300px;border-radius:4px;border:1px solid #d4c4a8;" />' +
-          '<button class="lab-btn lab-btn-secondary mt-8" onclick="event.stopPropagation();VisionUI.remove()"><img src="assets/icons/32/nav/alert.png" width="32" height="32" alt="Удалить" style="vertical-align: middle; margin-right: 6px;"> Удалить</button></div>' +
+          '<button class="lab-btn lab-btn-secondary mt-8" onclick="event.stopPropagation();VisionUI.remove()"><i data-lucide="trash-2" aria-hidden="true"></i> Удалить</button></div>' +
           '<div id="vi-placeholder"><span><img src="assets/icons/32/ui/placeholder.svg" width="32" height="32" alt="Изображение" style="vertical-align: middle; margin-right: 6px;"></span><div style="font-size:18px;color:#2c1810;margin-top:8px;">Нажмите, чтобы загрузить</div>' +
           '<div class="text-muted text-small mt-8">PNG, JPG, WEBP — до 10 МБ</div></div>' +
           '<input type="file" id="vi-file" accept="image/png,image/jpeg,image/jpg,image/webp" style="display:none;" onchange="VisionUI.load(event)" /></div>' +
-          '<button class="lab-btn lab-btn-primary" id="vi-analyze-btn" onclick="VisionUI.analyze()" disabled style="width:100%;justify-content:center;padding:14px;font-size:18px;margin-bottom:16px;"><img src="assets/icons/32/ui/question.png" width="32" height="32" alt="Анализировать" style="vertical-align: middle; margin-right: 6px;"> Анализировать</button>' +
+          '<button class="lab-btn lab-btn-primary" id="vi-analyze-btn" onclick="VisionUI.analyze()" disabled style="width:100%;justify-content:center;padding:14px;font-size:18px;margin-bottom:16px;"><i data-lucide="image" aria-hidden="true"></i> Анализировать</button>' +
           '<div id="vi-spinner" class="lab-spinner"><div class="loader"></div><div class="spinner-text">Анализ…</div></div>' +
           '<div id="vi-result" class="lab-card" style="display:none;"><div class="lab-card-header"><img src="assets/icons/32/scribe/scroll.png" width="32" height="32" alt="Результат" style="vertical-align: middle; margin-right: 6px;"> Результат</div><div class="lab-card-body" id="vi-result-body" style="white-space:pre-wrap;"></div>' +
           '<div class="text-muted text-small mt-8 flex justify-between"><span id="vi-model-badge">SmolVLM-256M</span><span id="vi-timestamp"></span></div></div>' +
@@ -1680,7 +1708,7 @@ const PageController = (function() {
         container.innerHTML = '<h1><img src="assets/icons/32/paleo/track.png" width="32" height="32" alt="Палео-клавиатура" style="vertical-align: middle; margin-right: 6px;"> Палео-ивритская клавиатура</h1>' +
           '<p class="subtitle">Нажимайте на буквы, чтобы вставить их. Каждая буква — с образом и значением.</p>' +
           '<textarea id="pk-output" class="lab-card pk-output" aria-label="Поле палео-текста" placeholder="Введите палео-символы…"></textarea>' +
-          '<div class="flex gap-8 mb-16 pk-actions"><button type="button" class="lab-btn lab-btn-secondary" onclick="PaleoKey.copy()"><img src="assets/icons/32/scribe/scroll.png" width="32" height="32" alt="Копировать" style="vertical-align: middle; margin-right: 6px;"> Копировать</button><button type="button" class="lab-btn lab-btn-secondary" onclick="PaleoKey.clear()"><img src="assets/icons/32/nav/alert.png" width="32" height="32" alt="Очистить" style="vertical-align: middle; margin-right: 6px;"> Очистить</button></div>' +
+          '<div class="flex gap-8 mb-16 pk-actions"><button type="button" class="lab-btn lab-btn-secondary" onclick="PaleoKey.copy()"><i data-lucide="copy" aria-hidden="true"></i> Копировать</button><button type="button" class="lab-btn lab-btn-secondary" onclick="PaleoKey.clear()"><i data-lucide="trash-2" aria-hidden="true"></i> Очистить</button></div>' +
           '<div id="pk-keys" class="pk-keyboard" aria-label="Палео-клавиатура"></div>' +
           '<div id="pk-info" class="lab-card mt-16" style="display:none;"><div class="lab-card-header" id="pk-info-title"></div><div class="lab-card-body" id="pk-info-body"></div></div>';
         container.dataset.loaded = '1';
@@ -2093,6 +2121,7 @@ const PageController = (function() {
     if (window.VisionUI) VisionUI.init();
     if (window.EdChat) EdChat.init();
     if (window.PaleoKey) PaleoKey.init();
+    if (window.LabIcons) window.LabIcons.sync();
     if (window.Investigation) Investigation.init();
     if (window.ScriptureReader) ScriptureReader.init();
     if (window.AdminSettings) AdminSettings.init();

@@ -27,7 +27,7 @@
         (config.kicker ? '<p class="lab-hero__kicker">' + esc(config.kicker) + '</p>' : '') +
         '<h1 class="lab-hero__title"' + titleId + '>' +
           '<span class="lab-hero__title-main">' +
-          (config.icon ? '<img class="lab-hero__icon" src="../../assets/icons/32/' + config.icon + '" alt="" aria-hidden="true">' : '') +
+          (config.icon ? '<img class="lab-hero__icon" src="assets/icons/32/' + config.icon + '" alt="" aria-hidden="true">' : '') +
           esc(config.title) +
           '</span>' +
         '</h1>' +
@@ -301,8 +301,7 @@
       kicker: 'GOLEM · RESEARCH LAB',
       title: 'Анализаторы',
       subtitle: 'Вертикальные инструменты для диагностики текста: увидеть слой, проверить смысловой сдвиг и найти слова, которые требуют палео-восстановления.',
-      icon: 'archaeology/testtube.png',
-      meta: ['8 слоёв', 'локальный mock', 'эмет / шекер']
+      icon: 'archaeology/testtube.png'
     }
   };
     /* Внутренние экраны модулей: '<moduleId>/<view>' → шапка экрана.

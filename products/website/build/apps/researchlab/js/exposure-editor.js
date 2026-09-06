@@ -180,7 +180,7 @@ const ExposureEditor = (function() {
   function buildHeader() {
     var label = editingId ? 'Редактировать разоблачение' : 'Новое разоблачение';
     return '<div class="exposure-editor-header">' +
-'<h1><img src="../../assets/icons/32/archaeology/lamp.png" alt="">' + esc(label) + '</h1>' +
+'<h1><img src="assets/icons/32/archaeology/lamp.png" alt="">' + esc(label) + '</h1>' +
       '<button class="lab-btn lab-btn-secondary lab-btn-sm" onclick="ExposureEditor.showDrafts()">' +
       '📋 Черновики (' + getDrafts().length + ')</button>' +
       '</div>';
@@ -593,7 +593,7 @@ const ExposureEditor = (function() {
     html += '</div></div>';
 
     LabModal.show(
-'<img src="../../assets/icons/32/scribe/scrolls.png" width="28" height="28" alt="" style="vertical-align:middle;margin-right:8px;"> Черновики разоблачений',
+'<img src="assets/icons/32/scribe/scrolls.png" width="28" height="28" alt="" style="vertical-align:middle;margin-right:8px;"> Черновики разоблачений',
       html,
       '<button class="lab-btn lab-btn-secondary lab-btn-sm" onclick="LabModal.close()">Закрыть</button>'
     );

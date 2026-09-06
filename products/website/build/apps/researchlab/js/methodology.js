@@ -232,7 +232,7 @@
         title: title,
         summary: summary.replace(/\*\*/g, ''),
         text: text,
-        icon: '../../assets/icons/32/' + icons[index % icons.length],
+        icon: 'assets/icons/32/' + icons[index % icons.length],
         document: 'paleo-translation-card'
       };
     }).filter(function(card) { return card.title && card.text; });
@@ -246,7 +246,7 @@
         title: item[0],
         summary: item[1],
         text: item[1],
-        icon: '../../assets/icons/32/ui/book.png',
+        icon: 'assets/icons/32/ui/book.png',
         document: 'paleo-translation-card'
       };
     });
@@ -259,7 +259,7 @@
   var INFO_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 10.5v5"></path><circle cx="12" cy="7.5" r=".7" fill="currentColor" stroke="none"></circle></svg>';
   var CHECK_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M5 13l4 4L19 7"></path></svg>';
   var SAVE_ICON = '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>';
-  var MODAL_ICON = '<img src="../../assets/icons/32/ui/close.png" width="24" height="24" alt="" aria-hidden="true" style="vertical-align:middle;margin-right:8px;">';
+  var MODAL_ICON = '<img src="assets/icons/32/ui/close.png" width="24" height="24" alt="" aria-hidden="true" style="vertical-align:middle;margin-right:8px;">';
 
   function toast(msg) {
     if (window.LabToast) window.LabToast.show(msg);
@@ -439,7 +439,7 @@
         ? String(card.summary || card.text || '').replace(/^\s*\*\s*/, '')
         : (card.summary || card.text || ''),
       text: card.text || card.summary || '',
-      icon: card.icon || '../../assets/icons/32/ui/book.png',
+      icon: card.icon || 'assets/icons/32/ui/book.png',
       document: category === 'mechanisms' ? 'mechanism-card' : (category === 'matrices' ? 'matrix-card' : (category === 'methods' ? 'method-card' : 'principle-card'))
     };
   }
@@ -509,7 +509,7 @@
         title: match[1],
         summary: techniqueCardSummary(match[1]),
         text: match[2],
-        icon: '../../assets/icons/32/ui/diff.png',
+        icon: 'assets/icons/32/ui/diff.png',
         document: 'technique-card'
       };
     }).filter(Boolean);
@@ -631,7 +631,7 @@
             title: LANGUAGE_SHIFT_TITLES[index] || section.title,
             summary: LANGUAGE_SHIFT_SUMMARIES[index] || section.content,
             text: section.content,
-            icon: '../../assets/icons/32/' + LANGUAGE_SHIFT_ICONS[index],
+            icon: 'assets/icons/32/' + LANGUAGE_SHIFT_ICONS[index],
             document: 'language-shift',
             sourceIndex: index
           };
@@ -646,7 +646,7 @@
             title: cleanMethodTitle(section.title),
             summary: index === 0 ? FIRST_MECHANISM_SUMMARY : mechanismEssence(section.content),
             text: section.content,
-            icon: '../../assets/icons/32/' + MECHANISM_ICONS[index % MECHANISM_ICONS.length],
+            icon: 'assets/icons/32/' + MECHANISM_ICONS[index % MECHANISM_ICONS.length],
             document: 'mechanism-card'
           };
         });
@@ -674,7 +674,7 @@
             title: section.title,
             summary: summaryMatch ? summaryMatch[1] : text.split('\n')[0],
             text: text,
-            icon: '../../assets/icons/32/ui/book.png',
+            icon: 'assets/icons/32/ui/book.png',
             document: 'philosopheme-card'
           };
         });
@@ -689,7 +689,7 @@
             title: cleanMethodTitle(section.title),
             summary: text,
             text: text,
-            icon: '../../assets/icons/32/ui/scales.png',
+            icon: 'assets/icons/32/ui/scales.png',
             document: 'distortion-card'
           };
         });

@@ -1,20 +1,81 @@
-/* Витрины инструментов: ясная иерархия и единый шаг к рабочему модулю. */
+/* Витрины инструментов: компактные карточки в стиле Linear. */
 .gc-page { max-width: var(--shell-page); margin: 0 auto; }
-.gc-intro { margin-bottom: 28px; }
-.gc-kicker { color: var(--accent-gold); font-size: 0.78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; margin: 0 0 8px; }
-.gc-intro h1 { margin-top: 0; }
-.gc-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.gc-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 760px; }
-.gc-card { display: flex; flex-direction: column; align-items: center; justify-content: space-between; gap: 18px; min-height: 250px; padding: 24px; color: inherit; text-align: center; text-decoration: none; background: var(--bg-secondary, #f7f1e5); border: 1px solid var(--border-light, #d8c8a8); border-radius: 8px; box-shadow: 0 5px 15px rgba(71, 48, 22, .08); transition: transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
-.gc-card:hover, .gc-card:focus-visible { border-color: var(--accent-gold); box-shadow: 0 10px 24px rgba(71, 48, 22, .15); outline: none; }
-.gc-card > img { width: 48px; height: 48px; object-fit: contain; }
-.gc-card-body { display: flex; flex: 1; width: 100%; flex-direction: column; align-items: center; text-align: center; }
-.gc-card-title { font-family: 'Cormorant Garamond', Georgia, serif; font-size: 1.45rem; font-weight: 700; }
-.gc-card-text { margin-top: 8px; line-height: 1.45; }
-.gc-card-action { width: 100%; box-sizing: border-box; margin-top: 16px; padding-top: 9px; padding-bottom: 9px; pointer-events: none; }
+
+/* Header */
+.gc-header { margin-bottom: 24px; }
+.gc-kicker { color: var(--text-muted); font-size: 0.72rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; margin: 0 0 6px; }
+.gc-header h1 { margin: 0; font-size: 1.75rem; font-weight: 600; }
+.gc-lead { margin: 6px 0 0; color: var(--text-secondary); font-size: 0.95rem; max-width: 480px; }
+.gc-header-icon { width: 28px; height: 28px; vertical-align: middle; margin-right: 8px; }
+
+/* Grid */
+.gc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+
+/* Card — compact, Linear-style */
+.gc-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  color: inherit;
+  text-decoration: none;
+  background: var(--bg-card, #fff);
+  border: 1px solid var(--border-light, #e5e0d8);
+  border-radius: 8px;
+  transition: border-color .15s ease, background .15s ease, transform .15s ease;
+}
+.gc-card:hover, .gc-card:focus-visible {
+  border-color: var(--accent-gold, #b8956a);
+  background: var(--bg-hover, #faf7f2);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+/* Icon */
+.gc-card-icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--bg-icon, #f3ede3);
+}
+.gc-card-icon img { width: 20px; height: 20px; object-fit: contain; }
+
+/* Body */
+.gc-card-body { flex: 1; min-width: 0; }
+.gc-card-title { font-size: 0.95rem; font-weight: 600; color: var(--text-primary); }
+.gc-card-desc { display: block; margin-top: 2px; font-size: 0.8rem; color: var(--text-muted); line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Arrow */
+.gc-card-arrow { flex: 0 0 auto; color: var(--text-muted); font-size: 0.9rem; opacity: 0; transition: opacity .15s ease, transform .15s ease; }
+.gc-card:hover .gc-card-arrow { opacity: 1; transform: translateX(2px); }
+
+/* Badge for "soon" cards */
+.gc-card-badge {
+  flex: 0 0 auto;
+  padding: 2px 8px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-muted, #ede8de);
+  border-radius: 4px;
+}
+.gc-card--soon { opacity: 0.7; }
+.gc-card--soon:hover { opacity: 1; }
+
+/* Legacy support */
+.gc-card-text { display: none; }
+.gc-card-action { display: none; }
+.gc-card-placeholder { opacity: 0.7; }
 .gc-card-action--disabled { color: var(--text-muted); opacity: .72; }
 .gc-card-status { margin-top: auto; padding: 5px 9px; color: var(--accent-gold); border: 1px solid currentColor; border-radius: 999px; font-size: .72rem; font-weight: 700; letter-spacing: var(--tracking-caps); text-transform: uppercase; }
-@media (max-width: 820px) { .gc-grid { grid-template-columns: 1fr; } .gc-grid-2 { max-width: none; } .gc-card { min-height: 0; } }
+
+@media (max-width: 640px) { .gc-grid { grid-template-columns: 1fr; } }
 @media (prefers-reduced-motion: reduce) { .gc-card { transition: none; } }
 
 /* Стили Генератора видео-образов (Video Lab) */

@@ -10,11 +10,11 @@
   'use strict';
 
   var ICONS = {
-    layer: 'assets/icons/32/archaeology/testtube.svg',
+    layer: 'assets/icons/32/ui/map.png',
     ai: 'assets/icons/32/crafts/hammer-and-chisel.png',
     dialect: 'assets/icons/32/scribe/scroll.png',
-    tensor: 'assets/icons/32/archaeology/testtube.svg',
-    word: 'assets/icons/32/archaeology/testtube.svg',
+    tensor: 'assets/icons/32/ui/scales.png',
+    word: 'assets/icons/32/ui/scroll.png',
     state: 'assets/icons/32/paleo/track.png'
   };
   var LAYERS = [
@@ -93,10 +93,10 @@
     return '<div class="analyzers-hero">' + esc(kicker) + '</div><div><h1>' + esc(title) + '</h1><p>' + esc(description) + '</p></div>';
   }
   function pageHead(icon, title, description) { return '<div class="analyzer-page-head"><img class="analyzer-page-head__icon" src="' + icon + '" alt=""><div><h1>' + esc(title) + '</h1><p>' + esc(description) + '</p></div></div>'; }
-  function card(icon, title, description, route, tag) { return '<article class="analyzer-card"><img class="analyzer-card__icon" src="' + icon + '" alt=""><h2>' + esc(title) + '</h2><p>' + esc(description) + '</p><div class="analyzer-card__footer"><span class="analyzer-card__tag">' + esc(tag) + '</span><a class="lab-btn lab-btn-primary lab-btn-sm" href="#' + route + '">Открыть</a></div></article>'; }
+  function card(icon, title, description, route) { return '<a class="gc-card" href="#' + route + '"><span class="gc-card-icon"><img src="' + icon + '" width="20" height="20" alt=""></span><span class="gc-card-body"><span class="gc-card-title">' + esc(title) + '</span><span class="gc-card-desc">' + esc(description) + '</span></span><span class="gc-card-arrow" aria-hidden="true">→</span></a>'; }
 
   function renderOverview(container) {
-    container.innerHTML = '<div class="analyzers-shell"><div class="analyzers-grid">' + card(ICONS.layer, 'Слой-анализ', 'Показывает процентное соотношение восьми слоёв подмен и формирует краткую диагностику доминирующего слоя.', 'layer-analyzer', 'структура / проценты') + card(ICONS.ai, 'ИИ-анализ', 'Даёт смысловую интерпретацию и рекомендации. Сейчас работает автономный mock; API подключается через единый адаптер.', 'ai-analyzer', 'локально / API') + card(ICONS.dialect, 'Диалект-анализ', 'Находит грецизмы и латинизмы и предлагает ивритские или палео-аналоги для дальнейшей проверки.', 'dialect-analyzer', 'словарь / замена') + card(ICONS.state, 'Анализатор состояний (Теhилим)', 'Выберите состояние и получите соответствующий псалом с краткой диагностикой перехода.', 'state-analyzer', 'состояние / псалом') + card(ICONS.tensor, 'Лингвистический тензор', 'Точечное сравнение двух языков по шести осям: где поток удерживает действие, корень и физику образа.', 'linguistic-tensor', 'сравнение / 6 осей') + card(ICONS.word, 'Разбор слов', 'Разбирает слово по палео-механике: показывает палео-образы, корень, значение и цепочку подмен.', 'word-analyzer', 'палео / корни') + '</div></div>';
+    container.innerHTML = '<div class="analyzers-shell"><div class="analyzers-grid">' + card(ICONS.layer, 'Слой-анализ', 'Показывает процентное соотношение восьми слоёв подмен и формирует краткую диагностику доминирующего слоя.', 'layer-analyzer') + card(ICONS.ai, 'ИИ-анализ', 'Даёт смысловую интерпретацию и рекомендации. Сейчас работает автономный mock; API подключается через единый адаптер.', 'ai-analyzer') + card(ICONS.dialect, 'Диалект-анализ', 'Находит грецизмы и латинизмы и предлагает ивритские или палео-аналоги для дальнейшей проверки.', 'dialect-analyzer') + card(ICONS.state, 'Анализатор состояний (Теhилим)', 'Выберите состояние и получите соответствующий псалом с краткой диагностикой перехода.', 'state-analyzer') + card(ICONS.tensor, 'Лингвистический тензор', 'Точечное сравнение двух языков по шести осям: где поток удерживает действие, корень и физику образа.', 'linguistic-tensor') + card(ICONS.word, 'Разбор слов', 'Разбирает слово по палео-механике: показывает палео-образы, корень, значение и цепочку подмен.', 'word-analyzer') + '</div></div>';
   }
 
   function copyText(text, status) {

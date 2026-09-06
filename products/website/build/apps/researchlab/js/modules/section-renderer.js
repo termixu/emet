@@ -5,7 +5,7 @@
 const SectionRenderer = (function() {
   'use strict';
 
-  var ICON_BASE = '../../assets/icons/32/';
+  var ICON_BASE = 'assets/icons/32/';
   var DEFAULT_ICON = ICON_BASE + 'scribe/scroll.png';
 
   function escapeHtml(value) {

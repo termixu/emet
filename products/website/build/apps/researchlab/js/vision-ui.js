@@ -107,7 +107,8 @@ const VisionUI = (function() {
     var btn = document.getElementById('vi-analyze-btn');
     if (btn) {
       btn.disabled = true;
-      btn.textContent = '⏳ Анализ…';
+      btn.innerHTML = '<i data-lucide="loader-circle" aria-hidden="true"></i> Анализ…';
+      if (window.LabIcons) window.LabIcons.sync();
     }
     var spinner = document.getElementById('vi-spinner');
     if (spinner) spinner.classList.add('show');
@@ -138,7 +139,8 @@ const VisionUI = (function() {
       state.isAnalyzing = false;
       if (btn) {
         btn.disabled = false;
-        btn.textContent = '🔍 Анализировать';
+        btn.innerHTML = '<i data-lucide="image" aria-hidden="true"></i> Анализировать';
+        if (window.LabIcons) window.LabIcons.sync();
       }
       if (spinner) spinner.classList.remove('show');
     }

@@ -86,10 +86,10 @@ const BoardLib = (function() {
     // Используем LabModal вместо alert
     if (window.LabModal) {
       var body = '<pre style="font-family:monospace;font-size:13px;line-height:1.6;white-space:pre-wrap;">' + escapeHtml(content) + '</pre>';
-var footer = '<button class="lab-btn lab-btn-primary lab-btn-sm" onclick="LabExport.copyText(' + JSON.stringify(content) + ')"><img src="../../assets/icons/32/scribe/scroll.png" width="32" height="32" alt="Копировать" style="vertical-align: middle; margin-right: 6px;"> Копировать</button>' +
+var footer = '<button class="lab-btn lab-btn-primary lab-btn-sm" onclick="LabExport.copyText(' + JSON.stringify(content) + ')"><img src="assets/icons/32/scribe/scroll.png" width="32" height="32" alt="Копировать" style="vertical-align: middle; margin-right: 6px;"> Копировать</button>' +
         '<button class="lab-btn lab-btn-secondary lab-btn-sm" onclick="LabExport.exportTXT(\'' + (board.title || 'board') + '\', ' + JSON.stringify(content) + ')">📝 TXT</button>' +
         '<button class="lab-btn lab-btn-secondary lab-btn-sm" onclick="LabModal.close()">Закрыть</button>';
-LabModal.show('<img src="../../assets/icons/32/scribe/scrolls.png" width="32" height="32" alt="Доска" style="vertical-align: middle; margin-right: 6px;"> ' + escapeHtml(board.title || 'Просмотр доски'), body, footer);
+LabModal.show('<img src="assets/icons/32/scribe/scrolls.png" width="32" height="32" alt="Доска" style="vertical-align: middle; margin-right: 6px;"> ' + escapeHtml(board.title || 'Просмотр доски'), body, footer);
     } else {
       // fallback
       alert(content);

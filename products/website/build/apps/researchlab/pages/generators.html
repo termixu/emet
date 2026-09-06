@@ -1,50 +1,54 @@
-<section class="gc-page" aria-labelledby="generators-title">
-  <header class="section-hero">
-    <div class="section-hero-watermark" aria-hidden="true">𐤀 𐤁 𐤂 𐤃 𐤄 𐤅</div>
-    <p class="section-hero-kicker">ГОЛЕМ · ГЕНЕРАТОРЫ</p>
-    <h1 id="generators-title">Генераторы</h1>
-    <p class="section-hero-lead">Соберите рабочее поле, маршрут исследования или точный запрос к инструменту — каждый генератор превращает замысел в следующий шаг.</p>
-  </header>
+<section class="gc-page">
   <div class="gc-grid">
     <a class="gc-card" href="#board-generator">
-      <img src="../../assets/icons/32/scribe/scroll.png" width="48" height="48" alt="">
-      <span class="gc-card-body"><span class="gc-card-title">Генератор досок</span><span class="gc-card-text">Разложите улики, связи и выводы на едином поле исследования.</span><span class="lab-btn lab-btn-primary gc-card-action">Открыть</span></span>
+      <span class="gc-card-icon"><img src="assets/icons/32/scribe/scroll.png" width="20" height="20" alt=""></span>
+      <span class="gc-card-body"><span class="gc-card-title">Генератор досок</span><span class="gc-card-desc">Разложите улики, связи и выводы на едином поле.</span></span>
+      <span class="gc-card-arrow" aria-hidden="true">→</span>
     </a>
     <a class="gc-card" href="#research-generator">
-      <img src="../../assets/icons/32/archaeology/testtube.png" width="48" height="48" alt="">
-      <span class="gc-card-body"><span class="gc-card-title">Генератор исследований</span><span class="gc-card-text">Превратите вопрос в последовательность наблюдений, проверок и фиксаций.</span><span class="lab-btn lab-btn-primary gc-card-action">Открыть</span></span>
+      <span class="gc-card-icon"><img src="assets/icons/32/archaeology/testtube.svg" width="20" height="20" alt=""></span>
+      <span class="gc-card-body"><span class="gc-card-title">Генератор исследований</span><span class="gc-card-desc">Превратите вопрос в последовательность наблюдений.</span></span>
+      <span class="gc-card-arrow" aria-hidden="true">→</span>
     </a>
     <a class="gc-card" href="#prompt-generator">
-      <img src="../../assets/icons/32/crafts/hammer-and-chisel.png" width="48" height="48" alt="">
-      <span class="gc-card-body"><span class="gc-card-title">Генератор промптов</span><span class="gc-card-text">Сформулируйте точное задание для AI с нужным контекстом и форматом ответа.</span><span class="lab-btn lab-btn-primary gc-card-action">Открыть</span></span>
+      <span class="gc-card-icon"><img src="assets/icons/32/crafts/hammer-and-chisel.png" width="20" height="20" alt=""></span>
+      <span class="gc-card-body"><span class="gc-card-title">Генератор промптов</span><span class="gc-card-desc">Сформулируйте точное задание для AI.</span></span>
+      <span class="gc-card-arrow" aria-hidden="true">→</span>
     </a>
     <a class="gc-card" href="#clue-generator">
-      <img src="../../assets/icons/32/ui/link.png" width="48" height="48" alt="">
-      <span class="gc-card-body"><span class="gc-card-title">Генератор улик</span><span class="gc-card-text">Соберите наблюдения в цепочку разоблачения: от факта через связь к выводу.</span><span class="lab-btn lab-btn-primary gc-card-action">Открыть</span></span>
+      <span class="gc-card-icon"><img src="assets/icons/32/ui/link.png" width="20" height="20" alt=""></span>
+      <span class="gc-card-body"><span class="gc-card-title">Генератор улик</span><span class="gc-card-desc">Соберите наблюдения в цепочку разоблачения.</span></span>
+      <span class="gc-card-arrow" aria-hidden="true">→</span>
     </a>
     <a class="gc-card" href="#video-lab">
-      <img src="../../assets/icons/32/ui/anchor.png" width="48" height="48" alt="">
-      <span class="gc-card-body"><span class="gc-card-title">Генератор видео-образов</span><span class="gc-card-text">Визуализируй механику слова: буквы, состояния и переходы в движении.</span><span class="lab-btn lab-btn-primary gc-card-action">Открыть</span></span>
+      <span class="gc-card-icon"><img src="assets/icons/32/ui/anchor.png" width="20" height="20" alt=""></span>
+      <span class="gc-card-body"><span class="gc-card-title">Генератор видео-образов</span><span class="gc-card-desc">Визуализируй механику слова в движении.</span></span>
+      <span class="gc-card-arrow" aria-hidden="true">→</span>
     </a>
-    <a class="gc-card gc-card-placeholder" href="#generators" onclick="event.preventDefault(); LabToast.show('Этот генератор находится в разработке');">
-      <img src="../../assets/icons/32/ui/map.png" width="48" height="48" alt="">
-      <span class="gc-card-body"><span class="gc-card-title">Генератор контекста (Свива-генератор)</span><span class="gc-card-text">Описывает среду (Свиву), в которой находится объект или событие.</span><span class="lab-btn lab-btn-secondary gc-card-action gc-card-action--disabled">В разработке</span></span>
+    <a class="gc-card gc-card--soon" href="#generators" onclick="event.preventDefault();">
+      <span class="gc-card-icon"><img src="assets/icons/32/ui/map.png" width="20" height="20" alt=""></span>
+      <span class="gc-card-body"><span class="gc-card-title">Генератор контекста</span><span class="gc-card-desc">Описывает среду объекта или события.</span></span>
+      <span class="gc-card-badge">Soon</span>
     </a>
-    <a class="gc-card gc-card-placeholder" href="#generators" onclick="event.preventDefault(); LabToast.show('Этот генератор находится в разработке');">
-      <img src="../../assets/icons/32/ui/clock.png" width="48" height="48" alt="">
-      <span class="gc-card-body"><span class="gc-card-title">Генератор временной шкалы (Хронология)</span><span class="gc-card-text">Строит временную линию событий на основе введённых дат или периодов.</span><span class="lab-btn lab-btn-secondary gc-card-action gc-card-action--disabled">В разработке</span></span>
+    <a class="gc-card gc-card--soon" href="#generators" onclick="event.preventDefault();">
+      <span class="gc-card-icon"><img src="assets/icons/32/ui/clock.png" width="20" height="20" alt=""></span>
+      <span class="gc-card-body"><span class="gc-card-title">Генератор временной шкалы</span><span class="gc-card-desc">Строит линию событий по датам.</span></span>
+      <span class="gc-card-badge">Soon</span>
     </a>
-    <a class="gc-card gc-card-placeholder" href="#generators" onclick="event.preventDefault(); LabToast.show('Этот генератор находится в разработке');">
-      <img src="../../assets/icons/32/ui/scroll.png" width="48" height="48" alt="">
-      <span class="gc-card-body"><span class="gc-card-title">Генератор артефактов (Символ-генератор)</span><span class="gc-card-text">Собирает описание символа или артефакта через палео-образы.</span><span class="lab-btn lab-btn-secondary gc-card-action gc-card-action--disabled">В разработке</span></span>
+    <a class="gc-card gc-card--soon" href="#generators" onclick="event.preventDefault();">
+      <span class="gc-card-icon"><img src="assets/icons/32/ui/scroll.svg" width="20" height="20" alt=""></span>
+      <span class="gc-card-body"><span class="gc-card-title">Генератор артефактов</span><span class="gc-card-desc">Собирает описание символа через палео-образы.</span></span>
+      <span class="gc-card-badge">Soon</span>
     </a>
-    <a class="gc-card gc-card-placeholder" href="#generators" onclick="event.preventDefault(); LabToast.show('Этот генератор находится в разработке');">
-      <img src="../../assets/icons/32/ui/question.png" width="48" height="48" alt="">
-      <span class="gc-card-body"><span class="gc-card-title">Генератор гипотез (Что если...)</span><span class="gc-card-text">Строит альтернативные сценарии на основе существующих данных.</span><span class="lab-btn lab-btn-secondary gc-card-action gc-card-action--disabled">В разработке</span></span>
+    <a class="gc-card gc-card--soon" href="#generators" onclick="event.preventDefault();">
+      <span class="gc-card-icon"><img src="assets/icons/32/ui/question.png" width="20" height="20" alt=""></span>
+      <span class="gc-card-body"><span class="gc-card-title">Генератор гипотез</span><span class="gc-card-desc">Строит альтернативные сценарии.</span></span>
+      <span class="gc-card-badge">Soon</span>
     </a>
-    <a class="gc-card gc-card-placeholder" href="#generators" onclick="event.preventDefault(); LabToast.show('Этот генератор находится в разработке');">
-      <img src="../../assets/icons/32/ui/diff.png" width="48" height="48" alt="">
-      <span class="gc-card-body"><span class="gc-card-title">Генератор изменений (Дифф-генератор)</span><span class="gc-card-text">Показывает разницу между двумя версиями одного разоблачения.</span><span class="lab-btn lab-btn-secondary gc-card-action gc-card-action--disabled">В разработке</span></span>
+    <a class="gc-card gc-card--soon" href="#generators" onclick="event.preventDefault();">
+      <span class="gc-card-icon"><img src="assets/icons/32/ui/diff.png" width="20" height="20" alt=""></span>
+      <span class="gc-card-body"><span class="gc-card-title">Генератор изменений</span><span class="gc-card-desc">Показывает разницу между версиями.</span></span>
+      <span class="gc-card-badge">Soon</span>
     </a>
   </div>
 </section>

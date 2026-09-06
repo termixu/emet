@@ -6,14 +6,7 @@
 
 /* ===== АНАЛИЗАТОРЫ ===== */
 .analyzers-shell { max-width: var(--shell-page); margin: 0 auto; }
-.analyzers-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.analyzer-card { display: flex; min-height: 260px; flex-direction: column; padding: 22px; background: var(--bg-card); border: 1px solid var(--border-light); border-radius: 10px; box-shadow: var(--shadow-soft); }
-.analyzer-card:hover { border-color: var(--accent-gold); box-shadow: 0 8px 22px var(--shadow-card-hover-color); }
-.analyzer-card__icon { width: 42px; height: 42px; margin-bottom: 18px; object-fit: contain; }
-.analyzer-card h2 { margin: 0 0 9px; color: var(--text-primary); font-family: var(--font-heading); font-size: 21px; line-height: 1.2; }
-.analyzer-card p { margin: 0; color: var(--text-secondary); font-size: 15px; line-height: 1.55; }
-.analyzer-card__footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 22px; }
-.analyzer-card__tag { color: var(--text-muted); font-family: var(--font-mono); font-size: 11px; letter-spacing: var(--tracking-caps); text-transform: uppercase; }
+.analyzers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
 .analyzer-back { margin-bottom: 14px; }
 .analyzer-page-head { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 20px; }
 .analyzer-page-head__icon { flex: 0 0 auto; width: 44px; height: 44px; object-fit: contain; }
@@ -64,6 +57,6 @@
 .state-analyzer-heading strong { color: var(--accent-gold-hover); font-family: var(--font-heading); font-size: 22px; }
 .state-analyzer-psalm { padding: 18px; color: var(--text-primary); background: var(--bg-secondary); border: 1px solid var(--border-light); border-radius: 7px; font: 18px/1.7 var(--font-serif); white-space: pre-wrap; }
 @media (max-width: 900px) { .state-analyzer-workspace { grid-template-columns: 1fr; } }
-@media (max-width: 900px) { .analyzers-grid { grid-template-columns: 1fr; } .analyzer-workspace { grid-template-columns: 1fr; } }
+@media (max-width: 900px) { .analyzer-workspace { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { .analyzers-hero { padding: 24px 20px; } .analyzer-panel { padding: 16px; } .analyzer-settings, .analyzer-dialect-grid { grid-template-columns: 1fr; } .analyzer-page-head { gap: 10px; } }
-@media (prefers-reduced-motion: reduce) { .analyzer-card, .analyzer-bar span { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .analyzer-bar span { transition: none; } }

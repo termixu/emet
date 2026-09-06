@@ -5,6 +5,103 @@
    ============================================= */
 
 /* ===== PALEO-MECHANICS MODULES ===== */
+
+/* Doc Grid - Compact cards (scoped to paleo-mechanics) */
+#paleo-mechanics .doc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+#paleo-mechanics .doc-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  color: inherit;
+  text-decoration: none;
+  background: var(--bg-card, #fff);
+  border: 1px solid var(--border-light, #e5e0d8);
+  border-radius: 8px;
+  transition: border-color .15s ease, background .15s ease, transform .15s ease;
+}
+
+#paleo-mechanics .doc-card:hover,
+#paleo-mechanics .doc-card:focus-visible {
+  border-color: var(--accent-gold, #b8956a);
+  background: var(--bg-hover, #faf7f2);
+  transform: translateY(-1px);
+  outline: none;
+}
+
+#paleo-mechanics .doc-card-icon {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--bg-icon, #f3ede3);
+}
+
+#paleo-mechanics .doc-card-icon img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+#paleo-mechanics .doc-card-body {
+  flex: 1;
+  min-width: 0;
+}
+
+#paleo-mechanics .doc-card-title {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#paleo-mechanics .doc-card-desc {
+  display: block;
+  margin-top: 2px;
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#paleo-mechanics .doc-card-arrow {
+  flex: 0 0 auto;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  opacity: 0;
+  transition: opacity .15s ease, transform .15s ease;
+}
+
+#paleo-mechanics .doc-card:hover .doc-card-arrow {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
+@media (max-width: 640px) {
+  #paleo-mechanics .doc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Page wrapper */
+.paleo-mechanics-page {
+  max-width: var(--shell-page, 1200px);
+  margin: 0 auto;
+}
+
 .paleo-mechanics-actions {
   margin-bottom: var(--space-4);
   text-align: center;
