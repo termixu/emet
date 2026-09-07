@@ -106,29 +106,33 @@
 
 <!-- HEADER -->
 <header class="lab-header glass-topbar" id="labHeader">
-  <a href="#dashboard" class="logo"><img src="../../assets/images/golem-logo-2.png" alt="ГОЛЕМ" style="height: 40px; width: auto;"><span class="golem-beta" aria-label="Бета-версия">BETA</span></a>
-  
-  <!-- Global Search -->
-  <div class="header-search" id="globalSearch">
-    <span class="search-icon"><i data-lucide="search" aria-hidden="true"></i></span>
-    <input type="text" id="gs-input" placeholder="Поиск по лаборатории..." autocomplete="off" />
-    <div class="search-results" id="gs-results"></div>
-  </div>
+  <a href="#dashboard" class="logo"><img src="../../assets/images/golem-logo.svg" alt="Golem" style="height: 40px; width: auto;"><span class="golem-beta glass-btn-gold" aria-label="Бета-версия">BETA</span></a>
   
   <nav>
-    <button class="theme-toggle" onclick="LabTheme.toggle()" title="Переключить тему" id="themeBtn"><i data-lucide="moon" aria-hidden="true"></i></button>
+    <button class="theme-toggle icon-btn" onclick="LabTheme.toggle()" title="Переключить тему" id="themeBtn"><i data-lucide="moon" aria-hidden="true"></i></button>
+    <button class="search-toggle icon-btn" id="searchToggle" type="button" aria-label="Поиск" role="button" tabindex="0" aria-expanded="false" aria-controls="globalSearch"><i data-lucide="search" aria-hidden="true"></i></button>
     <a href="../../" class="icon-link" title="Сайт" aria-label="Сайт"><i data-lucide="globe" aria-hidden="true"></i></a>
     <a href="https://github.com/ortamy/golem" target="_blank" rel="noopener" class="icon-link" title="GitHub" aria-label="GitHub"><i data-lucide="github" aria-hidden="true"></i></a>
   </nav>
   <div class="lab-header-mobile-links">
     <button class="mobile-icon-link" onclick="LabTheme.toggle()" title="Переключить тему" id="themeBtnMobile"><i data-lucide="moon" aria-hidden="true"></i></button>
+    <button class="mobile-icon-link search-toggle" id="searchToggleMobile" type="button" aria-label="Поиск" role="button" tabindex="0" aria-expanded="false" aria-controls="globalSearch"><i data-lucide="search" aria-hidden="true"></i></button>
     <a href="../../" class="mobile-icon-link" title="Сайт"><i data-lucide="globe" aria-hidden="true"></i></a>
     <a href="https://github.com/ortamy/golem" target="_blank" rel="noopener" class="mobile-icon-link" title="GitHub"><i data-lucide="github" aria-hidden="true"></i></a>
   </div>
-  <button class="lab-hamburger hamburger-btn" id="labSidebarToggle" aria-label="Открыть меню" aria-controls="labSidebar" aria-expanded="false" onclick="LabSidebar.toggle()" style="display:none;">
+  <button class="lab-hamburger hamburger-btn icon-btn" id="labSidebarToggle" aria-label="Открыть меню" aria-controls="labSidebar" aria-expanded="false" onclick="LabSidebar.toggle()" style="display:none;">
     <i data-lucide="menu" aria-hidden="true"></i>
   </button>
 </header>
+
+<!-- Global Search: separate from the sticky header so the header remains the top layer. -->
+<div class="glass-search-panel" id="globalSearch" aria-hidden="true">
+  <div class="search-panel-inner">
+    <span class="search-icon"><i data-lucide="search" aria-hidden="true"></i></span>
+    <input type="text" id="gs-input" placeholder="Поиск по модулям, словарям, исследованиям…" autocomplete="off" aria-label="Поиск по модулям, словарям, исследованиям" />
+    <div class="search-results" id="gs-results"></div>
+  </div>
+</div>
 
 <!-- LAYOUT -->
 <div class="lab-layout">
@@ -321,6 +325,65 @@ const LabSidebar = {
     btn.setAttribute('aria-expanded', 'false');
   }
 };
+
+// ===== LAB SEARCH TOGGLE =====
+const LabSearchToggle = {
+  init: function() {
+    var panel = document.getElementById('globalSearch');
+    var input = document.getElementById('gs-input');
+    var toggles = document.querySelectorAll('.search-toggle');
+    if (!panel || !input || !toggles.length) return;
+
+    var self = this;
+    toggles.forEach(function(btn) {
+      btn.addEventListener('click', function() { self.toggle(); });
+      btn.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          self.toggle();
+        }
+      });
+    });
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape' && panel.classList.contains('is-search-open')) self.close();
+    });
+    document.addEventListener('click', function(event) {
+      if (panel.classList.contains('is-search-open') &&
+          !panel.contains(event.target) &&
+          !event.target.closest('.search-toggle')) self.close();
+    });
+  },
+  toggle: function() {
+    var panel = document.getElementById('globalSearch');
+    if (!panel) return;
+    panel.classList.contains('is-search-open') ? this.close() : this.open();
+  },
+  open: function() {
+    var panel = document.getElementById('globalSearch');
+    var input = document.getElementById('gs-input');
+    if (!panel) return;
+    panel.classList.add('is-search-open');
+    panel.setAttribute('aria-hidden', 'false');
+    document.querySelectorAll('.search-toggle').forEach(function(btn) {
+      btn.classList.add('is-active');
+      btn.setAttribute('aria-expanded', 'true');
+    });
+    if (input) window.requestAnimationFrame(function() { input.focus(); });
+  },
+  close: function(clearInput) {
+    var panel = document.getElementById('globalSearch');
+    if (!panel) return;
+    panel.classList.remove('is-search-open');
+    panel.setAttribute('aria-hidden', 'true');
+    document.querySelectorAll('.search-toggle').forEach(function(btn) {
+      btn.classList.remove('is-active');
+      btn.setAttribute('aria-expanded', 'false');
+    });
+    if (clearInput !== false && window.LabSearch) window.LabSearch.hide();
+  }
+};
+window.LabSearchToggle = LabSearchToggle;
+document.addEventListener('DOMContentLoaded', function() { LabSearchToggle.init(); });
 
 // ===== LAB THEME =====
 const LabTheme = {
@@ -606,11 +669,12 @@ const LabHotkeys = {
       // Ctrl+F — фокус на поиск
       if (e.ctrlKey && e.key === 'f') {
         e.preventDefault();
-        document.getElementById('gs-input').focus();
+        LabSearchToggle.open();
       }
       // Escape — закрыть поиск/модалку
       if (e.key === 'Escape') {
         LabSearch.hide();
+        LabSearchToggle.close(false);
         LabModal.close();
       }
       // ? — показать помощь

@@ -170,6 +170,7 @@
     var parts = String(item.route || '').split('/');
     var moduleId = parts.shift();
     hide();
+    if (global.LabSearchToggle) global.LabSearchToggle.close(false);
     global.LabRouter.navigate(moduleId, parts.length ? parts : null, item.params || null);
   }
 

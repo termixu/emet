@@ -53,7 +53,28 @@
       --shadow: 0 18px 45px rgba(45, 31, 20, .10);
       --max: 1180px;
     }
-    /* Пергаментная тема сохраняет существующую бежевую палитру. */
+    /* Пастельная бежевая тема. */
+    [data-theme="beige"] {
+      --paper: #f6efdf;
+      --paper-deep: #e9dcbd;
+      --paper-light: #faf4e6;
+      --chocolate: #3a2b17;
+      --chocolate-soft: #6a563a;
+      --muted: #9c8766;
+      --line: rgba(58, 43, 23, .16);
+      --shadow: 0 18px 45px rgba(58, 43, 23, .10);
+    }
+    [data-theme="brown"] {
+      --paper: #3b2a18;
+      --paper-deep: #4f3a23;
+      --paper-light: #45321d;
+      --chocolate: #f3e9d6;
+      --chocolate-soft: #d8c6a6;
+      --muted: #b09b78;
+      --line: rgba(243, 233, 214, .18);
+      --shadow: 0 18px 45px rgba(0, 0, 0, .22);
+    }
+    /* Legacy parchment value is kept as an alias for old bookmarks. */
     [data-theme="parchment"] {
       --paper: #faf3e0;
       --paper-deep: #f0e6cc;
@@ -103,6 +124,16 @@
     [data-theme="white"] .footer-slogan,
     [data-theme="white"] .footer-bottom {
       color: var(--chocolate-soft);
+    }
+    /* Цвет логотипа соответствует поверхности шапки каждой темы. */
+    .lab-header .logo img[src*="golem-logo"] {
+      filter: brightness(0) invert(1);
+    }
+    [data-theme="white"] .lab-header .logo img[src*="golem-logo"] {
+      filter: brightness(0);
+    }
+    [data-theme="beige"] .lab-header .logo img[src*="golem-logo"] {
+      filter: invert(29%) sepia(19%) saturate(1090%) hue-rotate(348deg) brightness(83%) contrast(88%);
     }
     *, *::before, *::after { box-sizing: border-box; }
     html { min-width: 320px; scroll-behavior: smooth; }
@@ -878,7 +909,7 @@
     </div>
   </aside>
   <header class="lab-header">
-    <a href="./" class="logo" aria-label="Golem — на главную"><img src="assets/images/golem-logo-2.png" alt="ГОЛЕМ" style="height: 40px; width: auto;"><span class="golem-beta" aria-label="Бета-версия">BETA</span></a>
+<a href="./" class="logo" aria-label="Golem — на главную"><img src="assets/images/golem-logo.svg" alt="Golem" style="height: 40px; width: auto;"><span class="golem-beta" aria-label="Бета-версия">BETA</span></a>
 
     <nav class="desktop-anchor-nav" aria-label="Разделы лендинга"><a href="#map">Карта</a><a href="#mechanics">Механика</a><a href="#club">Клуб</a><a href="#tools">Инструменты</a></nav>
     <nav>
@@ -1118,22 +1149,22 @@
   <button class="back-to-top" id="backToTop" type="button" aria-label="Наверх">↑</button>
 
   <script>
-    // Тема сайта: цикл light → white → dark, как LabTheme в лабе. Общий ключ golem_theme.
+    // Тема сайта: общий с Research Lab цикл white → beige → brown → dark.
     const themeButtons = [
       document.querySelector('#themeBtn'),
       document.querySelector('#themeBtnMobile')
     ].filter(Boolean);
-    const themeOrder = ['light', 'parchment', 'white', 'dark'];
+    const themeOrder = ['white', 'beige', 'brown', 'dark'];
     // Иконка показывает тему, в которую ведёт клик (как в лабе).
     const themeViews = {
-      light: { icon: 'contrast', alt: 'Пергаментная тема', title: 'Переключить на пергаментную тему' },
-      parchment: { icon: 'contrast', alt: 'Белая тема', title: 'Переключить на белую тему' },
-      white: { icon: 'moon', alt: 'Тёмная тема', title: 'Переключить на тёмную тему' },
-      dark: { icon: 'sun', alt: 'Светлая тема', title: 'Переключить на светлую тему' }
+      white: { icon: 'contrast', alt: 'Бежевая тема', title: 'Переключить на бежевую тему' },
+      beige: { icon: 'contrast', alt: 'Коричневая тема', title: 'Переключить на коричневую тему' },
+      brown: { icon: 'moon', alt: 'Чёрная тема', title: 'Переключить на чёрную тему' },
+      dark: { icon: 'sun', alt: 'Белая тема', title: 'Переключить на белую тему' }
     };
 
     function updateThemeControls(theme) {
-      const view = themeViews[theme] || themeViews.light;
+      const view = themeViews[theme] || themeViews.white;
       themeButtons.forEach((button) => {
         const icon = button.querySelector('i[data-lucide]');
         if (icon) icon.setAttribute('data-lucide', view.icon);
@@ -1157,9 +1188,10 @@
       });
     });
 
-    let savedTheme = 'light';
-    try { savedTheme = localStorage.getItem('golem_theme') || 'light'; } catch (e) {}
-    if (themeOrder.indexOf(savedTheme) < 0) savedTheme = 'light';
+    let savedTheme = 'white';
+    try { savedTheme = localStorage.getItem('golem_theme') || 'white'; } catch (e) {}
+    if (savedTheme === 'light' || savedTheme === 'parchment') savedTheme = 'beige';
+    if (themeOrder.indexOf(savedTheme) < 0) savedTheme = 'white';
     document.documentElement.dataset.theme = savedTheme;
     updateThemeControls(savedTheme);
 
