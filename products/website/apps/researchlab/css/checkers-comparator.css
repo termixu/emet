@@ -1,14 +1,5 @@
 /* checkers-comparator.css — вертикальная сравнительная карта */
 
-.gc-card--comparator { display: block; padding: 0; overflow: hidden; }
-.gc-card--comparator[open] { grid-column: 1 / -1; }
-.gc-card-summary { display: flex; align-items: center; gap: 18px; padding: 24px; cursor: pointer; list-style: none; }
-.gc-card-summary::-webkit-details-marker { display: none; }
-.gc-card-summary::marker { content: ''; }
-.gc-card-summary .gc-card-icon { flex: 0 0 36px; width: 36px; height: 36px; }
-.gc-card-summary .gc-card-icon img { width: 20px; height: 20px; }
-.gc-card--comparator[open] .gc-card-summary { border-bottom: 1px solid var(--border-light, #e5e0d8); }
-.gc-card--comparator[open] .gc-card-arrow { opacity: 1; transform: rotate(90deg); }
 .tc-checker-content { padding: 20px; background: var(--bg-card); }
 .tc-checker-header { margin-bottom: 18px; }
 .tc-checker-header h2 { display: flex; align-items: center; gap: 8px; margin: 0; font-family: var(--font-heading); font-size: 1.35rem; color: var(--text-primary); }

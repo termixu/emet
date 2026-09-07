@@ -123,3 +123,140 @@
   .lab-shimmer::after { content: none; animation: none; }
   .lab-btn-cta:hover, .lab-btn-cta:active { transform: none; }
 }
+/* =============================================
+   LIQUID GLASS layer (адаптация Liquid Glass под
+   «современный манускрипт»: стекло = полупрозрачный
+   пергамент + backdrop-blur + световая кромка).
+   Классы: .glass-modal / .glass-btn-gold / .glass-card-elevated.
+   Правила применения и запреты — DESIGN-SYSTEM.md §6.3.
+   Performance: backdrop-filter только на элементах < 500px
+   шириной (.glass-modal каппится 480px); на ≤767px blur
+   отключён (solid fallback); prefers-reduced-motion
+   отключает и transform, и blur.
+   ============================================= */
+
+:root {
+  --glass-blur: 14px;
+  --glass-saturate: 1.3;
+  --glass-tint: 74%;
+  --glass-border: color-mix(in srgb, var(--border-light) 65%, transparent);
+  --glass-edge-top: rgb(255 255 255 / 0.42);
+  --glass-edge-bottom: rgb(20 10 4 / 0.12);
+  --glass-shadow: 0 24px 64px rgb(0 0 0 / 0.18), 0 4px 16px rgb(0 0 0 / 0.10);
+}
+/* Тёмные темы: кромки тише, стекло плотнее */
+[data-theme="dark"],
+[data-theme="brown"] {
+  --glass-edge-top: rgb(255 255 255 / 0.14);
+  --glass-edge-bottom: rgb(0 0 0 / 0.35);
+  --glass-tint: 68%;
+}
+
+/* Стеклянная модалка (подтверждения, command palette).
+   Специфичность перекрывает .modal-window и [data-theme="dark"] .tl-cp-modal. */
+.modal-window.glass-modal,
+.tl-cp-overlay .tl-cp-modal.glass-modal {
+  background: color-mix(in srgb, var(--bg-card) var(--glass-tint), transparent);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturate));
+  border-color: var(--glass-border);
+  box-shadow:
+    inset 0 1px 0 var(--glass-edge-top),
+    inset 0 -1px 0 var(--glass-edge-bottom),
+    var(--glass-shadow);
+  /* Performance: blur только на элементах < 500px шириной */
+  max-width: min(480px, 92vw);
+}
+
+/* Золотая стеклянная кнопка (модификатор к .lab-btn / .lab-select):
+   градиент + inset-блик + hover-lift */
+.glass-btn-gold {
+  background: var(--grad-gold-cta);
+  border: 1px solid rgb(var(--accent-gold-rgb) / 0.55);
+  color: var(--text-on-light);
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.45),
+    inset 0 -1px 0 rgb(44 24 16 / 0.22),
+    0 2px 10px rgb(var(--accent-gold-rgb) / 0.30);
+  transition: transform var(--motion-base), box-shadow var(--motion-base), filter var(--motion-base);
+}
+.glass-btn-gold:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.04);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.50),
+    inset 0 -1px 0 rgb(44 24 16 / 0.22),
+    0 5px 16px rgb(var(--accent-gold-rgb) / 0.42);
+}
+.glass-btn-gold:active { transform: translateY(0) scale(0.98); }
+.glass-btn-gold:focus-visible {
+  outline: none;
+  box-shadow: var(--ring-focus);
+}
+/* Каскад: redesign.css (.lab-select → --surface) и theme-white.css
+   (html[data-theme="white"] .lab-select → белые фоны) побеждают базовый
+   класс; ID-скоуп возвращает золотое стекло селекту модели в #neurochat. */
+#ed-chat select.glass-btn-gold {
+  background: var(--grad-gold-cta);
+  border-color: rgb(var(--accent-gold-rgb) / 0.55);
+}
+
+/* Возвышенная стеклянная карточка (toast, будущие поповеры) */
+.glass-card-elevated {
+  --glass-fallback: var(--bg-card);
+  background: color-mix(in srgb, var(--bg-card) 86%, transparent);
+  -webkit-backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  backdrop-filter: blur(12px) saturate(var(--glass-saturate));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  box-shadow:
+    inset 0 1px 0 var(--glass-edge-top),
+    inset 0 -1px 0 var(--glass-edge-bottom),
+    var(--shadow-floating);
+}
+
+/* Тост сохраняет тёмную чип-идентичность: стекло = тонировка bg-dark */
+#lab-toast.glass-card-elevated {
+  --glass-fallback: var(--bg-dark);
+  background: color-mix(in srgb, var(--bg-dark) 84%, transparent);
+  border-color: var(--border-gold);
+  border-radius: var(--radius-sm);
+  color: var(--text-light);
+  font-family: var(--font-serif);
+  font-size: 14px;
+  padding: 10px 24px;
+}
+
+/* Мобильные: blur выключен — solid fallback; модалки остаются на всю ширину */
+@media (max-width: 767px) {
+  .modal-window.glass-modal,
+  .tl-cp-overlay .tl-cp-modal.glass-modal {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--bg-card);
+    max-width: none;
+  }
+  .glass-card-elevated {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--glass-fallback, var(--bg-card));
+  }
+}
+
+/* Reduced motion: transform и blur отключены */
+@media (prefers-reduced-motion: reduce) {
+  .glass-btn-gold,
+  .glass-btn-gold:hover,
+  .glass-btn-gold:active { transform: none; }
+  .glass-btn-gold { filter: none; }
+  .modal-window.glass-modal { animation: none; }
+  .modal-window.glass-modal,
+  .tl-cp-overlay .tl-cp-modal.glass-modal,
+  .glass-card-elevated {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--glass-fallback, var(--bg-card));
+  }
+}

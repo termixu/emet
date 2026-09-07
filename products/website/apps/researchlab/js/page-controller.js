@@ -1680,7 +1680,7 @@ const PageController = (function() {
         container.innerHTML = '<h1><img src="assets/icons/32/crafts/hammer-and-chisel.png" width="32" height="32" alt="Нейрочат" style="vertical-align: middle; margin-right: 6px;"> Нейрочат</h1>' +
           '<p class="subtitle">Чат с исследовательской нейросетью для анализа, разбора слов и поиска подмен.</p>' +
           '<div class="ec-layout"><main class="ec-main">' +
-          '<div class="ec-toolbar"><label for="ec-model">Модель</label><select id="ec-model" class="lab-select"><option value="claude">Claude Sonnet 4</option><option value="gpt4o">GPT-4o</option><option value="deepseek">DeepSeek</option><option value="gemini">Gemini</option></select><span id="ec-model-label" class="ec-model-label"></span><span id="ec-tokens" class="ec-tokens" hidden></span></div>' +
+          '<div class="ec-toolbar"><label for="ec-model">Модель</label><select id="ec-model" class="lab-select glass-btn-gold"><option value="claude">Claude Sonnet 4</option><option value="gpt4o">GPT-4o</option><option value="deepseek">DeepSeek</option><option value="gemini">Gemini</option></select><span id="ec-model-label" class="ec-model-label"></span><span id="ec-tokens" class="ec-tokens" hidden></span></div>' +
           '<div class="lab-card ec-messages" id="ec-messages"><div class="text-muted ec-welcome" id="ec-welcome">Начните диалог.</div></div>' +
           '<div class="ec-composer"><textarea id="ec-input" class="lab-textarea" rows="3" placeholder="Введите запрос..." onkeydown="if(event.key===\'Enter\'&&!event.shiftKey){event.preventDefault();EdChat.send();}"></textarea><div class="ec-actions"><button class="lab-btn lab-btn-primary" onclick="EdChat.send()">Отправить</button><button class="lab-btn lab-btn-secondary" onclick="EdChat.clear()">Очистить</button><button class="lab-btn lab-btn-secondary" onclick="EdChat.save()">Сохранить диалог</button><button class="lab-btn lab-btn-secondary" onclick="EdChat.export()">Экспортировать Markdown</button><button class="lab-btn lab-btn-secondary" onclick="EdChat.useInPromptGenerator()">Использовать в генераторе промптов</button></div></div>' +
           '</main><aside id="ec-sidebar" class="ec-sidebar"><section class="ec-panel"><h2>Контекст</h2><h3>Документы</h3><ul id="ec-context-documents" class="ec-document-list"></ul><h3>Активный промпт</h3><textarea id="ec-prompt" class="lab-textarea ec-prompt" rows="5"></textarea></section><section class="ec-panel"><h2>История диалогов</h2><div id="ec-history" class="ec-history">Сохранённых диалогов пока нет.</div></section></aside></div>' +
@@ -1708,6 +1708,7 @@ const PageController = (function() {
       case 'video-lab':
       case 'generators':
       case 'checkers':
+      case 'translation-comparator':
         showSpinner(container, 'Загрузка модуля…');
         fetchPage('pages/' + moduleId + '.html').then(function(html) {
           container.innerHTML = html;
@@ -1718,7 +1719,7 @@ const PageController = (function() {
           if (moduleId === 'video-lab' && window.VideoLab) {
             window.VideoLab.init(container);
           }
-          if (moduleId === 'checkers' && window.TransComp) {
+          if (moduleId === 'translation-comparator' && window.TransComp) {
             window.TransComp.init();
           }
         }).catch(function(err) {

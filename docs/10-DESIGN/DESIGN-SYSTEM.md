@@ -22,6 +22,7 @@
   - [Stagger-анимация](#stagger-анимация)
   - [Inline Actions](#inline-actions)
   - [Command Palette](#command-palette-⌘k)
+6.3 [Liquid Glass слой](#63-liquid-glass-слой)
 7. [Иконки](#7-иконки)
 8. [Адаптивность](#8-адаптивность)
 
@@ -219,6 +220,7 @@ Focus: граница `--accent-gold` + `box-shadow: 0 0 0 2px rgba(184,134,11,0
 `.modal-overlay`: fullscreen fixed, фон `rgba(0,0,0,0.55)`, `backdrop-filter: blur(4px)`, z-index `9998`.
 `.modal-window`: max-width `600px`, max-height `80vh`, border-radius `6px`, тень `0 8px 32px rgba(0,0,0,0.25)`, анимация появления `modalIn 0.25s ease` (scale 0.95→1 + translateY 8px→0).
 Структура: `.modal-header` (padding `16px 20px`, разделитель) / `.modal-body` (padding `20px`, `15px`, `line-height: 1.7`) / `.modal-footer` (padding `12px 20px`, кнопки справа).
+Окно `#labModal` несёт класс `.glass-modal` (Liquid Glass, §6.3): полупрозрачное пергаментное стекло + backdrop-blur; на десктопе ширина каппится 480px.
 
 ### Алерты
 
@@ -410,7 +412,7 @@ Focus: граница `--accent-gold` + `box-shadow: 0 0 0 2px rgba(184,134,11,0
 
 ```css
 .tl-cp-overlay       — fixed fullscreen, bg rgba(0,0,0,0.5), blur
-.tl-cp-modal         — max-width 520px, scale + translateY transition
+.tl-cp-modal         — max-width 520px, scale + translateY transition; с классом .glass-modal — стекло (§6.3), кап 480px
 .tl-cp-input-row     — flex, padding, border-bottom
 .tl-cp-input         — 14px, transparent bg, no border
 .tl-cp-results       — max-height 320px, overflow-y
@@ -421,6 +423,39 @@ Focus: граница `--accent-gold` + `box-shadow: 0 0 0 2px rgba(184,134,11,0
 ```
 
 JS API: `buildSearchIndex()`, `openCommandPalette()`, `closeCommandPalette()`, `renderCpResults()`, `updateCpSelection()`, `selectCpItem()`. Хоткей: `⌘K` / `Ctrl+K`.
+
+### 6.3 Liquid Glass слой (2026-09-07)
+
+Адаптация принципов Liquid Glass под «современный манускрипт»: стекло = полупрозрачный пергамент + backdrop-blur + световая кромка (свет сверху, тень снизу) + layered-тень. Классы и токены живут в `lab.css` (секция «LIQUID GLASS layer»). Применение — **точечное, только по реестру ниже**; новый элемент получает glass-класс, только если попадает в этот список.
+
+#### Классы
+
+| Класс | Состав | Применение (реестр) |
+|---|---|---|
+| `.glass-modal` | полупрозрачный пергамент `color-mix(bg-card, transparent)` + `backdrop-filter: blur(14px) saturate(1.3)` + inset-кромки + layered-тень `--glass-shadow`; ширина каппится `min(480px, 92vw)` | окно `#labModal` (`.modal-window.glass-modal` — подтверждения, просмотры, формы); command palette (`.tl-cp-overlay .tl-cp-modal.glass-modal`, `⌘K`) |
+| `.glass-btn-gold` | градиент `--grad-gold-cta` + inset-блик сверху / тень снизу + золотое гало; hover `translateY(-1px)` + brightness, active `scale(0.98)`, focus `--ring-focus` | select модели в #neurochat (`#ec-model`, вместе с `.lab-select`); годится модификатором к `.lab-btn` |
+| `.glass-card-elevated` | подложка 86% + `blur(12px)` + кромки + `--shadow-floating` | toast `#lab-toast` (тёмный тонированный вариант: `--glass-fallback: var(--bg-dark)`, золотая кромка сохранена); будущие поповеры/дропдауны уже 500px |
+
+#### Токены
+
+`--glass-blur` (14px), `--glass-saturate` (1.3), `--glass-tint` (74%), `--glass-border`, `--glass-edge-top/bottom`, `--glass-shadow`, `--glass-fallback`. Тёмные темы (`dark`, `brown`) переопределяют кромки (тише: top `0.14`, bottom `rgba(0,0,0,.35)`) и плотность стекла (tint 68%). Все подложки считаются от тематических переменных (`--bg-card`, `--bg-dark`, `--border-light`), поэтому четыре темы работают без отдельных правил.
+
+#### Где НЕ применять (осознанный запрет)
+
+- **Шапка и hero** — сохраняют глиф-водяной знак и noise-пергамент (`--grad-dark` + `--texture-noise`);
+- **Карточки модулей** (`.lab-card`, `.tool-card`) — пергаментная текстура, стекло на них не накладывается;
+- **Сайдбар** — минимализм навигации, без стекла и elevation.
+
+#### Performance-правила (обязательные)
+
+- `backdrop-filter` разрешён только элементам **уже 500px** по ширине: `.glass-modal` жёстко каппится `max-width: min(480px, 92vw)`; кнопка и тост по природе малы;
+- на **≤767px blur отключён целиком** — fallback на solid `var(--glass-fallback)` / `var(--bg-card)`; мобильные модалки остаются на всю ширину (правила responsive.css не сломаны);
+- **`prefers-reduced-motion: reduce`** отключает и transform (hover-lift кнопки, `modalIn`), и blur (solid fallback) — зеркально мобильному блоку;
+- специфичность подобрана под каскад: `.tl-cp-overlay .tl-cp-modal.glass-modal` перекрывает `[data-theme="dark"] .tl-cp-modal` из linear-timeline.css (он подключён позже lab.css); `#lab-toast.glass-card-elevated` перекрывает базовый класс.
+
+#### Границы применения
+
+Нативные `window.confirm()` CSS не стилизует — их перевод на кастомные модалки через `LabModal.show` (и, соответственно, на `.glass-modal`) — отдельная задача; до тех пор «модалки подтверждения» = все вызовы `LabModal`. Бонусные эффекты Liquid Glass (specular-подсветка за курсором, refract-искажения) сознательно не внедрены — противоречат минимализму манускрипта.
 
 ---
 

@@ -221,7 +221,7 @@
 
 <!-- MODAL -->
 <div class="modal-overlay" id="labModal" onclick="if(event.target===this)LabModal.close()">
-  <div class="modal-window">
+  <div class="modal-window glass-modal">
     <div class="modal-header">
       <h3 id="modalTitle">Просмотр</h3>
 <button class="modal-close" onclick="LabModal.close()" title="Закрыть"><i data-lucide="x" aria-hidden="true"></i></button>
@@ -403,7 +403,9 @@ const LabToast = {
     if (!t) {
       t = document.createElement('div');
       t.id = 'lab-toast';
-      t.style.cssText = 'position:fixed;top:24px;left:50%;transform:translateX(-50%);background:var(--bg-dark);color:var(--text-light);padding:10px 24px;font-size:14px;font-family:"EB Garamond",serif;opacity:0;pointer-events:none;z-index:9999;border-radius:4px;border:1px solid var(--border-gold);transition:opacity 0.4s;';
+      t.className = 'glass-card-elevated';
+      // Позиционирование — инлайном (динамика); визуал — .glass-card-elevated + #lab-toast в lab.css
+      t.style.cssText = 'position:fixed;top:24px;left:50%;transform:translateX(-50%);opacity:0;pointer-events:none;z-index:9999;transition:opacity 0.4s;';
       document.body.appendChild(t);
     }
     t.textContent = msg;

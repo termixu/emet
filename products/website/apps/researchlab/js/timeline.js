@@ -472,7 +472,7 @@ const Timeline = (function() {
     overlay.className = 'tl-cp-overlay';
     overlay.id = 'tl-cp-overlay';
     overlay.innerHTML =
-      '<div class="tl-cp-modal" role="dialog" aria-modal="true" aria-label="Поиск по таймлайнам">' +
+      '<div class="tl-cp-modal glass-modal" role="dialog" aria-modal="true" aria-label="Поиск по таймлайнам">' +
         '<div class="tl-cp-input-row">' +
           '<span class="tl-cp-icon">⌘</span>' +
           '<input class="tl-cp-input" type="text" placeholder="Поиск таймлайнов и событий…" aria-label="Поиск" autofocus>' +
