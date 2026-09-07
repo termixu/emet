@@ -435,6 +435,7 @@ JS API: `buildSearchIndex()`, `openCommandPalette()`, `closeCommandPalette()`, `
 | `.glass-modal` | полупрозрачный пергамент `color-mix(bg-card, transparent)` + `backdrop-filter: blur(14px) saturate(1.3)` + inset-кромки + layered-тень `--glass-shadow`; ширина каппится `min(480px, 92vw)` | окно `#labModal` (`.modal-window.glass-modal` — подтверждения, просмотры, формы); command palette (`.tl-cp-overlay .tl-cp-modal.glass-modal`, `⌘K`) |
 | `.glass-btn-gold` | градиент `--grad-gold-cta` + inset-блик сверху / тень снизу + золотое гало; hover `translateY(-1px)` + brightness, active `scale(0.98)`, focus `--ring-focus` | select модели в #neurochat (`#ec-model`, вместе с `.lab-select`); годится модификатором к `.lab-btn` |
 | `.glass-card-elevated` | подложка 86% + `blur(12px)` + кромки + `--shadow-floating` | toast `#lab-toast` (тёмный тонированный вариант: `--glass-fallback: var(--bg-dark)`, золотая кромка сохранена); будущие поповеры/дропдауны уже 500px |
+| `.glass-topbar` | шапка-витрина, два состояния: сверху solid `--header-bg`, blur нет, тени нет; `.is-scrolled` (scrollY > 8px) — `color-mix(--header-bg 74%, transparent)` + `blur(12px) saturate(1.2)` + кромка `accent-gold/15%` + `--shadow-soft`; transition 150ms ease; @supports-fallback на solid, ≤767px без blur, reduced-motion без transition | шапка лаба `#labHeader` (`.lab-header.glass-topbar`); переключатель — один rAF-throttled scroll-слушатель в `PageController.init` (не по модулям) |
 
 #### Токены
 
@@ -442,13 +443,14 @@ JS API: `buildSearchIndex()`, `openCommandPalette()`, `closeCommandPalette()`, `
 
 #### Где НЕ применять (осознанный запрет)
 
-- **Шапка и hero** — сохраняют глиф-водяной знак и noise-пергамент (`--grad-dark` + `--texture-noise`);
+- **Hero и глиф-водяной знак** — noise-пергамент hero (`--grad-dark` + `--texture-noise`) не стеклуется; шапка получает стекло только как `.glass-topbar` в состоянии `.is-scrolled` (см. реестр);
 - **Карточки модулей** (`.lab-card`, `.tool-card`) — пергаментная текстура, стекло на них не накладывается;
 - **Сайдбар** — минимализм навигации, без стекла и elevation.
 
 #### Performance-правила (обязательные)
 
 - `backdrop-filter` разрешён только элементам **уже 500px** по ширине: `.glass-modal` жёстко каппится `max-width: min(480px, 92vw)`; кнопка и тост по природе малы;
+- **исключение — `.glass-topbar`**: единственный полноширинный элемент со стеклом — один backdrop-фильтр на страницу, статичный хром, не тиражируется на карточки; стекло включается только в `.is-scrolled`; тонируется от `--header-bg` (не `--bg-card`): текст шапки `--header-text` рассчитан на тёмную подложку, контраст сохраняется во всех темах;
 - на **≤767px blur отключён целиком** — fallback на solid `var(--glass-fallback)` / `var(--bg-card)`; мобильные модалки остаются на всю ширину (правила responsive.css не сломаны);
 - **`prefers-reduced-motion: reduce`** отключает и transform (hover-lift кнопки, `modalIn`), и blur (solid fallback) — зеркально мобильному блоку;
 - специфичность подобрана под каскад: `.tl-cp-overlay .tl-cp-modal.glass-modal` перекрывает `[data-theme="dark"] .tl-cp-modal` из linear-timeline.css (он подключён позже lab.css); `#lab-toast.glass-card-elevated` перекрывает базовый класс.

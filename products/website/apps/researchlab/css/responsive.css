@@ -44,7 +44,11 @@
 }
 @media (max-width: 768px) {
   html, body {
+    /* clip вместо hidden: hidden создаёт scroll-контейнер и ломает
+       position: sticky шапки (она уезжала при скролле). Clip так же
+       режет горизонтальный вылет, но sticky продолжает работать. */
     overflow-x: hidden;
+    overflow-x: clip;
   }
 
   body {

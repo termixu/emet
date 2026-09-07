@@ -88,3 +88,61 @@ test('agent server offline shows Сервер отключен without uncaught 
   await expect(page.locator('[data-pipeline-server-status]')).toContainText('Сервер отключен', { timeout: 5_000 });
   expect(errors).toEqual([]);
 });
+
+test.describe('checkers module cards', () => {
+  // Поведенческая проверка: клик по карточке-модулю на #checkers меняет
+  // location.hash на её маршрут. Селектор `.gc-card[href^="#"]` берёт только
+  // якорные карточки — карточки-описания без собственного маршрута пропускаются.
+  test('clicking a module card sets location.hash to its route', async ({ browser }) => {
+    const context = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+    const page = await context.newPage();
+    const pageErrors = [];
+    page.on('pageerror', (error) => pageErrors.push(error.message));
+
+    await page.goto('/#checkers', { waitUntil: 'domcontentloaded' });
+    await page.waitForSelector('.gc-card[href^="#"]', { timeout: 20_000 });
+
+    const cards = await page.$$eval('.gc-card[href^="#"]', (nodes) => nodes.map((node) => ({
+      hash: node.getAttribute('href'),
+      title: (node.querySelector('.gc-card-title') || node).textContent.trim()
+    })));
+    expect(cards.length, 'маршрутизируемых карточек .gc-card на #checkers').toBeGreaterThan(0);
+
+    // Даём отложенной перерисовке модуля завершиться: router дёргает
+    // handleHash повторно на load+100ms, PageController заменяет innerHTML —
+    // клик, попавший в это окно, не синтезирует click-событие.
+    await page.waitForTimeout(1000);
+
+    for (const card of cards) {
+      const cardSelector = `.gc-card[href="${card.hash}"]`;
+      // Возврат на #checkers перед каждым кликом; на первом проходе это no-op.
+      await page.evaluate(() => { window.location.hash = '#checkers'; });
+      await page.waitForSelector(cardSelector, { timeout: 20_000 });
+
+      // Клик + ожидание смены hash; один повтор на случай гонки с перерисовкой.
+      let actualHash = null;
+      let navigated = false;
+      for (let attempt = 0; attempt < 2 && !navigated; attempt++) {
+        if (attempt > 0) {
+          await page.evaluate(() => { window.location.hash = '#checkers'; });
+          await page.waitForSelector(cardSelector, { timeout: 20_000 });
+        }
+        await page.click(cardSelector);
+        try {
+          await expect(async () => {
+            actualHash = await page.evaluate(() => window.location.hash);
+            expect(actualHash).toBe(card.hash);
+          }).toPass({ timeout: 4_000 });
+          navigated = true;
+        } catch (error) {
+          if (attempt === 1) {
+            throw new Error(`Карточка «${card.title}»: ожидался hash ${card.hash}, фактически ${actualHash} (после повтора)`);
+          }
+        }
+      }
+    }
+
+    expect(pageErrors, 'uncaught errors при навигации по карточкам #checkers').toEqual([]);
+    await context.close();
+  });
+});

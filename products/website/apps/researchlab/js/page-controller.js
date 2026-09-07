@@ -2083,6 +2083,24 @@ const PageController = (function() {
     observer.observe(root, { childList: true, subtree: true });
   }
 
+  // ===== LIQUID GLASS TOPBAR: один переключатель .is-scrolled =====
+  // Шапка-витрина (DESIGN-SYSTEM §6.3): сплошная сверху, стекло при скролле.
+  // rAF-throttle и один слушатель на всё приложение — не по модулям.
+  function initGlassTopbar() {
+    var header = document.getElementById('labHeader');
+    if (!header) return;
+    var ticking = false;
+    function update() {
+      ticking = false;
+      var y = window.scrollY || document.documentElement.scrollTop || 0;
+      header.classList.toggle('is-scrolled', y > 8);
+    }
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }, { passive: true });
+    update();
+  }
+
   // ===== ИНИЦИАЛИЗАЦИЯ ПРИ ЗАГРУЗКЕ =====
   function init() {
     // Инициализируем служебные модули
@@ -2096,6 +2114,7 @@ const PageController = (function() {
       });
       LabRouter.init();
       if (window.LabHero) LabHero.observe();
+      initGlassTopbar();
 
     // Инициализируем модули, работающие с готовым DOM
     setTimeout(function() {

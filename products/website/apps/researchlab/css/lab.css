@@ -260,3 +260,39 @@
     background: var(--glass-fallback, var(--bg-card));
   }
 }
+
+/* Шапка-витрина: сплошная сверху, стекло при скролле (.is-scrolled от JS).
+   Исключение из правила «backdrop-filter < 500px» (§6.3): единственный
+   полноширинный хром-элемент, один blur на страницу, санкционирован реестром.
+   Тонировка от --header-bg, а не --bg-card: текст шапки --header-text
+   рассчитан на тёмную подложку — контраст сохраняется во всех темах. */
+.lab-header.glass-topbar {
+  transition: background-color 150ms ease, border-color 150ms ease, box-shadow 150ms ease;
+}
+.lab-header.glass-topbar.is-scrolled {
+  background: color-mix(in srgb, var(--header-bg) 74%, transparent);
+  -webkit-backdrop-filter: blur(12px) saturate(1.2);
+  backdrop-filter: blur(12px) saturate(1.2);
+  border-bottom-color: rgb(var(--accent-gold-rgb) / 0.15);
+  box-shadow: var(--shadow-soft);
+}
+/* Fallback: без поддержки backdrop-filter — solid bg, без blur */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .lab-header.glass-topbar.is-scrolled {
+    background: var(--header-bg);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+/* Мобильные: blur выключен — полупрозрачный solid bg */
+@media (max-width: 767px) {
+  .lab-header.glass-topbar.is-scrolled {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: color-mix(in srgb, var(--header-bg) 88%, transparent);
+  }
+}
+/* Reduced motion: переключение состояний без transition */
+@media (prefers-reduced-motion: reduce) {
+  .lab-header.glass-topbar { transition: none; }
+}

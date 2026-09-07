@@ -94,12 +94,12 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 2089,
+                  "duration": 2008,
                   "errors": [],
                   "stdout": [],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-09-07T09:31:39.406Z",
+                  "startTime": "2026-09-07T11:27:35.394Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -136,12 +136,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5148,
+                      "duration": 5047,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-09-07T09:30:43.745Z",
+                      "startTime": "2026-09-07T11:25:58.919Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -170,12 +170,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 5179,
+                      "duration": 3940,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-09-07T09:30:49.387Z",
+                      "startTime": "2026-09-07T11:26:04.629Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -204,12 +204,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 7882,
+                      "duration": 6759,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-09-07T09:30:54.697Z",
+                      "startTime": "2026-09-07T11:26:08.648Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -238,12 +238,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 24260,
+                      "duration": 60988,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-09-07T09:31:02.622Z",
+                      "startTime": "2026-09-07T11:26:15.458Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -272,12 +272,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3091,
+                      "duration": 4804,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-09-07T09:31:26.915Z",
+                      "startTime": "2026-09-07T11:27:16.504Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -306,12 +306,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3429,
+                      "duration": 5931,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-09-07T09:31:30.039Z",
+                      "startTime": "2026-09-07T11:27:21.416Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -340,12 +340,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 2821,
+                      "duration": 3930,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-09-07T09:31:33.497Z",
+                      "startTime": "2026-09-07T11:27:27.440Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -374,12 +374,12 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "passed",
-                      "duration": 3038,
+                      "duration": 3898,
                       "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-09-07T09:31:36.344Z",
+                      "startTime": "2026-09-07T11:27:31.448Z",
                       "annotations": [],
                       "attachments": []
                     }
@@ -393,15 +393,57 @@
               "column": 5
             }
           ]
+        },
+        {
+          "title": "checkers module cards",
+          "file": "smoke.spec.js",
+          "line": 92,
+          "column": 6,
+          "specs": [
+            {
+              "title": "clicking a module card sets location.hash to its route",
+              "ok": true,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 90000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "smoke",
+                  "projectName": "smoke",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "passed",
+                      "duration": 16428,
+                      "errors": [],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-09-07T11:27:37.450Z",
+                      "annotations": [],
+                      "attachments": []
+                    }
+                  ],
+                  "status": "expected"
+                }
+              ],
+              "id": "2c14808d47b386fba9eb-b40d97ebde6e73c9ad98",
+              "file": "smoke.spec.js",
+              "line": 96,
+              "column": 3
+            }
+          ]
         }
       ]
     }
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-09-07T09:30:42.443Z",
-    "duration": 59435.026000000005,
-    "expected": 9,
+    "startTime": "2026-09-07T11:25:55.936Z",
+    "duration": 118528.29699999999,
+    "expected": 10,
     "skipped": 0,
     "unexpected": 0,
     "flaky": 0
